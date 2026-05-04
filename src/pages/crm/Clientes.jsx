@@ -98,13 +98,13 @@ export function Clientes() {
     <Layout title="Clientes">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
         <div className="relative flex-1 max-w-md">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-text-secondary" />
           <input
             type="text"
             placeholder="Buscar clientes..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-9 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+            className="w-full pl-9 pr-4 py-2 border border-border rounded-lg text-sm bg-bg-main text-text-primary placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent"
           />
         </div>
         <Button onClick={() => handleOpenModal()}>
@@ -117,13 +117,13 @@ export function Clientes() {
         {filteredClientes.map((cliente) => (
           <div
             key={cliente.id}
-            className="bg-white rounded-xl border border-gray-200 p-5 hover:shadow-md transition-shadow"
+            className="bg-bg-card rounded-xl border border-border p-5 hover:shadow-md transition-shadow"
           >
             <div className="flex items-start justify-between mb-3">
               <div>
-                <h3 className="font-semibold text-gray-900">{cliente.nome}</h3>
+                <h3 className="font-semibold text-text-primary">{cliente.nome}</h3>
                 {cliente.empresa && (
-                  <p className="text-sm text-gray-500">{cliente.empresa}</p>
+                  <p className="text-sm text-text-secondary">{cliente.empresa}</p>
                 )}
               </div>
               <Badge variant={cliente.status === 'ativo' ? 'success' : 'default'}>
@@ -131,41 +131,41 @@ export function Clientes() {
               </Badge>
             </div>
 
-            <div className="space-y-2 text-sm text-gray-600 mb-4">
+            <div className="space-y-2 text-sm text-text-secondary mb-4">
               <div className="flex items-center gap-2">
-                <Mail className="w-4 h-4 text-gray-400 flex-shrink-0" />
+                <Mail className="w-4 h-4 text-text-muted flex-shrink-0" />
                 <span className="truncate">{cliente.email}</span>
               </div>
               <div className="flex items-center gap-2">
-                <Phone className="w-4 h-4 text-gray-400 flex-shrink-0" />
+                <Phone className="w-4 h-4 text-text-muted flex-shrink-0" />
                 <span>{cliente.telefone}</span>
               </div>
               {cliente.endereco && (
                 <div className="flex items-center gap-2">
-                  <MapPin className="w-4 h-4 text-gray-400 flex-shrink-0" />
+                  <MapPin className="w-4 h-4 text-text-muted flex-shrink-0" />
                   <span className="truncate">{cliente.endereco}</span>
                 </div>
               )}
             </div>
 
-            <div className="flex items-center justify-between pt-3 border-t border-gray-100">
-              <span className="text-xs text-gray-400">
+            <div className="flex items-center justify-between pt-3 border-t border-border">
+              <span className="text-xs text-text-muted">
                 Cadastro: {formatDate(cliente.dataCadastro)}
               </span>
               <div className="flex gap-1">
                 <button
                   onClick={() => handleOpenModal(cliente)}
-                  className="p-1.5 rounded-lg hover:bg-gray-100 transition-colors"
+                  className="p-1.5 rounded-lg hover:bg-bg-elevated transition-colors"
                   title="Editar"
                 >
-                  <Edit className="w-4 h-4 text-gray-500" />
+                  <Edit className="w-4 h-4 text-text-secondary" />
                 </button>
                 <button
                   onClick={() => setConfirmDelete(cliente.id)}
-                  className="p-1.5 rounded-lg hover:bg-danger-50 transition-colors"
+                  className="p-1.5 rounded-lg hover:bg-danger-950 transition-colors"
                   title="Excluir"
                 >
-                  <Trash2 className="w-4 h-4 text-danger-500" />
+                  <Trash2 className="w-4 h-4 text-danger-400" />
                 </button>
               </div>
             </div>
@@ -175,7 +175,7 @@ export function Clientes() {
 
       {filteredClientes.length === 0 && (
         <div className="text-center py-12">
-          <p className="text-gray-500">Nenhum cliente encontrado.</p>
+          <p className="text-text-secondary">Nenhum cliente encontrado.</p>
         </div>
       )}
 

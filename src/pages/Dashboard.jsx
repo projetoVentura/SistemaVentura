@@ -44,10 +44,10 @@ export function Dashboard() {
   ];
 
   const colorClasses = {
-    primary: 'bg-primary-100 text-primary-600',
-    warning: 'bg-warning-100 text-warning-600',
-    success: 'bg-success-100 text-success-600',
-    info: 'bg-primary-100 text-primary-600',
+    primary: 'bg-accent-light text-accent',
+    warning: 'bg-warning-950 text-warning-400',
+    success: 'bg-success-950 text-success-400',
+    info: 'bg-accent-light text-accent',
   };
 
   const proximosEventos = [
@@ -69,39 +69,39 @@ export function Dashboard() {
               <div className={`p-2 rounded-lg ${colorClasses[stat.color]}`}>
                 <stat.icon className="w-5 h-5" />
               </div>
-              <span className="text-sm text-gray-500">{stat.label}</span>
+              <span className="text-sm text-text-secondary">{stat.label}</span>
             </div>
-            <p className="text-2xl font-bold text-gray-900">{stat.value}</p>
+            <p className="text-2xl font-bold text-text-primary">{stat.value}</p>
           </Card>
         ))}
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <Card className="p-5">
-          <h3 className="font-semibold text-gray-900 mb-4">Orçamentos Recentes</h3>
+          <h3 className="font-semibold text-text-primary mb-4">Orçamentos Recentes</h3>
           <div className="space-y-3">
             {orcamentos.slice(0, 5).map((orcamento) => (
               <div
                 key={orcamento.id}
-                className="flex items-center justify-between py-2 border-b border-gray-100 last:border-0"
+                className="flex items-center justify-between py-2 border-b border-border last:border-0"
               >
                 <div>
-                  <p className="text-sm font-medium text-gray-900">{orcamento.titulo}</p>
-                  <p className="text-xs text-gray-500">{orcamento.clienteNome}</p>
+                  <p className="text-sm font-medium text-text-primary">{orcamento.titulo}</p>
+                  <p className="text-xs text-text-secondary">{orcamento.clienteNome}</p>
                 </div>
                 <div className="text-right">
-                  <p className="text-sm font-semibold text-gray-900">
+                  <p className="text-sm font-semibold text-accent">
                     {formatCurrency(orcamento.valor)}
                   </p>
                   <span
                     className={`inline-block px-2 py-0.5 rounded-full text-xs font-medium ${
                       orcamento.status === 'aprovado'
-                        ? 'bg-success-100 text-success-700'
+                        ? 'bg-success-950 text-success-400 border border-success-700'
                         : orcamento.status === 'pendente'
-                        ? 'bg-warning-100 text-warning-700'
+                        ? 'bg-warning-950 text-warning-400 border border-warning-700'
                         : orcamento.status === 'recusado'
-                        ? 'bg-danger-100 text-danger-700'
-                        : 'bg-gray-100 text-gray-700'
+                        ? 'bg-danger-950 text-danger-400 border border-danger-700'
+                        : 'bg-bg-elevated text-text-secondary border border-border'
                     }`}
                   >
                     {orcamento.status.charAt(0).toUpperCase() + orcamento.status.slice(1)}
@@ -113,21 +113,21 @@ export function Dashboard() {
         </Card>
 
         <Card className="p-5">
-          <h3 className="font-semibold text-gray-900 mb-4">Próximos Eventos</h3>
+          <h3 className="font-semibold text-text-primary mb-4">Próximos Eventos</h3>
           <div className="space-y-3">
             {proximosEventos.map((evento, index) => (
               <div
                 key={index}
-                className="flex items-center gap-3 py-2 border-b border-gray-100 last:border-0"
+                className="flex items-center gap-3 py-2 border-b border-border last:border-0"
               >
-                <div className="p-2 bg-primary-50 rounded-lg">
-                  <Calendar className="w-5 h-5 text-primary-600" />
+                <div className="p-2 bg-accent-light rounded-lg">
+                  <Calendar className="w-5 h-5 text-accent" />
                 </div>
                 <div className="flex-1">
-                  <p className="text-sm font-medium text-gray-900">{evento.titulo}</p>
-                  <p className="text-xs text-gray-500">{evento.cliente}</p>
+                  <p className="text-sm font-medium text-text-primary">{evento.titulo}</p>
+                  <p className="text-xs text-text-secondary">{evento.cliente}</p>
                 </div>
-                <span className="text-sm text-gray-500">{formatDate(evento.data)}</span>
+                <span className="text-sm text-text-secondary">{formatDate(evento.data)}</span>
               </div>
             ))}
           </div>
@@ -136,7 +136,7 @@ export function Dashboard() {
 
       <div className="mt-6">
         <Card className="p-5">
-          <h3 className="font-semibold text-gray-900 mb-4">Acesso Rápido</h3>
+          <h3 className="font-semibold text-text-primary mb-4">Acesso Rápido</h3>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {[
               { label: 'Novo Cliente', icon: Users, href: '/crm/clientes' },
@@ -147,10 +147,10 @@ export function Dashboard() {
               <a
                 key={item.label}
                 href={item.href}
-                className="flex flex-col items-center gap-2 p-4 rounded-lg border border-gray-200 hover:border-primary-300 hover:bg-primary-50 transition-colors"
+                className="flex flex-col items-center gap-2 p-4 rounded-lg border border-border hover:border-accent hover:bg-bg-elevated transition-colors"
               >
-                <item.icon className="w-6 h-6 text-primary-600" />
-                <span className="text-sm font-medium text-gray-700">{item.label}</span>
+                <item.icon className="w-6 h-6 text-accent" />
+                <span className="text-sm font-medium text-text-primary">{item.label}</span>
               </a>
             ))}
           </div>

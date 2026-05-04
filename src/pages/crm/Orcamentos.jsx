@@ -156,8 +156,8 @@ export function Orcamentos() {
             onClick={() => setFilterStatus('todos')}
             className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
               filterStatus === 'todos'
-                ? 'bg-primary-600 text-white'
-                : 'bg-white text-gray-600 border border-gray-300 hover:bg-gray-50'
+                ? 'bg-accent text-bg-main'
+                : 'bg-bg-card text-text-secondary border border-border hover:bg-bg-elevated'
             }`}
           >
             Todos
@@ -168,8 +168,8 @@ export function Orcamentos() {
               onClick={() => setFilterStatus(status)}
               className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
                 filterStatus === status
-                  ? 'bg-primary-600 text-white'
-                  : 'bg-white text-gray-600 border border-gray-300 hover:bg-gray-50'
+                  ? 'bg-accent text-bg-main'
+                  : 'bg-bg-card text-text-secondary border border-border hover:bg-bg-elevated'
               }`}
             >
               {statusConfig[status].label}
@@ -187,9 +187,9 @@ export function Orcamentos() {
           {pipelineStatuses.map((status) => {
             const statusOrcamentos = orcamentos.filter((o) => o.status === status);
             return (
-              <div key={status} className="bg-gray-100 rounded-xl p-4">
+              <div key={status} className="bg-bg-card rounded-xl p-4 border border-border">
                 <div className="flex items-center justify-between mb-3">
-                  <h3 className="font-semibold text-sm text-gray-700">
+                  <h3 className="font-semibold text-sm text-text-primary">
                     {statusConfig[status].label}
                   </h3>
                   <Badge variant={statusConfig[status].color}>
@@ -200,14 +200,14 @@ export function Orcamentos() {
                   {statusOrcamentos.map((orcamento) => (
                     <div
                       key={orcamento.id}
-                      className="bg-white rounded-lg p-3 shadow-sm hover:shadow-md transition-shadow"
+                      className="bg-bg-main rounded-lg p-3 border border-border hover:border-accent/50 transition-colors"
                     >
-                      <h4 className="font-medium text-sm text-gray-900 mb-1">
+                      <h4 className="font-medium text-sm text-text-primary mb-1">
                         {orcamento.titulo}
                       </h4>
-                      <p className="text-xs text-gray-500 mb-2">{orcamento.clienteNome}</p>
+                      <p className="text-xs text-text-secondary mb-2">{orcamento.clienteNome}</p>
                       <div className="flex items-center justify-between">
-                        <span className="text-sm font-semibold text-primary-600">
+                        <span className="text-sm font-semibold text-accent">
                           {formatCurrency(orcamento.valor)}
                         </span>
                         <div className="flex gap-1">
@@ -216,33 +216,33 @@ export function Orcamentos() {
                               setViewingOrcamento(orcamento);
                               setIsViewModalOpen(true);
                             }}
-                            className="p-1 rounded hover:bg-gray-100"
+                            className="p-1 rounded hover:bg-bg-elevated"
                             title="Visualizar"
                           >
-                            <Eye className="w-3.5 h-3.5 text-gray-500" />
+                            <Eye className="w-3.5 h-3.5 text-text-secondary" />
                           </button>
                           <button
                             onClick={() => handleOpenModal(orcamento)}
-                            className="p-1 rounded hover:bg-gray-100"
+                            className="p-1 rounded hover:bg-bg-elevated"
                             title="Editar"
                           >
-                            <Edit className="w-3.5 h-3.5 text-gray-500" />
+                            <Edit className="w-3.5 h-3.5 text-text-secondary" />
                           </button>
                           <button
                             onClick={() => setConfirmDelete(orcamento.id)}
-                            className="p-1 rounded hover:bg-danger-50"
+                            className="p-1 rounded hover:bg-danger-950"
                             title="Excluir"
                           >
-                            <Trash2 className="w-3.5 h-3.5 text-danger-500" />
+                            <Trash2 className="w-3.5 h-3.5 text-danger-400" />
                           </button>
                         </div>
                       </div>
                       {status !== 'recusado' && status !== 'aprovado' && (
-                        <div className="mt-2 pt-2 border-t border-gray-100">
+                        <div className="mt-2 pt-2 border-t border-border">
                           <select
                             value={orcamento.status}
                             onChange={(e) => handleChangeStatus(orcamento.id, e.target.value)}
-                            className="w-full text-xs border border-gray-200 rounded px-2 py-1 focus:outline-none focus:ring-1 focus:ring-primary-500"
+                            className="w-full text-xs border border-border rounded px-2 py-1 bg-bg-main text-text-primary focus:outline-none focus:ring-1 focus:ring-accent"
                           >
                             {pipelineStatuses.map((s) => (
                               <option key={s} value={s}>
@@ -264,23 +264,23 @@ export function Orcamentos() {
           {filteredOrcamentos.map((orcamento) => (
             <div
               key={orcamento.id}
-              className="bg-white rounded-xl border border-gray-200 p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3"
+              className="bg-bg-card rounded-xl border border-border p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3"
             >
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-1">
-                  <h3 className="font-medium text-gray-900">{orcamento.titulo}</h3>
+                  <h3 className="font-medium text-text-primary">{orcamento.titulo}</h3>
                   <Badge variant={statusConfig[orcamento.status].color}>
                     {statusConfig[orcamento.status].label}
                   </Badge>
                 </div>
-                <p className="text-sm text-gray-500">{orcamento.clienteNome}</p>
+                <p className="text-sm text-text-secondary">{orcamento.clienteNome}</p>
               </div>
               <div className="flex items-center gap-4">
                 <div className="text-right">
-                  <p className="text-lg font-semibold text-primary-600">
+                  <p className="text-lg font-semibold text-accent">
                     {formatCurrency(orcamento.valor)}
                   </p>
-                  <p className="text-xs text-gray-400">
+                  <p className="text-xs text-text-muted">
                     Válido até {formatDate(orcamento.dataValidade)}
                   </p>
                 </div>
@@ -290,24 +290,24 @@ export function Orcamentos() {
                       setViewingOrcamento(orcamento);
                       setIsViewModalOpen(true);
                     }}
-                    className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
+                    className="p-2 rounded-lg hover:bg-bg-elevated transition-colors"
                     title="Visualizar"
                   >
-                    <Eye className="w-4 h-4 text-gray-500" />
+                    <Eye className="w-4 h-4 text-text-secondary" />
                   </button>
                   <button
                     onClick={() => handleOpenModal(orcamento)}
-                    className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
+                    className="p-2 rounded-lg hover:bg-bg-elevated transition-colors"
                     title="Editar"
                   >
-                    <Edit className="w-4 h-4 text-gray-500" />
+                    <Edit className="w-4 h-4 text-text-secondary" />
                   </button>
                   <button
                     onClick={() => setConfirmDelete(orcamento.id)}
-                    className="p-2 rounded-lg hover:bg-danger-50 transition-colors"
+                    className="p-2 rounded-lg hover:bg-danger-950 transition-colors"
                     title="Excluir"
                   >
-                    <Trash2 className="w-4 h-4 text-danger-500" />
+                    <Trash2 className="w-4 h-4 text-danger-400" />
                   </button>
                 </div>
               </div>
@@ -398,7 +398,7 @@ export function Orcamentos() {
         {viewingOrcamento && (
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <h3 className="text-lg font-semibold text-gray-900">
+              <h3 className="text-lg font-semibold text-text-primary">
                 {viewingOrcamento.titulo}
               </h3>
               <Badge variant={statusConfig[viewingOrcamento.status].color}>
@@ -407,46 +407,46 @@ export function Orcamentos() {
             </div>
             <div className="grid grid-cols-2 gap-4 text-sm">
               <div>
-                <p className="text-gray-500">Cliente</p>
-                <p className="font-medium">{viewingOrcamento.clienteNome}</p>
+                <p className="text-text-muted">Cliente</p>
+                <p className="font-medium text-text-primary">{viewingOrcamento.clienteNome}</p>
               </div>
               <div>
-                <p className="text-gray-500">Valor</p>
-                <p className="font-medium text-primary-600">
+                <p className="text-text-muted">Valor</p>
+                <p className="font-medium text-accent">
                   {formatCurrency(viewingOrcamento.valor)}
                 </p>
               </div>
               <div>
-                <p className="text-gray-500">Data de Criação</p>
-                <p className="font-medium">{formatDate(viewingOrcamento.dataCriacao)}</p>
+                <p className="text-text-muted">Data de Criação</p>
+                <p className="font-medium text-text-primary">{formatDate(viewingOrcamento.dataCriacao)}</p>
               </div>
               <div>
-                <p className="text-gray-500">Validade</p>
-                <p className="font-medium">{formatDate(viewingOrcamento.dataValidade)}</p>
+                <p className="text-text-muted">Validade</p>
+                <p className="font-medium text-text-primary">{formatDate(viewingOrcamento.dataValidade)}</p>
               </div>
             </div>
             {viewingOrcamento.descricao && (
               <div>
-                <p className="text-gray-500 text-sm mb-1">Descrição</p>
-                <p className="text-sm text-gray-700">{viewingOrcamento.descricao}</p>
+                <p className="text-text-muted text-sm mb-1">Descrição</p>
+                <p className="text-sm text-text-secondary">{viewingOrcamento.descricao}</p>
               </div>
             )}
             {viewingOrcamento.itens && viewingOrcamento.itens.length > 0 && (
               <div>
-                <p className="text-gray-500 text-sm mb-2">Itens</p>
-                <div className="border border-gray-200 rounded-lg overflow-hidden">
+                <p className="text-text-muted text-sm mb-2">Itens</p>
+                <div className="border border-border rounded-lg overflow-hidden">
                   <table className="w-full text-sm">
-                    <thead className="bg-gray-50">
+                    <thead className="bg-bg-main">
                       <tr>
-                        <th className="text-left px-4 py-2 font-medium text-gray-600">Equipamento</th>
-                        <th className="text-center px-4 py-2 font-medium text-gray-600">Qtd</th>
+                        <th className="text-left px-4 py-2 font-medium text-text-secondary">Equipamento</th>
+                        <th className="text-center px-4 py-2 font-medium text-text-secondary">Qtd</th>
                       </tr>
                     </thead>
                     <tbody>
                       {viewingOrcamento.itens.map((item, index) => (
-                        <tr key={index} className="border-t border-gray-100">
-                          <td className="px-4 py-2">{item.nome}</td>
-                          <td className="px-4 py-2 text-center">{item.quantidade}</td>
+                        <tr key={index} className="border-t border-border">
+                          <td className="px-4 py-2 text-text-primary">{item.nome}</td>
+                          <td className="px-4 py-2 text-center text-text-primary">{item.quantidade}</td>
                         </tr>
                       ))}
                     </tbody>

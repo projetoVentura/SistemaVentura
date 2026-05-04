@@ -3,7 +3,7 @@ import { Header } from './Header';
 
 export function Layout({ children, title }) {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-bg-main">
       <Sidebar />
       <div className="ml-64">
         <Header title={title} />

@@ -275,43 +275,43 @@ export function Financeiro() {
     <Layout title="Financeiro">
       {/* Stats */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-        <div className="bg-white rounded-xl border border-gray-200 p-4">
+        <div className="bg-bg-card rounded-xl border border-border p-4">
           <div className="flex items-center gap-3 mb-2">
-            <div className="p-2 bg-success-100 rounded-lg">
-              <ArrowUpCircle className="w-5 h-5 text-success-600" />
+            <div className="p-2 bg-success-950 rounded-lg">
+              <ArrowUpCircle className="w-5 h-5 text-success-400" />
             </div>
-            <span className="text-sm text-gray-500">Total Entradas</span>
+            <span className="text-sm text-text-secondary">Total Entradas</span>
           </div>
-          <p className="text-2xl font-bold text-success-600">{formatCurrency(totalEntradas)}</p>
+          <p className="text-2xl font-bold text-success-400">{formatCurrency(totalEntradas)}</p>
         </div>
-        <div className="bg-white rounded-xl border border-gray-200 p-4">
+        <div className="bg-bg-card rounded-xl border border-border p-4">
           <div className="flex items-center gap-3 mb-2">
-            <div className="p-2 bg-danger-100 rounded-lg">
-              <ArrowDownCircle className="w-5 h-5 text-danger-600" />
+            <div className="p-2 bg-danger-950 rounded-lg">
+              <ArrowDownCircle className="w-5 h-5 text-danger-400" />
             </div>
-            <span className="text-sm text-gray-500">Total Saídas</span>
+            <span className="text-sm text-text-secondary">Total Saídas</span>
           </div>
-          <p className="text-2xl font-bold text-danger-600">{formatCurrency(totalSaidas)}</p>
+          <p className="text-2xl font-bold text-danger-400">{formatCurrency(totalSaidas)}</p>
         </div>
-        <div className="bg-white rounded-xl border border-gray-200 p-4">
+        <div className="bg-bg-card rounded-xl border border-border p-4">
           <div className="flex items-center gap-3 mb-2">
-            <div className={`p-2 rounded-lg ${saldo >= 0 ? 'bg-primary-100' : 'bg-danger-100'}`}>
-              <DollarSign className={`w-5 h-5 ${saldo >= 0 ? 'text-primary-600' : 'text-danger-600'}`} />
+            <div className={`p-2 rounded-lg ${saldo >= 0 ? 'bg-accent-light' : 'bg-danger-950'}`}>
+              <DollarSign className={`w-5 h-5 ${saldo >= 0 ? 'text-accent' : 'text-danger-400'}`} />
             </div>
-            <span className="text-sm text-gray-500">Saldo</span>
+            <span className="text-sm text-text-secondary">Saldo</span>
           </div>
-          <p className={`text-2xl font-bold ${saldo >= 0 ? 'text-primary-600' : 'text-danger-600'}`}>
+          <p className={`text-2xl font-bold ${saldo >= 0 ? 'text-accent' : 'text-danger-400'}`}>
             {formatCurrency(saldo)}
           </p>
         </div>
-        <div className="bg-white rounded-xl border border-gray-200 p-4">
+        <div className="bg-bg-card rounded-xl border border-border p-4">
           <div className="flex items-center gap-3 mb-2">
-            <div className="p-2 bg-warning-100 rounded-lg">
-              <TrendingUp className="w-5 h-5 text-warning-600" />
+            <div className="p-2 bg-warning-950 rounded-lg">
+              <TrendingUp className="w-5 h-5 text-warning-400" />
             </div>
-            <span className="text-sm text-gray-500">A Receber</span>
+            <span className="text-sm text-text-secondary">A Receber</span>
           </div>
-          <p className="text-2xl font-bold text-warning-600">{formatCurrency(entradasPendentes)}</p>
+          <p className="text-2xl font-bold text-warning-400">{formatCurrency(entradasPendentes)}</p>
         </div>
       </div>
 
@@ -321,7 +321,7 @@ export function Financeiro() {
           <Button variant="secondary" size="sm" onClick={prevMonth}>
             <ChevronLeft className="w-4 h-4" />
           </Button>
-          <h3 className="text-lg font-semibold text-gray-900 min-w-[160px] text-center">
+          <h3 className="text-lg font-semibold text-text-primary min-w-[160px] text-center">
             {meses[filterMes]} {filterAno}
           </h3>
           <Button variant="secondary" size="sm" onClick={nextMonth}>
@@ -330,13 +330,13 @@ export function Financeiro() {
         </div>
 
         <div className="flex items-center gap-2">
-          <div className="flex border border-gray-300 rounded-lg overflow-hidden">
+          <div className="flex border border-border rounded-lg overflow-hidden">
             <button
               onClick={() => setViewMode('transacoes')}
               className={`px-3 py-1.5 text-sm flex items-center gap-1.5 transition-colors ${
                 viewMode === 'transacoes'
-                  ? 'bg-primary-600 text-white'
-                  : 'bg-white text-gray-600 hover:bg-gray-50'
+                  ? 'bg-accent text-bg-main'
+                  : 'bg-bg-card text-text-secondary hover:bg-bg-elevated'
               }`}
             >
               <FileText className="w-4 h-4" />
@@ -346,8 +346,8 @@ export function Financeiro() {
               onClick={() => setViewMode('relatorio')}
               className={`px-3 py-1.5 text-sm flex items-center gap-1.5 transition-colors ${
                 viewMode === 'relatorio'
-                  ? 'bg-primary-600 text-white'
-                  : 'bg-white text-gray-600 hover:bg-gray-50'
+                  ? 'bg-accent text-bg-main'
+                  : 'bg-bg-card text-text-secondary hover:bg-bg-elevated'
               }`}
             >
               <BarChart3 className="w-4 h-4" />
@@ -364,19 +364,19 @@ export function Financeiro() {
       {/* Filters */}
       <div className="flex flex-wrap gap-3 mb-4">
         <div className="relative flex-1 min-w-[200px]">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-text-secondary" />
           <input
             type="text"
             placeholder="Buscar por descrição, cliente ou fornecedor..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-9 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+            className="w-full pl-9 pr-4 py-2 border border-border rounded-lg text-sm bg-bg-main text-text-primary placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent"
           />
         </div>
         <select
           value={filterTipo}
           onChange={(e) => setFilterTipo(e.target.value)}
-          className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
+          className="px-3 py-2 border border-border rounded-lg text-sm bg-bg-main text-text-primary focus:outline-none focus:ring-2 focus:ring-accent"
         >
           <option value="todos">Todos Tipos</option>
           <option value="entrada">Entradas</option>
@@ -385,7 +385,7 @@ export function Financeiro() {
         <select
           value={filterCategoria}
           onChange={(e) => setFilterCategoria(e.target.value)}
-          className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
+          className="px-3 py-2 border border-border rounded-lg text-sm bg-bg-main text-text-primary focus:outline-none focus:ring-2 focus:ring-accent"
         >
           <option value="todas">Todas Categorias</option>
           {Object.entries({ ...categoriaEntradaConfig, ...categoriaSaidaConfig }).map(
@@ -399,7 +399,7 @@ export function Financeiro() {
         <select
           value={filterStatus}
           onChange={(e) => setFilterStatus(e.target.value)}
-          className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
+          className="px-3 py-2 border border-border rounded-lg text-sm bg-bg-main text-text-primary focus:outline-none focus:ring-2 focus:ring-accent"
         >
           <option value="todos">Todos Status</option>
           {Object.entries(statusConfig).map(([value, config]) => (
@@ -414,39 +414,39 @@ export function Financeiro() {
       {viewMode === 'transacoes' ? (
         <div className="space-y-3">
           {filteredTransacoes.length === 0 && (
-            <div className="text-center py-12 bg-white rounded-xl border border-gray-200">
-              <DollarSign className="w-12 h-12 text-gray-300 mx-auto mb-3" />
-              <p className="text-gray-500">Nenhuma transação encontrada para este mês.</p>
+            <div className="text-center py-12 bg-bg-card rounded-xl border border-border">
+              <DollarSign className="w-12 h-12 text-text-muted mx-auto mb-3" />
+              <p className="text-text-secondary">Nenhuma transação encontrada para este mês.</p>
             </div>
           )}
           {filteredTransacoes.map((t) => (
             <div
               key={t.id}
-              className="bg-white rounded-xl border border-gray-200 p-4 hover:shadow-md transition-shadow"
+              className="bg-bg-card rounded-xl border border-border p-4 hover:shadow-md transition-shadow"
             >
               <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
                 <div className="flex items-start gap-3 flex-1">
                   <div
                     className={`p-2 rounded-lg flex-shrink-0 ${
                       t.tipo === 'entrada'
-                        ? 'bg-success-100'
-                        : 'bg-danger-100'
+                        ? 'bg-success-950'
+                        : 'bg-danger-950'
                     }`}
                   >
                     {t.tipo === 'entrada' ? (
-                      <ArrowUpCircle className="w-5 h-5 text-success-600" />
+                      <ArrowUpCircle className="w-5 h-5 text-success-400" />
                     ) : (
-                      <ArrowDownCircle className="w-5 h-5 text-danger-600" />
+                      <ArrowDownCircle className="w-5 h-5 text-danger-400" />
                     )}
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1">
-                      <h3 className="font-medium text-gray-900 truncate">{t.descricao}</h3>
+                      <h3 className="font-medium text-text-primary truncate">{t.descricao}</h3>
                       <Badge variant={t.tipo === 'entrada' ? 'success' : 'danger'}>
                         {t.tipo === 'entrada' ? 'Entrada' : 'Saída'}
                       </Badge>
                     </div>
-                    <div className="flex flex-wrap gap-3 text-sm text-gray-500">
+                    <div className="flex flex-wrap gap-3 text-sm text-text-secondary">
                       <span>{formatDate(t.data)}</span>
                       <Badge variant={getCategoriaConfig(t.categoria, t.tipo).color}>
                         {getCategoriaConfig(t.categoria, t.tipo).label}
@@ -465,7 +465,7 @@ export function Financeiro() {
                 <div className="flex items-center gap-4">
                   <p
                     className={`text-lg font-bold ${
-                      t.tipo === 'entrada' ? 'text-success-600' : 'text-danger-600'
+                      t.tipo === 'entrada' ? 'text-success-400' : 'text-danger-400'
                     }`}
                   >
                     {t.tipo === 'entrada' ? '+' : '-'} {formatCurrency(t.valor)}
@@ -473,7 +473,7 @@ export function Financeiro() {
                   <select
                     value={t.status}
                     onChange={(e) => handleStatusChange(t.id, e.target.value)}
-                    className="px-2 py-1 border border-gray-200 rounded text-xs focus:outline-none focus:ring-1 focus:ring-primary-500"
+                    className="px-2 py-1 border border-border rounded text-xs bg-bg-main text-text-primary focus:outline-none focus:ring-1 focus:ring-accent"
                   >
                     {Object.entries(statusConfig).map(([value, config]) => (
                       <option key={value} value={value}>
@@ -484,23 +484,23 @@ export function Financeiro() {
                   <div className="flex gap-1">
                     <button
                       onClick={() => handleOpenModal(t)}
-                      className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
+                      className="p-2 rounded-lg hover:bg-bg-elevated transition-colors"
                       title="Editar"
                     >
-                      <Edit className="w-4 h-4 text-gray-500" />
+                      <Edit className="w-4 h-4 text-text-secondary" />
                     </button>
                     <button
                       onClick={() => setConfirmDelete(t.id)}
-                      className="p-2 rounded-lg hover:bg-danger-50 transition-colors"
+                      className="p-2 rounded-lg hover:bg-danger-950 transition-colors"
                       title="Excluir"
                     >
-                      <Trash2 className="w-4 h-4 text-danger-500" />
+                      <Trash2 className="w-4 h-4 text-danger-400" />
                     </button>
                   </div>
                 </div>
               </div>
               {t.observacoes && (
-                <p className="text-xs text-gray-400 mt-2 pt-2 border-t border-gray-100 ml-10">
+                <p className="text-xs text-text-muted mt-2 pt-2 border-t border-border ml-10">
                   {t.observacoes}
                 </p>
               )}
@@ -512,45 +512,45 @@ export function Financeiro() {
         <div className="space-y-6">
           {/* Monthly Summary */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div className="bg-white rounded-xl border border-gray-200 p-5">
+            <div className="bg-bg-card rounded-xl border border-border p-5">
               <div className="flex items-center gap-3 mb-2">
-                <div className="p-2 bg-success-100 rounded-lg">
-                  <TrendingUp className="w-5 h-5 text-success-600" />
+                <div className="p-2 bg-success-950 rounded-lg">
+                  <TrendingUp className="w-5 h-5 text-success-400" />
                 </div>
-                <span className="text-sm text-gray-500">Entradas do Mês</span>
+                <span className="text-sm text-text-secondary">Entradas do Mês</span>
               </div>
-              <p className="text-2xl font-bold text-success-600">{formatCurrency(mesTotalEntradas)}</p>
-              <p className="text-xs text-gray-400 mt-1">{mesEntradas.length} transações</p>
+              <p className="text-2xl font-bold text-success-400">{formatCurrency(mesTotalEntradas)}</p>
+              <p className="text-xs text-text-muted mt-1">{mesEntradas.length} transações</p>
             </div>
-            <div className="bg-white rounded-xl border border-gray-200 p-5">
+            <div className="bg-bg-card rounded-xl border border-border p-5">
               <div className="flex items-center gap-3 mb-2">
-                <div className="p-2 bg-danger-100 rounded-lg">
-                  <TrendingDown className="w-5 h-5 text-danger-600" />
+                <div className="p-2 bg-danger-950 rounded-lg">
+                  <TrendingDown className="w-5 h-5 text-danger-400" />
                 </div>
-                <span className="text-sm text-gray-500">Saídas do Mês</span>
+                <span className="text-sm text-text-secondary">Saídas do Mês</span>
               </div>
-              <p className="text-2xl font-bold text-danger-600">{formatCurrency(mesTotalSaidas)}</p>
-              <p className="text-xs text-gray-400 mt-1">{mesSaidas.length} transações</p>
+              <p className="text-2xl font-bold text-danger-400">{formatCurrency(mesTotalSaidas)}</p>
+              <p className="text-xs text-text-muted mt-1">{mesSaidas.length} transações</p>
             </div>
-            <div className="bg-white rounded-xl border border-gray-200 p-5">
+            <div className="bg-bg-card rounded-xl border border-border p-5">
               <div className="flex items-center gap-3 mb-2">
-                <div className={`p-2 rounded-lg ${mesTotalEntradas - mesTotalSaidas >= 0 ? 'bg-primary-100' : 'bg-danger-100'}`}>
-                  <DollarSign className={`w-5 h-5 ${mesTotalEntradas - mesTotalSaidas >= 0 ? 'text-primary-600' : 'text-danger-600'}`} />
+                <div className={`p-2 rounded-lg ${mesTotalEntradas - mesTotalSaidas >= 0 ? 'bg-accent-light' : 'bg-danger-950'}`}>
+                  <DollarSign className={`w-5 h-5 ${mesTotalEntradas - mesTotalSaidas >= 0 ? 'text-accent' : 'text-danger-400'}`} />
                 </div>
-                <span className="text-sm text-gray-500">Resultado</span>
+                <span className="text-sm text-text-secondary">Resultado</span>
               </div>
-              <p className={`text-2xl font-bold ${mesTotalEntradas - mesTotalSaidas >= 0 ? 'text-primary-600' : 'text-danger-600'}`}>
+              <p className={`text-2xl font-bold ${mesTotalEntradas - mesTotalSaidas >= 0 ? 'text-accent' : 'text-danger-400'}`}>
                 {formatCurrency(mesTotalEntradas - mesTotalSaidas)}
               </p>
-              <p className="text-xs text-gray-400 mt-1">{mesTransacoes.length} transações</p>
+              <p className="text-xs text-text-muted mt-1">{mesTransacoes.length} transações</p>
             </div>
           </div>
 
           {/* Breakdown by Category */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <div className="bg-white rounded-xl border border-gray-200 p-5">
-              <h3 className="font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                <ArrowUpCircle className="w-5 h-5 text-success-600" />
+            <div className="bg-bg-card rounded-xl border border-border p-5">
+              <h3 className="font-semibold text-text-primary mb-4 flex items-center gap-2">
+                <ArrowUpCircle className="w-5 h-5 text-success-400" />
                 Entradas por Categoria
               </h3>
               <div className="space-y-3">
@@ -563,27 +563,27 @@ export function Financeiro() {
                     <div key={cat}>
                       <div className="flex justify-between text-sm mb-1">
                         <Badge variant={config.color}>{config.label}</Badge>
-                        <span className="font-medium">{formatCurrency(total)}</span>
+                        <span className="font-medium text-text-primary">{formatCurrency(total)}</span>
                       </div>
-                      <div className="w-full h-2 bg-gray-100 rounded-full overflow-hidden">
+                      <div className="w-full h-2 bg-bg-elevated rounded-full overflow-hidden">
                         <div
-                          className="h-full bg-success-500 rounded-full"
+                          className="h-full bg-success-400 rounded-full"
                           style={{ width: `${percent}%` }}
                         />
                       </div>
-                      <p className="text-xs text-gray-400 mt-1">{catTransacoes.length} transações</p>
+                      <p className="text-xs text-text-muted mt-1">{catTransacoes.length} transações</p>
                     </div>
                   );
                 })}
                 {mesEntradas.length === 0 && (
-                  <p className="text-sm text-gray-400 text-center py-4">Nenhuma entrada neste mês</p>
+                  <p className="text-sm text-text-muted text-center py-4">Nenhuma entrada neste mês</p>
                 )}
               </div>
             </div>
 
-            <div className="bg-white rounded-xl border border-gray-200 p-5">
-              <h3 className="font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                <ArrowDownCircle className="w-5 h-5 text-danger-600" />
+            <div className="bg-bg-card rounded-xl border border-border p-5">
+              <h3 className="font-semibold text-text-primary mb-4 flex items-center gap-2">
+                <ArrowDownCircle className="w-5 h-5 text-danger-400" />
                 Saídas por Categoria
               </h3>
               <div className="space-y-3">
@@ -596,40 +596,40 @@ export function Financeiro() {
                     <div key={cat}>
                       <div className="flex justify-between text-sm mb-1">
                         <Badge variant={config.color}>{config.label}</Badge>
-                        <span className="font-medium">{formatCurrency(total)}</span>
+                        <span className="font-medium text-text-primary">{formatCurrency(total)}</span>
                       </div>
-                      <div className="w-full h-2 bg-gray-100 rounded-full overflow-hidden">
+                      <div className="w-full h-2 bg-bg-elevated rounded-full overflow-hidden">
                         <div
-                          className="h-full bg-danger-500 rounded-full"
+                          className="h-full bg-danger-400 rounded-full"
                           style={{ width: `${percent}%` }}
                         />
                       </div>
-                      <p className="text-xs text-gray-400 mt-1">{catTransacoes.length} transações</p>
+                      <p className="text-xs text-text-muted mt-1">{catTransacoes.length} transações</p>
                     </div>
                   );
                 })}
                 {mesSaidas.length === 0 && (
-                  <p className="text-sm text-gray-400 text-center py-4">Nenhuma saída neste mês</p>
+                  <p className="text-sm text-text-muted text-center py-4">Nenhuma saída neste mês</p>
                 )}
               </div>
             </div>
           </div>
 
           {/* Last 6 Months Overview */}
-          <div className="bg-white rounded-xl border border-gray-200 p-5">
-            <h3 className="font-semibold text-gray-900 mb-4 flex items-center gap-2">
-              <BarChart3 className="w-5 h-5 text-primary-600" />
+          <div className="bg-bg-card rounded-xl border border-border p-5">
+            <h3 className="font-semibold text-text-primary mb-4 flex items-center gap-2">
+              <BarChart3 className="w-5 h-5 text-accent" />
               Últimos 6 Meses
             </h3>
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="border-b border-gray-200">
-                    <th className="text-left py-2 px-3 font-medium text-gray-600">Mês</th>
-                    <th className="text-right py-2 px-3 font-medium text-success-600">Entradas</th>
-                    <th className="text-right py-2 px-3 font-medium text-danger-600">Saídas</th>
-                    <th className="text-right py-2 px-3 font-medium text-gray-600">Saldo</th>
-                    <th className="text-center py-2 px-3 font-medium text-gray-600">Nº Transações</th>
+                  <tr className="border-b border-border">
+                    <th className="text-left py-2 px-3 font-medium text-text-secondary">Mês</th>
+                    <th className="text-right py-2 px-3 font-medium text-success-400">Entradas</th>
+                    <th className="text-right py-2 px-3 font-medium text-danger-400">Saídas</th>
+                    <th className="text-right py-2 px-3 font-medium text-text-secondary">Saldo</th>
+                    <th className="text-center py-2 px-3 font-medium text-text-secondary">Nº Transações</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -642,23 +642,23 @@ export function Financeiro() {
                     return (
                       <tr
                         key={i}
-                        className={`border-b border-gray-100 ${
-                          i === 0 ? 'bg-primary-50' : ''
+                        className={`border-b border-border ${
+                          i === 0 ? 'bg-bg-elevated' : ''
                         }`}
                       >
-                        <td className="py-2.5 px-3 font-medium">
+                        <td className="py-2.5 px-3 font-medium text-text-primary">
                           {meses[month]} {year}
                         </td>
-                        <td className="py-2.5 px-3 text-right text-success-600">
+                        <td className="py-2.5 px-3 text-right text-success-400">
                           {formatCurrency(resumo.entradas)}
                         </td>
-                        <td className="py-2.5 px-3 text-right text-danger-600">
+                        <td className="py-2.5 px-3 text-right text-danger-400">
                           {formatCurrency(resumo.saidas)}
                         </td>
-                        <td className={`py-2.5 px-3 text-right font-semibold ${saldo >= 0 ? 'text-primary-600' : 'text-danger-600'}`}>
+                        <td className={`py-2.5 px-3 text-right font-semibold ${saldo >= 0 ? 'text-accent' : 'text-danger-400'}`}>
                           {formatCurrency(saldo)}
                         </td>
-                        <td className="py-2.5 px-3 text-center">{resumo.count}</td>
+                        <td className="py-2.5 px-3 text-center text-text-secondary">{resumo.count}</td>
                       </tr>
                     );
                   })}

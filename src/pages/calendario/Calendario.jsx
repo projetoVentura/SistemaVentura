@@ -214,7 +214,7 @@ export function Calendario() {
           <Button variant="secondary" size="sm" onClick={prevMonth}>
             <ChevronLeft className="w-4 h-4" />
           </Button>
-          <h3 className="text-lg font-semibold text-gray-900 min-w-[180px] text-center">
+          <h3 className="text-lg font-semibold text-text-primary min-w-[180px] text-center">
             {meses[month]} {year}
           </h3>
           <Button variant="secondary" size="sm" onClick={nextMonth}>
@@ -223,13 +223,13 @@ export function Calendario() {
         </div>
 
         <div className="flex items-center gap-2">
-          <div className="flex border border-gray-300 rounded-lg overflow-hidden">
+          <div className="flex border border-border rounded-lg overflow-hidden">
             <button
               onClick={() => setViewMode('calendar')}
               className={`px-3 py-1.5 text-sm transition-colors ${
                 viewMode === 'calendar'
-                  ? 'bg-primary-600 text-white'
-                  : 'bg-white text-gray-600 hover:bg-gray-50'
+                  ? 'bg-accent text-bg-main'
+                  : 'bg-bg-card text-text-secondary hover:bg-bg-elevated'
               }`}
             >
               <LayoutGrid className="w-4 h-4" />
@@ -238,8 +238,8 @@ export function Calendario() {
               onClick={() => setViewMode('list')}
               className={`px-3 py-1.5 text-sm transition-colors ${
                 viewMode === 'list'
-                  ? 'bg-primary-600 text-white'
-                  : 'bg-white text-gray-600 hover:bg-gray-50'
+                  ? 'bg-accent text-bg-main'
+                  : 'bg-bg-card text-text-secondary hover:bg-bg-elevated'
               }`}
             >
               <List className="w-4 h-4" />
@@ -253,12 +253,12 @@ export function Calendario() {
       </div>
 
       {viewMode === 'calendar' ? (
-        <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
-          <div className="grid grid-cols-7 border-b border-gray-200">
+        <div className="bg-bg-card rounded-xl border border-border overflow-hidden">
+          <div className="grid grid-cols-7 border-b border-border">
             {diasSemana.map((dia) => (
               <div
                 key={dia}
-                className="py-3 text-center text-sm font-medium text-gray-500"
+                className="py-3 text-center text-sm font-medium text-text-secondary"
               >
                 {dia}
               </div>
@@ -271,9 +271,9 @@ export function Calendario() {
               return (
                 <div
                   key={index}
-                  className={`min-h-[100px] border-b border-r border-gray-100 p-2 ${
-                    day ? 'cursor-pointer hover:bg-gray-50' : 'bg-gray-50'
-                  } ${isToday(day) ? 'bg-primary-50' : ''}`}
+                  className={`min-h-[100px] border-b border-r border-border p-2 ${
+                    day ? 'cursor-pointer hover:bg-bg-elevated' : 'bg-bg-main'
+                  } ${isToday(day) ? 'bg-accent-light' : ''}`}
                   onClick={() => day && handleDayClick(day)}
                 >
                   {day && (
@@ -281,8 +281,8 @@ export function Calendario() {
                       <span
                         className={`inline-flex items-center justify-center w-7 h-7 rounded-full text-sm ${
                           isToday(day)
-                            ? 'bg-primary-600 text-white font-semibold'
-                            : 'text-gray-700'
+                            ? 'bg-accent text-bg-main font-semibold'
+                            : 'text-text-primary'
                         }`}
                       >
                         {day}
@@ -298,17 +298,17 @@ export function Calendario() {
                             }}
                             className={`w-full text-left px-1.5 py-0.5 rounded text-xs truncate font-medium ${
                               evento.status === 'confirmado'
-                                ? 'bg-success-100 text-success-700'
+                                ? 'bg-success-950 text-success-400 border border-success-700'
                                 : evento.status === 'pendente'
-                                ? 'bg-warning-100 text-warning-700'
-                                : 'bg-danger-100 text-danger-700'
+                                ? 'bg-warning-950 text-warning-400 border border-warning-700'
+                                : 'bg-danger-950 text-danger-400 border border-danger-700'
                             }`}
                           >
                             {evento.titulo}
                           </button>
                         ))}
                         {dayEventos.length > 2 && (
-                          <p className="text-xs text-gray-500 pl-1">
+                          <p className="text-xs text-text-muted pl-1">
                             +{dayEventos.length - 2} mais
                           </p>
                         )}
@@ -323,45 +323,45 @@ export function Calendario() {
       ) : (
         <div className="space-y-3">
           {eventosDoMes.length === 0 && (
-            <div className="text-center py-12 bg-white rounded-xl border border-gray-200">
-              <CalendarIcon className="w-12 h-12 text-gray-300 mx-auto mb-3" />
-              <p className="text-gray-500">Nenhum evento neste mês.</p>
+            <div className="text-center py-12 bg-bg-card rounded-xl border border-border">
+              <CalendarIcon className="w-12 h-12 text-text-muted mx-auto mb-3" />
+              <p className="text-text-secondary">Nenhum evento neste mês.</p>
             </div>
           )}
           {eventosDoMes.map((evento) => (
             <div
               key={evento.id}
-              className="bg-white rounded-xl border border-gray-200 p-4 hover:shadow-md transition-shadow"
+              className="bg-bg-card rounded-xl border border-border p-4 hover:shadow-md transition-shadow"
             >
               <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-2">
-                    <h3 className="font-semibold text-gray-900">{evento.titulo}</h3>
+                    <h3 className="font-semibold text-text-primary">{evento.titulo}</h3>
                     <Badge variant={statusConfig[evento.status].color}>
                       {statusConfig[evento.status].label}
                     </Badge>
                   </div>
-                  <p className="text-sm text-gray-500 mb-3">{evento.descricao}</p>
-                  <div className="flex flex-wrap gap-4 text-sm text-gray-600">
+                  <p className="text-sm text-text-secondary mb-3">{evento.descricao}</p>
+                  <div className="flex flex-wrap gap-4 text-sm text-text-secondary">
                     <div className="flex items-center gap-1.5">
-                      <CalendarIcon className="w-4 h-4 text-gray-400" />
+                      <CalendarIcon className="w-4 h-4 text-text-muted" />
                       <span>{formatDate(evento.data)}</span>
                       {evento.dataFim && <span> até {formatDate(evento.dataFim)}</span>}
                     </div>
                     {evento.horarioInicio && (
                       <div className="flex items-center gap-1.5">
-                        <Clock className="w-4 h-4 text-gray-400" />
+                        <Clock className="w-4 h-4 text-text-muted" />
                         <span>
                           {evento.horarioInicio} - {evento.horarioFim}
                         </span>
                       </div>
                     )}
                     <div className="flex items-center gap-1.5">
-                      <MapPin className="w-4 h-4 text-gray-400" />
+                      <MapPin className="w-4 h-4 text-text-muted" />
                       <span>{evento.local}</span>
                     </div>
                     <div className="flex items-center gap-1.5">
-                      <User className="w-4 h-4 text-gray-400" />
+                      <User className="w-4 h-4 text-text-muted" />
                       <span>{evento.cliente}</span>
                     </div>
                   </div>
@@ -373,24 +373,24 @@ export function Calendario() {
                       setViewingEvento(evento);
                       setIsViewModalOpen(true);
                     }}
-                    className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
+                    className="p-2 rounded-lg hover:bg-bg-elevated transition-colors"
                     title="Visualizar"
                   >
-                    <Eye className="w-4 h-4 text-gray-500" />
+                    <Eye className="w-4 h-4 text-text-secondary" />
                   </button>
                   <button
                     onClick={() => handleOpenModal(evento)}
-                    className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
+                    className="p-2 rounded-lg hover:bg-bg-elevated transition-colors"
                     title="Editar"
                   >
-                    <Edit className="w-4 h-4 text-gray-500" />
+                    <Edit className="w-4 h-4 text-text-secondary" />
                   </button>
                   <button
                     onClick={() => setConfirmDelete(evento.id)}
-                    className="p-2 rounded-lg hover:bg-danger-50 transition-colors"
+                    className="p-2 rounded-lg hover:bg-danger-950 transition-colors"
                     title="Excluir"
                   >
-                    <Trash2 className="w-4 h-4 text-danger-500" />
+                    <Trash2 className="w-4 h-4 text-danger-400" />
                   </button>
                 </div>
               </div>
@@ -482,8 +482,8 @@ export function Calendario() {
             placeholder="João Silva, Maria Santos, Pedro Costa"
           />
 
-          <div className="border-t border-gray-200 pt-4">
-            <h4 className="font-medium text-gray-900 mb-3 flex items-center gap-2">
+          <div className="border-t border-border pt-4">
+            <h4 className="font-medium text-text-primary mb-3 flex items-center gap-2">
               <Package className="w-4 h-4" />
               Materiais do Evento
             </h4>
@@ -498,7 +498,7 @@ export function Calendario() {
                     setFormData({ ...formData, materiais: newMateriais });
                   }}
                   placeholder="Nome do equipamento"
-                  className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
+                  className="flex-1 px-3 py-2 border border-border rounded-lg text-sm bg-bg-main text-text-primary focus:outline-none focus:ring-2 focus:ring-accent"
                 />
                 <input
                   type="number"
@@ -509,7 +509,7 @@ export function Calendario() {
                     setFormData({ ...formData, materiais: newMateriais });
                   }}
                   placeholder="Qtd"
-                  className="w-20 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
+                  className="w-20 px-3 py-2 border border-border rounded-lg text-sm bg-bg-main text-text-primary focus:outline-none focus:ring-2 focus:ring-accent"
                 />
                 <button
                   type="button"
@@ -517,9 +517,9 @@ export function Calendario() {
                     const newMateriais = formData.materiais.filter((_, i) => i !== index);
                     setFormData({ ...formData, materiais: newMateriais });
                   }}
-                  className="p-2 rounded-lg hover:bg-danger-50 transition-colors"
+                  className="p-2 rounded-lg hover:bg-danger-950 transition-colors"
                 >
-                  <Trash2 className="w-4 h-4 text-danger-500" />
+                  <Trash2 className="w-4 h-4 text-danger-400" />
                 </button>
               </div>
             ))}
@@ -562,7 +562,7 @@ export function Calendario() {
         {viewingEvento && (
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <h3 className="text-lg font-semibold text-gray-900">
+              <h3 className="text-lg font-semibold text-text-primary">
                 {viewingEvento.titulo}
               </h3>
               <Badge variant={statusConfig[viewingEvento.status].color}>
@@ -571,16 +571,16 @@ export function Calendario() {
             </div>
 
             {viewingEvento.descricao && (
-              <p className="text-sm text-gray-600">{viewingEvento.descricao}</p>
+              <p className="text-sm text-text-secondary">{viewingEvento.descricao}</p>
             )}
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <p className="text-sm text-gray-500 mb-1 flex items-center gap-1.5">
+                <p className="text-sm text-text-muted mb-1 flex items-center gap-1.5">
                   <CalendarIcon className="w-4 h-4" />
                   Data
                 </p>
-                <p className="text-sm font-medium">
+                <p className="text-sm font-medium text-text-primary">
                   {formatDate(viewingEvento.data)}
                   {viewingEvento.dataFim && (
                     <span> até {formatDate(viewingEvento.dataFim)}</span>
@@ -588,33 +588,33 @@ export function Calendario() {
                 </p>
               </div>
               <div>
-                <p className="text-sm text-gray-500 mb-1 flex items-center gap-1.5">
+                <p className="text-sm text-text-muted mb-1 flex items-center gap-1.5">
                   <Clock className="w-4 h-4" />
                   Horário
                 </p>
-                <p className="text-sm font-medium">
+                <p className="text-sm font-medium text-text-primary">
                   {viewingEvento.horarioInicio} - {viewingEvento.horarioFim}
                 </p>
               </div>
               <div>
-                <p className="text-sm text-gray-500 mb-1 flex items-center gap-1.5">
+                <p className="text-sm text-text-muted mb-1 flex items-center gap-1.5">
                   <MapPin className="w-4 h-4" />
                   Local
                 </p>
-                <p className="text-sm font-medium">{viewingEvento.local}</p>
+                <p className="text-sm font-medium text-text-primary">{viewingEvento.local}</p>
               </div>
               <div>
-                <p className="text-sm text-gray-500 mb-1 flex items-center gap-1.5">
+                <p className="text-sm text-text-muted mb-1 flex items-center gap-1.5">
                   <User className="w-4 h-4" />
                   Cliente
                 </p>
-                <p className="text-sm font-medium">{viewingEvento.cliente}</p>
+                <p className="text-sm font-medium text-text-primary">{viewingEvento.cliente}</p>
               </div>
             </div>
 
             {viewingEvento.equipe && viewingEvento.equipe.length > 0 && (
               <div>
-                <p className="text-sm text-gray-500 mb-2">Equipe</p>
+                <p className="text-sm text-text-muted mb-2">Equipe</p>
                 <div className="flex flex-wrap gap-2">
                   {viewingEvento.equipe.map((membro, index) => (
                     <Badge key={index} variant="info">
@@ -627,24 +627,24 @@ export function Calendario() {
 
             {viewingEvento.materiais && viewingEvento.materiais.length > 0 && (
               <div>
-                <p className="text-sm text-gray-500 mb-2">Materiais</p>
-                <div className="border border-gray-200 rounded-lg overflow-hidden">
+                <p className="text-sm text-text-muted mb-2">Materiais</p>
+                <div className="border border-border rounded-lg overflow-hidden">
                   <table className="w-full text-sm">
-                    <thead className="bg-gray-50">
+                    <thead className="bg-bg-main">
                       <tr>
-                        <th className="text-left px-4 py-2 font-medium text-gray-600">
+                        <th className="text-left px-4 py-2 font-medium text-text-secondary">
                           Equipamento
                         </th>
-                        <th className="text-center px-4 py-2 font-medium text-gray-600">
+                        <th className="text-center px-4 py-2 font-medium text-text-secondary">
                           Quantidade
                         </th>
                       </tr>
                     </thead>
                     <tbody>
                       {viewingEvento.materiais.map((item, index) => (
-                        <tr key={index} className="border-t border-gray-100">
-                          <td className="px-4 py-2">{item.nome}</td>
-                          <td className="px-4 py-2 text-center">{item.quantidade}</td>
+                        <tr key={index} className="border-t border-border">
+                          <td className="px-4 py-2 text-text-primary">{item.nome}</td>
+                          <td className="px-4 py-2 text-center text-text-primary">{item.quantidade}</td>
                         </tr>
                       ))}
                     </tbody>

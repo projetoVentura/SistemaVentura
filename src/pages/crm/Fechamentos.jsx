@@ -144,32 +144,32 @@ export function Fechamentos() {
   return (
     <Layout title="Fechamentos">
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-        <div className="bg-white rounded-xl border border-gray-200 p-4">
+        <div className="bg-bg-card rounded-xl border border-border p-4">
           <div className="flex items-center gap-3 mb-2">
-            <div className="p-2 bg-primary-100 rounded-lg">
-              <TrendingUp className="w-5 h-5 text-primary-600" />
+            <div className="p-2 bg-accent-light rounded-lg">
+              <TrendingUp className="w-5 h-5 text-accent" />
             </div>
-            <span className="text-sm text-gray-500">Total Geral</span>
+            <span className="text-sm text-text-secondary">Total Geral</span>
           </div>
-          <p className="text-2xl font-bold text-gray-900">{formatCurrency(totalGeral)}</p>
+          <p className="text-2xl font-bold text-text-primary">{formatCurrency(totalGeral)}</p>
         </div>
-        <div className="bg-white rounded-xl border border-gray-200 p-4">
+        <div className="bg-bg-card rounded-xl border border-border p-4">
           <div className="flex items-center gap-3 mb-2">
-            <div className="p-2 bg-success-100 rounded-lg">
-              <CheckCircle className="w-5 h-5 text-success-600" />
+            <div className="p-2 bg-success-950 rounded-lg">
+              <CheckCircle className="w-5 h-5 text-success-400" />
             </div>
-            <span className="text-sm text-gray-500">Recebido</span>
+            <span className="text-sm text-text-secondary">Recebido</span>
           </div>
-          <p className="text-2xl font-bold text-success-600">{formatCurrency(totalPago)}</p>
+          <p className="text-2xl font-bold text-success-400">{formatCurrency(totalPago)}</p>
         </div>
-        <div className="bg-white rounded-xl border border-gray-200 p-4">
+        <div className="bg-bg-card rounded-xl border border-border p-4">
           <div className="flex items-center gap-3 mb-2">
-            <div className="p-2 bg-warning-100 rounded-lg">
-              <DollarSign className="w-5 h-5 text-warning-600" />
+            <div className="p-2 bg-warning-950 rounded-lg">
+              <DollarSign className="w-5 h-5 text-warning-400" />
             </div>
-            <span className="text-sm text-gray-500">Pendente</span>
+            <span className="text-sm text-text-secondary">Pendente</span>
           </div>
-          <p className="text-2xl font-bold text-warning-600">{formatCurrency(totalPendente)}</p>
+          <p className="text-2xl font-bold text-warning-400">{formatCurrency(totalPendente)}</p>
         </div>
       </div>
 
@@ -179,8 +179,8 @@ export function Fechamentos() {
             onClick={() => setFilterStatus('todos')}
             className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
               filterStatus === 'todos'
-                ? 'bg-primary-600 text-white'
-                : 'bg-white text-gray-600 border border-gray-300 hover:bg-gray-50'
+                ? 'bg-accent text-bg-main'
+                : 'bg-bg-card text-text-secondary border border-border hover:bg-bg-elevated'
             }`}
           >
             Todos
@@ -191,8 +191,8 @@ export function Fechamentos() {
               onClick={() => setFilterStatus(value)}
               className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
                 filterStatus === value
-                  ? 'bg-primary-600 text-white'
-                  : 'bg-white text-gray-600 border border-gray-300 hover:bg-gray-50'
+                  ? 'bg-accent text-bg-main'
+                  : 'bg-bg-card text-text-secondary border border-border hover:bg-bg-elevated'
               }`}
             >
               {config.label}
@@ -209,25 +209,25 @@ export function Fechamentos() {
         {filteredFechamentos.map((fechamento) => (
           <div
             key={fechamento.id}
-            className="bg-white rounded-xl border border-gray-200 p-4 flex flex-col lg:flex-row lg:items-center justify-between gap-4"
+            className="bg-bg-card rounded-xl border border-border p-4 flex flex-col lg:flex-row lg:items-center justify-between gap-4"
           >
             <div className="flex-1">
               <div className="flex items-center gap-2 mb-1">
-                <h3 className="font-medium text-gray-900">{fechamento.titulo}</h3>
+                <h3 className="font-medium text-text-primary">{fechamento.titulo}</h3>
                 <Badge variant={statusPagamentoConfig[fechamento.statusPagamento].color}>
                   {statusPagamentoConfig[fechamento.statusPagamento].label}
                 </Badge>
               </div>
-              <p className="text-sm text-gray-500">{fechamento.clienteNome}</p>
+              <p className="text-sm text-text-secondary">{fechamento.clienteNome}</p>
             </div>
 
             <div className="flex flex-wrap items-center gap-4 text-sm">
-              <div className="flex items-center gap-1.5 text-gray-500">
+              <div className="flex items-center gap-1.5 text-text-secondary">
                 <Calendar className="w-4 h-4" />
                 <span>Fechamento: {formatDate(fechamento.dataFechamento)}</span>
               </div>
               {fechamento.dataEvento && (
-                <div className="flex items-center gap-1.5 text-gray-500">
+                <div className="flex items-center gap-1.5 text-text-secondary">
                   <Calendar className="w-4 h-4" />
                   <span>Evento: {formatDate(fechamento.dataEvento)}</span>
                 </div>
@@ -238,24 +238,24 @@ export function Fechamentos() {
                 </Badge>
               </div>
               <div className="text-right">
-                <p className="text-lg font-semibold text-primary-600">
+                <p className="text-lg font-semibold text-accent">
                   {formatCurrency(fechamento.valor)}
                 </p>
               </div>
               <div className="flex gap-1">
                 <button
                   onClick={() => handleOpenModal(fechamento)}
-                  className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
+                  className="p-2 rounded-lg hover:bg-bg-elevated transition-colors"
                   title="Editar"
                 >
-                  <Edit className="w-4 h-4 text-gray-500" />
+                  <Edit className="w-4 h-4 text-text-secondary" />
                 </button>
                 <button
                   onClick={() => setConfirmDelete(fechamento.id)}
-                  className="p-2 rounded-lg hover:bg-danger-50 transition-colors"
+                  className="p-2 rounded-lg hover:bg-danger-950 transition-colors"
                   title="Excluir"
                 >
-                  <Trash2 className="w-4 h-4 text-danger-500" />
+                  <Trash2 className="w-4 h-4 text-danger-400" />
                 </button>
               </div>
             </div>
@@ -265,7 +265,7 @@ export function Fechamentos() {
 
       {filteredFechamentos.length === 0 && (
         <div className="text-center py-12">
-          <p className="text-gray-500">Nenhum fechamento encontrado.</p>
+          <p className="text-text-secondary">Nenhum fechamento encontrado.</p>
         </div>
       )}
 

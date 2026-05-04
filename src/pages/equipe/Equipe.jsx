@@ -340,44 +340,44 @@ export function Equipe() {
     <Layout title="Equipe">
       {/* Stats */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-        <div className="bg-white rounded-xl border border-gray-200 p-4">
+        <div className="bg-bg-card rounded-xl border border-border p-4">
           <div className="flex items-center gap-3 mb-2">
-            <div className="p-2 bg-primary-100 rounded-lg">
-              <Users className="w-5 h-5 text-primary-600" />
+            <div className="p-2 bg-accent-light rounded-lg">
+              <Users className="w-5 h-5 text-accent" />
             </div>
-            <span className="text-sm text-gray-500">Membros Ativos</span>
+            <span className="text-sm text-text-secondary">Membros Ativos</span>
           </div>
-          <p className="text-2xl font-bold text-gray-900">{membrosAtivos}</p>
+          <p className="text-2xl font-bold text-text-primary">{membrosAtivos}</p>
         </div>
-        <div className="bg-white rounded-xl border border-gray-200 p-4">
+        <div className="bg-bg-card rounded-xl border border-border p-4">
           <div className="flex items-center gap-3 mb-2">
-            <div className="p-2 bg-accent-100 rounded-lg">
-              <Calendar className="w-5 h-5 text-accent-600" />
+            <div className="p-2 bg-accent-light rounded-lg">
+              <Calendar className="w-5 h-5 text-accent" />
             </div>
-            <span className="text-sm text-gray-500">Escalas no Mês</span>
+            <span className="text-sm text-text-secondary">Escalas no Mês</span>
           </div>
-          <p className="text-2xl font-bold text-accent-600">{escalasMes.length}</p>
+          <p className="text-2xl font-bold text-accent">{escalasMes.length}</p>
         </div>
-        <div className="bg-white rounded-xl border border-gray-200 p-4">
+        <div className="bg-bg-card rounded-xl border border-border p-4">
           <div className="flex items-center gap-3 mb-2">
-            <div className="p-2 bg-success-100 rounded-lg">
-              <Briefcase className="w-5 h-5 text-success-600" />
+            <div className="p-2 bg-success-950 rounded-lg">
+              <Briefcase className="w-5 h-5 text-success-400" />
             </div>
-            <span className="text-sm text-gray-500">Eventos no Mês</span>
+            <span className="text-sm text-text-secondary">Eventos no Mês</span>
           </div>
-          <p className="text-2xl font-bold text-success-600">{eventosMes}</p>
+          <p className="text-2xl font-bold text-success-400">{eventosMes}</p>
         </div>
       </div>
 
       {/* Tabs */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
-        <div className="flex gap-2 border-b border-gray-200">
+        <div className="flex gap-2 border-b border-border">
           <button
             onClick={() => setActiveTab('membros')}
             className={`px-4 py-2 text-sm font-medium transition-colors border-b-2 ${
               activeTab === 'membros'
-                ? 'border-primary-600 text-primary-600'
-                : 'border-transparent text-gray-500 hover:text-gray-700'
+                ? 'border-accent text-accent'
+                : 'border-transparent text-text-muted hover:text-text-secondary'
             }`}
           >
             Membros
@@ -386,8 +386,8 @@ export function Equipe() {
             onClick={() => setActiveTab('escalas')}
             className={`px-4 py-2 text-sm font-medium transition-colors border-b-2 ${
               activeTab === 'escalas'
-                ? 'border-primary-600 text-primary-600'
-                : 'border-transparent text-gray-500 hover:text-gray-700'
+                ? 'border-accent text-accent'
+                : 'border-transparent text-text-muted hover:text-text-secondary'
             }`}
           >
             Escalas
@@ -407,7 +407,7 @@ export function Equipe() {
       {/* Filters */}
       <div className="flex flex-wrap gap-3 mb-4">
         <div className="relative flex-1 min-w-[200px]">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-text-secondary" />
           <input
             type="text"
             placeholder={
@@ -417,7 +417,7 @@ export function Equipe() {
             }
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-9 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+            className="w-full pl-9 pr-4 py-2 border border-border rounded-lg text-sm bg-bg-main text-text-primary placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent"
           />
         </div>
         {activeTab === 'membros' ? (
@@ -425,7 +425,7 @@ export function Equipe() {
             <select
               value={filterFuncao}
               onChange={(e) => setFilterFuncao(e.target.value)}
-              className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
+              className="px-3 py-2 border border-border rounded-lg text-sm bg-bg-main text-text-primary focus:outline-none focus:ring-2 focus:ring-accent"
             >
               <option value="todas">Todas Funções</option>
               {funcoesUnicas.map((f) => (
@@ -435,7 +435,7 @@ export function Equipe() {
             <select
               value={filterStatus}
               onChange={(e) => setFilterStatus(e.target.value)}
-              className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
+              className="px-3 py-2 border border-border rounded-lg text-sm bg-bg-main text-text-primary focus:outline-none focus:ring-2 focus:ring-accent"
             >
               <option value="todos">Todos Status</option>
               <option value="ativo">Ativos</option>
@@ -448,7 +448,7 @@ export function Equipe() {
               <Button variant="secondary" size="sm" onClick={prevMonth}>
                 <ChevronLeft className="w-4 h-4" />
               </Button>
-              <span className="text-sm font-medium min-w-[140px] text-center">
+              <span className="text-sm font-medium min-w-[140px] text-center text-text-primary">
                 {meses[month]} {year}
               </span>
               <Button variant="secondary" size="sm" onClick={nextMonth}>
@@ -458,7 +458,7 @@ export function Equipe() {
             <select
               value={selectedMembro || ''}
               onChange={(e) => setSelectedMembro(e.target.value ? parseInt(e.target.value) : null)}
-              className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
+              className="px-3 py-2 border border-border rounded-lg text-sm bg-bg-main text-text-primary focus:outline-none focus:ring-2 focus:ring-accent"
             >
               <option value="">Todos os Membros</option>
               {membros.filter((m) => m.status === 'ativo').map((m) => (
@@ -475,20 +475,20 @@ export function Equipe() {
           {filteredMembros.map((membro) => (
             <div
               key={membro.id}
-              className={`bg-white rounded-xl border p-5 hover:shadow-md transition-shadow ${
-                membro.status === 'inativo' ? 'border-gray-200 opacity-75' : 'border-gray-200'
+              className={`bg-bg-card rounded-xl border p-5 hover:shadow-md transition-shadow ${
+                membro.status === 'inativo' ? 'border-border opacity-75' : 'border-border'
               }`}
             >
               <div className="flex items-start justify-between mb-3">
                 <div className="flex items-center gap-3">
                   <div className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-semibold ${
-                    membro.status === 'ativo' ? 'bg-primary-600 text-white' : 'bg-gray-300 text-gray-600'
+                    membro.status === 'ativo' ? 'bg-accent text-bg-main' : 'bg-bg-elevated text-text-muted'
                   }`}>
                     {membro.nome.split(' ').map((n) => n[0]).slice(0, 2).join('')}
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900">{membro.nome}</h3>
-                    <p className="text-sm text-gray-500">{membro.funcao}</p>
+                    <h3 className="font-semibold text-text-primary">{membro.nome}</h3>
+                    <p className="text-sm text-text-secondary">{membro.funcao}</p>
                   </div>
                 </div>
                 <Badge variant={statusConfig[membro.status].color}>
@@ -496,19 +496,19 @@ export function Equipe() {
                 </Badge>
               </div>
 
-              <div className="space-y-2 text-sm text-gray-600 mb-3">
+              <div className="space-y-2 text-sm text-text-secondary mb-3">
                 <div className="flex items-center gap-2">
-                  <Phone className="w-4 h-4 text-gray-400 flex-shrink-0" />
+                  <Phone className="w-4 h-4 text-text-muted flex-shrink-0" />
                   <span>{membro.telefone}</span>
                 </div>
                 {membro.email && (
                   <div className="flex items-center gap-2">
-                    <Mail className="w-4 h-4 text-gray-400 flex-shrink-0" />
+                    <Mail className="w-4 h-4 text-text-muted flex-shrink-0" />
                     <span className="truncate">{membro.email}</span>
                   </div>
                 )}
                 <div className="flex items-center gap-2">
-                  <DollarSign className="w-4 h-4 text-gray-400 flex-shrink-0" />
+                  <DollarSign className="w-4 h-4 text-text-muted flex-shrink-0" />
                   <span>{formatCurrency(membro.valorDiaria)}/dia</span>
                 </div>
               </div>
@@ -524,10 +524,10 @@ export function Equipe() {
                 </div>
               )}
 
-              <div className="flex gap-1 pt-3 border-t border-gray-100">
+              <div className="flex gap-1 pt-3 border-t border-border">
                 <button
                   onClick={() => handleOpenMembroModal(membro)}
-                  className="flex-1 p-2 rounded-lg hover:bg-gray-100 transition-colors text-sm text-gray-600"
+                  className="flex-1 p-2 rounded-lg hover:bg-bg-elevated transition-colors text-sm text-text-secondary"
                 >
                   <Edit className="w-4 h-4 inline mr-1" />
                   Editar
@@ -537,7 +537,7 @@ export function Equipe() {
                     setConfirmDelete(membro.id);
                     setDeleteType('membro');
                   }}
-                  className="flex-1 p-2 rounded-lg hover:bg-danger-50 transition-colors text-sm text-danger-600"
+                  className="flex-1 p-2 rounded-lg hover:bg-danger-950 transition-colors text-sm text-danger-400"
                 >
                   <Trash2 className="w-4 h-4 inline mr-1" />
                   Excluir
@@ -549,10 +549,10 @@ export function Equipe() {
       ) : (
         <>
           {/* Calendar View */}
-          <div className="bg-white rounded-xl border border-gray-200 overflow-hidden mb-6">
-            <div className="grid grid-cols-7 border-b border-gray-200">
+          <div className="bg-bg-card rounded-xl border border-border overflow-hidden mb-6">
+            <div className="grid grid-cols-7 border-b border-border">
               {diasSemana.map((dia) => (
-                <div key={dia} className="py-3 text-center text-sm font-medium text-gray-500">
+                <div key={dia} className="py-3 text-center text-sm font-medium text-text-secondary">
                   {dia}
                 </div>
               ))}
@@ -564,31 +564,31 @@ export function Equipe() {
                 return (
                   <div
                     key={index}
-                    className={`min-h-[80px] border-b border-r border-gray-100 p-1.5 ${
-                      day ? 'hover:bg-gray-50 cursor-pointer' : 'bg-gray-50'
+                    className={`min-h-[80px] border-b border-r border-border p-1.5 ${
+                      day ? 'hover:bg-bg-elevated cursor-pointer' : 'bg-bg-main'
                     }`}
                     onClick={() => day && handleOpenEscalaModal()}
                   >
                     {day && (
                       <>
-                        <span className="text-sm text-gray-700 font-medium">{day}</span>
+                        <span className="text-sm text-text-primary font-medium">{day}</span>
                         <div className="mt-1 space-y-0.5">
                           {dayEscalas.slice(0, 2).map((escala) => (
                             <div
                               key={escala.id}
                               className={`px-1 py-0.5 rounded text-xs truncate ${
                                 escala.status === 'confirmado'
-                                  ? 'bg-success-100 text-success-700'
+                                  ? 'bg-success-950 text-success-400 border border-success-700'
                                   : escala.status === 'pendente'
-                                  ? 'bg-warning-100 text-warning-700'
-                                  : 'bg-danger-100 text-danger-700'
+                                  ? 'bg-warning-950 text-warning-400 border border-warning-700'
+                                  : 'bg-danger-950 text-danger-400 border border-danger-700'
                               }`}
                             >
                               {escala.membroNome.split(' ')[0]}
                             </div>
                           ))}
                           {dayEscalas.length > 2 && (
-                            <p className="text-xs text-gray-400 pl-1">+{dayEscalas.length - 2}</p>
+                            <p className="text-xs text-text-muted pl-1">+{dayEscalas.length - 2}</p>
                           )}
                         </div>
                       </>
@@ -602,9 +602,9 @@ export function Equipe() {
           {/* Schedule List */}
           <div className="space-y-3">
             {filteredEscalas.length === 0 && (
-              <div className="text-center py-12 bg-white rounded-xl border border-gray-200">
-                <Calendar className="w-12 h-12 text-gray-300 mx-auto mb-3" />
-                <p className="text-gray-500">Nenhuma escala neste mês.</p>
+              <div className="text-center py-12 bg-bg-card rounded-xl border border-border">
+                <Calendar className="w-12 h-12 text-text-muted mx-auto mb-3" />
+                <p className="text-text-secondary">Nenhuma escala neste mês.</p>
               </div>
             )}
             {filteredEscalas.map((escala) => {
@@ -612,18 +612,18 @@ export function Equipe() {
               return (
                 <div
                   key={escala.id}
-                  className="bg-white rounded-xl border border-gray-200 p-4 hover:shadow-md transition-shadow"
+                  className="bg-bg-card rounded-xl border border-border p-4 hover:shadow-md transition-shadow"
                 >
                   <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
                     <div className="flex items-start gap-3 flex-1">
                       <div className={`w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center text-sm font-semibold ${
-                        membro?.status === 'inativo' ? 'bg-gray-300 text-gray-600' : 'bg-primary-600 text-white'
+                        membro?.status === 'inativo' ? 'bg-bg-elevated text-text-muted' : 'bg-accent text-bg-main'
                       }`}>
                         {escala.membroNome.split(' ').map((n) => n[0]).slice(0, 2).join('')}
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 mb-1">
-                          <h3 className="font-medium text-gray-900">{escala.membroNome}</h3>
+                          <h3 className="font-medium text-text-primary">{escala.membroNome}</h3>
                           <Badge variant={statusEscalaConfig[escala.status].color}>
                             {statusEscalaConfig[escala.status].label}
                           </Badge>
@@ -632,9 +632,9 @@ export function Equipe() {
                           </Badge>
                         </div>
                         {escala.evento && (
-                          <p className="text-sm text-gray-500">{escala.evento}</p>
+                          <p className="text-sm text-text-secondary">{escala.evento}</p>
                         )}
-                        <div className="flex flex-wrap gap-3 text-sm text-gray-500 mt-1">
+                        <div className="flex flex-wrap gap-3 text-sm text-text-secondary mt-1">
                           <span className="flex items-center gap-1">
                             <Calendar className="w-3.5 h-3.5" />
                             {formatDate(escala.data)}
@@ -657,7 +657,7 @@ export function Equipe() {
                       <select
                         value={escala.status}
                         onChange={(e) => handleStatusEscalaChange(escala.id, e.target.value)}
-                        className="px-2 py-1 border border-gray-200 rounded text-xs focus:outline-none focus:ring-1 focus:ring-primary-500"
+                        className="px-2 py-1 border border-border rounded text-xs bg-bg-main text-text-primary focus:outline-none focus:ring-1 focus:ring-accent"
                       >
                         {Object.entries(statusEscalaConfig).map(([value, config]) => (
                           <option key={value} value={value}>
@@ -667,20 +667,20 @@ export function Equipe() {
                       </select>
                       <button
                         onClick={() => handleOpenEscalaModal(escala)}
-                        className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
+                        className="p-2 rounded-lg hover:bg-bg-elevated transition-colors"
                         title="Editar"
                       >
-                        <Edit className="w-4 h-4 text-gray-500" />
+                        <Edit className="w-4 h-4 text-text-secondary" />
                       </button>
                       <button
                         onClick={() => {
                           setConfirmDelete(escala.id);
                           setDeleteType('escala');
                         }}
-                        className="p-2 rounded-lg hover:bg-danger-50 transition-colors"
+                        className="p-2 rounded-lg hover:bg-danger-950 transition-colors"
                         title="Excluir"
                       >
-                        <Trash2 className="w-4 h-4 text-danger-500" />
+                        <Trash2 className="w-4 h-4 text-danger-400" />
                       </button>
                     </div>
                   </div>
@@ -770,7 +770,7 @@ export function Equipe() {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1.5">
+            <label className="block text-sm font-medium text-text-primary mb-1.5">
               Especialidades
             </label>
             <div className="flex flex-wrap gap-2">
@@ -788,8 +788,8 @@ export function Equipe() {
                     }}
                     className={`px-3 py-1.5 rounded-lg text-sm font-medium border transition-colors ${
                       isSelected
-                        ? 'bg-primary-600 text-white border-primary-600'
-                        : 'bg-white text-gray-600 border-gray-300 hover:bg-gray-50'
+                        ? 'bg-accent text-bg-main border-accent'
+                        : 'bg-bg-main text-text-secondary border-border hover:bg-bg-elevated'
                     }`}
                   >
                     {option.label}
