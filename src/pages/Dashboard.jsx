@@ -61,32 +61,32 @@ export function Dashboard() {
   return (
     <Layout title="Dashboard">
       <div className="w-[95%] mx-auto">
-        {/* SEÇÃO 1: KPIs em linha horizontal, compactos */}
-        <div className="grid grid-cols-4 gap-4 mb-4">
+        {/* BLOCK 1: KPIs - Horizontal line with 4 cards */}
+        <div className="grid grid-cols-4 gap-5 mb-5">
           {stats.map((stat) => (
             <div
               key={stat.label}
-              className="bg-[#111111] border border-[#222222] rounded-lg p-3"
+              className="bg-[#111111] border border-[#222222] rounded-lg p-5"
             >
-              <div className="flex items-center gap-2 mb-1">
+              <div className="flex items-center gap-2 mb-2">
                 <stat.icon className="w-4 h-4 text-[#00ff88]" />
                 <p className="text-xs text-[#888888] uppercase tracking-wider">{stat.label}</p>
               </div>
-              <p className="text-lg font-bold text-white">{stat.value}</p>
+              <p className="text-xl font-bold text-white">{stat.value}</p>
             </div>
           ))}
         </div>
 
-        {/* SEÇÃO 2: Duas colunas (1fr 1fr) */}
-        <div className="grid grid-cols-2 gap-4 mb-4">
-          {/* Coluna Esquerda: Orçamentos Recentes */}
-          <div className="bg-[#111111] border border-[#222222] rounded-lg p-4">
+        {/* BLOCK 2: Two columns - Orçamentos Recentes and Próximos Eventos */}
+        <div className="grid grid-cols-2 gap-5 mb-5 clear-both">
+          {/* Left Column: Orçamentos Recentes */}
+          <div className="bg-[#111111] border border-[#222222] rounded-lg p-5">
             <h3 className="text-sm font-semibold text-white mb-3">Orçamentos Recentes</h3>
             <div className="divide-y divide-[#222222]">
               {orcamentosData.slice(0, 5).map((orcamento) => (
                 <div
                   key={orcamento.id}
-                  className="flex items-center justify-between py-2"
+                  className="flex items-center justify-between py-2.5"
                 >
                   <div>
                     <p className="text-sm text-white">{orcamento.titulo}</p>
@@ -107,14 +107,14 @@ export function Dashboard() {
             </div>
           </div>
 
-          {/* Coluna Direita: Próximos Eventos */}
-          <div className="bg-[#111111] border border-[#222222] rounded-lg p-4">
+          {/* Right Column: Próximos Eventos */}
+          <div className="bg-[#111111] border border-[#222222] rounded-lg p-5">
             <h3 className="text-sm font-semibold text-white mb-3">Próximos Eventos</h3>
             <div className="divide-y divide-[#222222]">
               {proximosEventos.map((evento, index) => (
                 <div
                   key={index}
-                  className="flex items-center justify-between py-2"
+                  className="flex items-center justify-between py-2.5"
                 >
                   <div>
                     <p className="text-sm text-white">{evento.titulo}</p>
@@ -127,10 +127,10 @@ export function Dashboard() {
           </div>
         </div>
 
-        {/* SEÇÃO 3: Acesso Rápido (cards menores, em linha) */}
-        <div className="bg-[#111111] border border-[#222222] rounded-lg p-4">
+        {/* BLOCK 3: Acesso Rápido - Horizontal line at the bottom */}
+        <div className="bg-[#111111] border border-[#222222] rounded-lg p-5">
           <h3 className="text-sm font-semibold text-white mb-3">Acesso Rápido</h3>
-          <div className="grid grid-cols-4 gap-4">
+          <div className="grid grid-cols-4 gap-5">
             {[
               { label: 'Novo Cliente', icon: Users, href: '/crm/clientes' },
               { label: 'Novo Orçamento', icon: FileText, href: '/crm/orcamentos' },
@@ -140,7 +140,7 @@ export function Dashboard() {
               <a
                 key={item.label}
                 href={item.href}
-                className="flex flex-col items-center gap-2 p-3 bg-[#1a1a1a] rounded-lg hover:bg-[#222222] hover:border-[#00ff88] border border-transparent transition-all"
+                className="flex flex-col items-center gap-2 p-4 bg-[#1a1a1a] rounded-lg hover:bg-[#222222] hover:border-[#00ff88] border border-transparent transition-all"
               >
                 <item.icon className="w-5 h-5 text-[#00ff88]" />
                 <span className="text-xs text-white text-center">{item.label}</span>
