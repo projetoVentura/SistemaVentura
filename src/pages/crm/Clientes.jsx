@@ -106,7 +106,7 @@ export function Clientes() {
   return (
     <Layout title="Clientes">
       {/* Cards KPI */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+      <div className="kpi-grid">
         {[
           { label: 'Total de Clientes', value: totalClientes, icon: Users },
           { label: 'Clientes Ativos', value: clientesAtivos, icon: Users },
@@ -115,17 +115,15 @@ export function Clientes() {
         ].map((kpi) => (
           <div
             key={kpi.label}
-            className="bg-[#111111] border border-[#222222] rounded-xl p-4 hover:border-[#00ff88]/50 transition-all duration-300"
+            className="kpi-card"
           >
-            <div className="mb-3">
-              <div className="p-2 rounded-lg bg-[#00ff88]/10 inline-block">
-                <kpi.icon className="w-5 h-5 text-[#00ff88]" />
-              </div>
+            <div className="kpi-icon">
+              <kpi.icon />
             </div>
-            <p className="text-xs font-medium text-[#888888] uppercase tracking-wider mb-1">
+            <p className="kpi-label">
               {kpi.label}
             </p>
-            <p className="text-2xl font-bold text-white">{kpi.value}</p>
+            <p className="kpi-value">{kpi.value}</p>
           </div>
         ))}
       </div>
@@ -155,7 +153,7 @@ export function Clientes() {
               className="w-full pl-9 pr-4 py-2 bg-[#111111] border border-[#222222] rounded-lg text-sm text-white placeholder-[#666666] focus:outline-none focus:ring-2 focus:ring-[#00ff88]"
             />
           </div>
-          <Button onClick={() => handleOpenModal()} className="bg-[#00ff88] text-black hover:bg-[#00cc70]">
+          <Button onClick={() => handleOpenModal()} className="btn-primary">
             <Plus className="w-4 h-4 mr-2" />
             Novo Cliente
           </Button>
@@ -163,11 +161,11 @@ export function Clientes() {
       </div>
 
       {/* Grid de Clientes */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <div className="clientes-grid">
         {filteredClientes.map((cliente) => (
           <div
             key={cliente.id}
-            className="bg-[#111111] border border-[#222222] rounded-xl p-5 transition-all duration-300 hover:border-[#00ff88]/50"
+            className="cliente-card"
           >
             <div className="flex items-start justify-between mb-3">
               <div>

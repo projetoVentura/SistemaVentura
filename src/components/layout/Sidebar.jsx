@@ -72,9 +72,9 @@ export function Sidebar() {
   };
 
   return (
-    <aside className="fixed top-0 left-0 h-screen w-[220px] bg-[#111111] border-r border-[#222222] flex flex-col z-50">
+    <aside className="sidebar-fixed">
       {/* Logo */}
-      <div className="px-4 py-5 border-b border-[#222222]">
+      <div className="sidebar-logo">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 bg-[#00ff88] rounded-lg flex items-center justify-center flex-shrink-0">
             <span className="text-black font-bold text-xl">VL</span>
@@ -87,7 +87,7 @@ export function Sidebar() {
       </div>
 
       {/* Menu Items */}
-      <nav className="flex-1 px-3 py-4 overflow-y-auto">
+      <nav className="sidebar-nav">
         <div className="sidebar-nav-list">
           {menuItems.map((item) => (
             <div key={item.path || item.label}>
@@ -145,7 +145,7 @@ export function Sidebar() {
       </nav>
 
       {/* User Info */}
-      <div className="px-4 py-4 border-t border-[#222222]">
+      <div className="sidebar-footer">
           <div className="mb-2">
             <p className="text-[#888888] text-xs">Conectado como</p>
           </div>
