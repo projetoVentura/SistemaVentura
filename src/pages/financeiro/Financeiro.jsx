@@ -414,28 +414,119 @@ export function Financeiro() {
       {viewMode === 'transacoes' ? (
         <div className="space-y-3">
           {filteredTransacoes.length === 0 && (
-            <div className="text-center py-12 bg-bg-card rounded-xl border border-border">
-              <DollarSign className="w-12 h-12 text-text-muted mx-auto mb-3" />
-              <p className="text-text-secondary">Nenhuma transação encontrada para este mês.</p>
+            <div className="text-center py-12 bg-[#111111] rounded-lg border border-[#222222]">
+              <DollarSign className="w-12 h-12 text-[#888888] mx-auto mb-3" />
+              <p className="text-[#888888]">Nenhuma transação encontrada para este mês.</p>
             </div>
           )}
           {filteredTransacoes.map((t) => (
             <div
               key={t.id}
-              className="bg-bg-card rounded-xl border border-border p-4 hover:shadow-md transition-shadow"
+              className="bg-[#111111] rounded-lg border border-[#222222] p-4 hover:border-[#00ff88] transition-all duration-300"
             >
               <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
                 <div className="flex items-start gap-3 flex-1">
                   <div
-                    className={`p-2 rounded-lg flex-shrink-0 ${
+                    className={`p-2 rounded-md flex-shrink-0 ${
                       t.tipo === 'entrada'
-                        ? 'bg-success-950'
-                        : 'bg-danger-950'
+                        ? 'bg-[#004430]'
+                        : 'bg-[#450a0a]'
                     }`}
                   >
                     {t.tipo === 'entrada' ? (
-                      <ArrowUpCircle className="w-5 h-5 text-success-400" />
+                      <ArrowUpCircle className="w-5 h-5 text-[#00ff88]" />
                     ) : (
+                      <ArrowDownCircle className="w-5 h-5 text-[#ef4444]" />
+                    )}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-1">
+                      <h3 className="font-medium text-white truncate">{t.descricao}</h3>
+                      <span
+                        className={`inline-block px-2 py-0.5 rounded-full text-xs font-medium ${
+                          t.tipo === 'entrada'
+                            ? 'bg-[#004430] text-[#00ff88] border border-[#00ff88]/30'
+                            : 'bg-[#450a0a] text-[#ef4444] border border-[#ef4444]/30'
+                        }`}
+                      >
+                        {t.tipo === 'entrada' ? 'Entrada' : 'Saída'}
+                      </span>
+                    </div>
+                    <div className="flex flex-wrap gap-3 text-sm text-[#888888]">
+                      <span>{formatDate(t.data)}</span>
+                      <span
+                        className={`inline-block px-2 py-0.5 rounded-full text-xs font-medium border ${
+                          getCategoriaConfig(t.categoria, t.tipo).color === 'success'
+                            ? 'bg-[#004430] text-[#00ff88] border-[#00ff88]/30'
+                            : getCategoriaConfig(t.categoria, t.tipo).color === 'warning'
+                            ? 'bg-[#443807] text-[#facc15] border-[#facc15]/30'
+                            : getCategoriaConfig(t.categoria, t.tipo).color === 'danger'
+                            ? 'bg-[#450a0a] text-[#ef4444] border-[#ef4444]/30'
+                            : 'bg-[#1a1a1a] text-[#888888] border-[#222222]'
+                        }`}
+                      >
+                        {getCategoriaConfig(t.categoria, t.tipo).label}
+                      </span>
+                      {t.cliente && <span>• {t.cliente}</span>}
+                      {t.fornecedor && <span>• {t.fornecedor}</span>}
+                      {t.formaPagamento && (
+                        <span
+                          className={`inline-block px-2 py-0.5 rounded-full text-xs font-medium border ${
+                            formaPagamentoConfig[t.formaPagamento]?.color === 'info'
+                              ? 'bg-[#004430] text-[#00ff88] border-[#00ff88]/30'
+                              : formaPagamentoConfig[t.formaPagamento]?.color === 'purple'
+                              ? 'bg-[#1a1a1a] text-[#00ff88] border-[#00ff88]/30'
+                              : 'bg-[#1a1a1a] text-[#888888] border-[#222222]'
+                          }`}
+                        >
+                          {formaPagamentoConfig[t.formaPagamento]?.label || t.formaPagamento}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-4">
+                  <p
+                    className={`text-lg font-bold ${
+                      t.tipo === 'entrada' ? 'text-[#00ff88]' : 'text-[#ef4444]'
+                    }`}
+                  >
+                    {t.tipo === 'entrada' ? '+' : '-'} {formatCurrency(t.valor)}
+                  </p>
+                  <select
+                    value={t.status}
+                    onChange={(e) => handleStatusChange(t.id, e.target.value)}
+                    className="px-2 py-1 border border-[#222222] rounded text-xs bg-[#111111] text-white focus:outline-none focus:ring-1 focus:ring-[#00ff88]"
+                  >
+                    {Object.entries(statusConfig).map(([value, config]) => (
+                      <option key={value} value={value}>
+                        → {config.label}
+                      </option>
+                    ))}
+                  </select>
+                  <div className="flex gap-1">
+                    <button
+                      onClick={() => handleOpenModal(t)}
+                      className="p-2 rounded-lg hover:bg-[#1a1a1a] transition-colors group"
+                      title="Editar"
+                    >
+                      <Edit className="w-4 h-4 text-white group-hover:text-[#00ff88] transition-colors" />
+                    </button>
+                    <button
+                      onClick={() => setConfirmDelete(t.id)}
+                      className="p-2 rounded-lg hover:bg-[#450a0a] transition-colors group"
+                      title="Excluir"
+                    >
+                      <Trash2 className="w-4 h-4 text-white group-hover:text-[#00ff88] transition-colors" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : (
                       <ArrowDownCircle className="w-5 h-5 text-danger-400" />
                     )}
                   </div>

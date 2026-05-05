@@ -64,44 +64,49 @@ export function Dashboard() {
     <Layout title="Dashboard">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         {stats.map((stat) => (
-          <Card key={stat.label} className="p-5">
-            <div className="flex items-center gap-3 mb-3">
-              <div className={`p-2 rounded-lg ${colorClasses[stat.color]}`}>
-                <stat.icon className="w-5 h-5" />
+          <div
+            key={stat.label}
+            className="bg-[#111111] border border-[#222222] rounded-lg p-4 hover:border-[#00ff88] transition-all duration-300"
+          >
+            <div className="flex items-start gap-3 mb-3">
+              <div className="p-2 rounded-md bg-[#00ff88]/10">
+                <stat.icon className="w-5 h-5 text-[#00ff88]" />
               </div>
-              <span className="text-sm text-text-secondary">{stat.label}</span>
             </div>
-            <p className="text-2xl font-bold text-text-primary">{stat.value}</p>
-          </Card>
+            <p className="text-xs font-medium text-[#888888] uppercase tracking-wider mb-1">
+              {stat.label}
+            </p>
+            <p className="text-3xl font-bold text-white">{stat.value}</p>
+          </div>
         ))}
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <Card className="p-5">
-          <h3 className="font-semibold text-text-primary mb-4">Orçamentos Recentes</h3>
+        <div className="bg-[#111111] border border-[#222222] rounded-lg p-5">
+          <h3 className="font-semibold text-white mb-4">Orçamentos Recentes</h3>
           <div className="space-y-3">
             {orcamentos.slice(0, 5).map((orcamento) => (
               <div
                 key={orcamento.id}
-                className="flex items-center justify-between py-2 border-b border-border last:border-0"
+                className="flex items-center justify-between py-2 border-b border-[#222222] last:border-0"
               >
                 <div>
-                  <p className="text-sm font-medium text-text-primary">{orcamento.titulo}</p>
-                  <p className="text-xs text-text-secondary">{orcamento.clienteNome}</p>
+                  <p className="text-sm font-medium text-white">{orcamento.titulo}</p>
+                  <p className="text-xs text-[#888888]">{orcamento.clienteNome}</p>
                 </div>
                 <div className="text-right">
-                  <p className="text-sm font-semibold text-accent">
+                  <p className="text-sm font-semibold text-[#00ff88]">
                     {formatCurrency(orcamento.valor)}
                   </p>
                   <span
                     className={`inline-block px-2 py-0.5 rounded-full text-xs font-medium ${
                       orcamento.status === 'aprovado'
-                        ? 'bg-success-950 text-success-400 border border-success-700'
+                        ? 'bg-[#004430] text-[#00ff88] border border-[#00ff88]/30'
                         : orcamento.status === 'pendente'
-                        ? 'bg-warning-950 text-warning-400 border border-warning-700'
+                        ? 'bg-[#443807] text-[#facc15] border border-[#facc15]/30'
                         : orcamento.status === 'recusado'
-                        ? 'bg-danger-950 text-danger-400 border border-danger-700'
-                        : 'bg-bg-elevated text-text-secondary border border-border'
+                        ? 'bg-[#450a0a] text-[#ef4444] border border-[#ef4444]/30'
+                        : 'bg-[#1a1a1a] text-[#888888] border border-[#222222]'
                     }`}
                   >
                     {orcamento.status.charAt(0).toUpperCase() + orcamento.status.slice(1)}
@@ -110,33 +115,33 @@ export function Dashboard() {
               </div>
             ))}
           </div>
-        </Card>
+        </div>
 
-        <Card className="p-5">
-          <h3 className="font-semibold text-text-primary mb-4">Próximos Eventos</h3>
+        <div className="bg-[#111111] border border-[#222222] rounded-lg p-5">
+          <h3 className="font-semibold text-white mb-4">Próximos Eventos</h3>
           <div className="space-y-3">
             {proximosEventos.map((evento, index) => (
               <div
                 key={index}
-                className="flex items-center gap-3 py-2 border-b border-border last:border-0"
+                className="flex items-center gap-3 py-2 border-b border-[#222222] last:border-0"
               >
-                <div className="p-2 bg-accent-light rounded-lg">
-                  <Calendar className="w-5 h-5 text-accent" />
+                <div className="p-2 bg-[#00ff88]/10 rounded-lg">
+                  <Calendar className="w-5 h-5 text-[#00ff88]" />
                 </div>
                 <div className="flex-1">
-                  <p className="text-sm font-medium text-text-primary">{evento.titulo}</p>
-                  <p className="text-xs text-text-secondary">{evento.cliente}</p>
+                  <p className="text-sm font-medium text-white">{evento.titulo}</p>
+                  <p className="text-xs text-[#888888]">{evento.cliente}</p>
                 </div>
-                <span className="text-sm text-text-secondary">{formatDate(evento.data)}</span>
+                <span className="text-sm text-[#888888]">{formatDate(evento.data)}</span>
               </div>
             ))}
           </div>
-        </Card>
+        </div>
       </div>
 
       <div className="mt-6">
-        <Card className="p-5">
-          <h3 className="font-semibold text-text-primary mb-4">Acesso Rápido</h3>
+        <div className="bg-[#111111] border border-[#222222] rounded-lg p-5">
+          <h3 className="font-semibold text-white mb-4">Acesso Rápido</h3>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {[
               { label: 'Novo Cliente', icon: Users, href: '/crm/clientes' },
@@ -147,14 +152,14 @@ export function Dashboard() {
               <a
                 key={item.label}
                 href={item.href}
-                className="flex flex-col items-center gap-2 p-4 rounded-lg border border-border hover:border-accent hover:bg-bg-elevated transition-colors"
+                className="flex flex-col items-center gap-2 p-4 rounded-lg border border-[#222222] hover:border-[#00ff88] hover:bg-[#1a1a1a] transition-colors"
               >
-                <item.icon className="w-6 h-6 text-accent" />
-                <span className="text-sm font-medium text-text-primary">{item.label}</span>
+                <item.icon className="w-6 h-6 text-[#00ff88]" />
+                <span className="text-sm font-medium text-white">{item.label}</span>
               </a>
             ))}
           </div>
-        </Card>
+        </div>
       </div>
     </Layout>
   );

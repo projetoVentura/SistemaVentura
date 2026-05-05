@@ -208,13 +208,13 @@ export function Calendario() {
   }).sort((a, b) => a.data.localeCompare(b.data));
 
   return (
-    <Layout title="Calendário de Eventos">
+    <Layout title="Calendário">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
         <div className="flex items-center gap-2">
           <Button variant="secondary" size="sm" onClick={prevMonth}>
             <ChevronLeft className="w-4 h-4" />
           </Button>
-          <h3 className="text-lg font-semibold text-text-primary min-w-[180px] text-center">
+          <h3 className="text-lg font-semibold text-white min-w-[180px] text-center">
             {meses[month]} {year}
           </h3>
           <Button variant="secondary" size="sm" onClick={nextMonth}>
@@ -223,13 +223,13 @@ export function Calendario() {
         </div>
 
         <div className="flex items-center gap-2">
-          <div className="flex border border-border rounded-lg overflow-hidden">
+          <div className="flex border border-[#222222] rounded-lg overflow-hidden">
             <button
               onClick={() => setViewMode('calendar')}
               className={`px-3 py-1.5 text-sm transition-colors ${
                 viewMode === 'calendar'
-                  ? 'bg-accent text-bg-main'
-                  : 'bg-bg-card text-text-secondary hover:bg-bg-elevated'
+                  ? 'bg-[#00ff88] text-black'
+                  : 'bg-[#111111] text-[#888888] hover:bg-[#1a1a1a]'
               }`}
             >
               <LayoutGrid className="w-4 h-4" />
@@ -238,8 +238,8 @@ export function Calendario() {
               onClick={() => setViewMode('list')}
               className={`px-3 py-1.5 text-sm transition-colors ${
                 viewMode === 'list'
-                  ? 'bg-accent text-bg-main'
-                  : 'bg-bg-card text-text-secondary hover:bg-bg-elevated'
+                  ? 'bg-[#00ff88] text-black'
+                  : 'bg-[#111111] text-[#888888] hover:bg-[#1a1a1a]'
               }`}
             >
               <List className="w-4 h-4" />
@@ -253,12 +253,12 @@ export function Calendario() {
       </div>
 
       {viewMode === 'calendar' ? (
-        <div className="bg-bg-card rounded-xl border border-border overflow-hidden">
-          <div className="grid grid-cols-7 border-b border-border">
+        <div className="bg-[#111111] rounded-lg border border-[#222222] overflow-hidden">
+          <div className="grid grid-cols-7 border-b border-[#222222]">
             {diasSemana.map((dia) => (
               <div
                 key={dia}
-                className="py-3 text-center text-sm font-medium text-text-secondary"
+                className="py-3 text-center text-sm font-medium text-[#888888]"
               >
                 {dia}
               </div>
@@ -271,9 +271,9 @@ export function Calendario() {
               return (
                 <div
                   key={index}
-                  className={`min-h-[100px] border-b border-r border-border p-2 ${
-                    day ? 'cursor-pointer hover:bg-bg-elevated' : 'bg-bg-main'
-                  } ${isToday(day) ? 'bg-accent-light' : ''}`}
+                  className={`min-h-[100px] border-b border-r border-[#222222] p-2 ${
+                    day ? 'cursor-pointer hover:bg-[#1a1a1a]' : 'bg-[#0a0a0a]'
+                  } ${isToday(day) ? 'bg-[#00ff88]/10' : ''}`}
                   onClick={() => day && handleDayClick(day)}
                 >
                   {day && (
@@ -281,8 +281,8 @@ export function Calendario() {
                       <span
                         className={`inline-flex items-center justify-center w-7 h-7 rounded-full text-sm ${
                           isToday(day)
-                            ? 'bg-accent text-bg-main font-semibold'
-                            : 'text-text-primary'
+                            ? 'bg-[#00ff88] text-black font-semibold'
+                            : 'text-white'
                         }`}
                       >
                         {day}
@@ -298,19 +298,17 @@ export function Calendario() {
                             }}
                             className={`w-full text-left px-1.5 py-0.5 rounded text-xs truncate font-medium ${
                               evento.status === 'confirmado'
-                                ? 'bg-success-950 text-success-400 border border-success-700'
+                                ? 'bg-[#004430] text-[#00ff88] border border-[#00ff88]/30'
                                 : evento.status === 'pendente'
-                                ? 'bg-warning-950 text-warning-400 border border-warning-700'
-                                : 'bg-danger-950 text-danger-400 border border-danger-700'
+                                ? 'bg-[#443807] text-[#facc15] border border-[#facc15]/30'
+                                : 'bg-[#450a0a] text-[#ef4444] border border-[#ef4444]/30'
                             }`}
                           >
                             {evento.titulo}
                           </button>
                         ))}
                         {dayEventos.length > 2 && (
-                          <p className="text-xs text-text-muted pl-1">
-                            +{dayEventos.length - 2} mais
-                          </p>
+                          <span className="text-xs text-[#888888]">+{dayEventos.length - 2}</span>
                         )}
                       </div>
                     </>
@@ -323,45 +321,53 @@ export function Calendario() {
       ) : (
         <div className="space-y-3">
           {eventosDoMes.length === 0 && (
-            <div className="text-center py-12 bg-bg-card rounded-xl border border-border">
-              <CalendarIcon className="w-12 h-12 text-text-muted mx-auto mb-3" />
-              <p className="text-text-secondary">Nenhum evento neste mês.</p>
+            <div className="text-center py-12 bg-[#111111] rounded-lg border border-[#222222]">
+              <CalendarIcon className="w-12 h-12 text-[#888888] mx-auto mb-3" />
+              <p className="text-[#888888]">Nenhum evento neste mês.</p>
             </div>
           )}
           {eventosDoMes.map((evento) => (
             <div
               key={evento.id}
-              className="bg-bg-card rounded-xl border border-border p-4 hover:shadow-md transition-shadow"
+              className="bg-[#111111] rounded-lg border border-[#222222] p-4 hover:border-[#00ff88] transition-all duration-300"
             >
               <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-2">
-                    <h3 className="font-semibold text-text-primary">{evento.titulo}</h3>
-                    <Badge variant={statusConfig[evento.status].color}>
+                    <h3 className="font-semibold text-white">{evento.titulo}</h3>
+                    <span
+                      className={`inline-block px-2 py-0.5 rounded-full text-xs font-medium ${
+                        evento.status === 'confirmado'
+                          ? 'bg-[#004430] text-[#00ff88] border border-[#00ff88]/30'
+                          : evento.status === 'pendente'
+                          ? 'bg-[#443807] text-[#facc15] border border-[#facc15]/30'
+                          : 'bg-[#450a0a] text-[#ef4444] border border-[#ef4444]/30'
+                      }`}
+                    >
                       {statusConfig[evento.status].label}
-                    </Badge>
+                    </span>
                   </div>
-                  <p className="text-sm text-text-secondary mb-3">{evento.descricao}</p>
-                  <div className="flex flex-wrap gap-4 text-sm text-text-secondary">
+                  <p className="text-sm text-[#888888] mb-3">{evento.descricao}</p>
+                  <div className="flex flex-wrap gap-4 text-sm text-[#888888]">
                     <div className="flex items-center gap-1.5">
-                      <CalendarIcon className="w-4 h-4 text-text-muted" />
+                      <CalendarIcon className="w-4 h-4 text-[#666666]" />
                       <span>{formatDate(evento.data)}</span>
                       {evento.dataFim && <span> até {formatDate(evento.dataFim)}</span>}
                     </div>
                     {evento.horarioInicio && (
                       <div className="flex items-center gap-1.5">
-                        <Clock className="w-4 h-4 text-text-muted" />
+                        <Clock className="w-4 h-4 text-[#666666]" />
                         <span>
                           {evento.horarioInicio} - {evento.horarioFim}
                         </span>
                       </div>
                     )}
                     <div className="flex items-center gap-1.5">
-                      <MapPin className="w-4 h-4 text-text-muted" />
+                      <MapPin className="w-4 h-4 text-[#666666]" />
                       <span>{evento.local}</span>
                     </div>
                     <div className="flex items-center gap-1.5">
-                      <User className="w-4 h-4 text-text-muted" />
+                      <User className="w-4 h-4 text-[#666666]" />
                       <span>{evento.cliente}</span>
                     </div>
                   </div>
@@ -373,24 +379,24 @@ export function Calendario() {
                       setViewingEvento(evento);
                       setIsViewModalOpen(true);
                     }}
-                    className="p-2 rounded-lg hover:bg-bg-elevated transition-colors"
+                    className="p-2 rounded-lg hover:bg-[#1a1a1a] transition-colors group"
                     title="Visualizar"
                   >
-                    <Eye className="w-4 h-4 text-text-secondary" />
+                    <Eye className="w-4 h-4 text-white group-hover:text-[#00ff88] transition-colors" />
                   </button>
                   <button
                     onClick={() => handleOpenModal(evento)}
-                    className="p-2 rounded-lg hover:bg-bg-elevated transition-colors"
+                    className="p-2 rounded-lg hover:bg-[#1a1a1a] transition-colors group"
                     title="Editar"
                   >
-                    <Edit className="w-4 h-4 text-text-secondary" />
+                    <Edit className="w-4 h-4 text-white group-hover:text-[#00ff88] transition-colors" />
                   </button>
                   <button
                     onClick={() => setConfirmDelete(evento.id)}
-                    className="p-2 rounded-lg hover:bg-danger-950 transition-colors"
+                    className="p-2 rounded-lg hover:bg-[#450a0a] transition-colors group"
                     title="Excluir"
                   >
-                    <Trash2 className="w-4 h-4 text-danger-400" />
+                    <Trash2 className="w-4 h-4 text-white group-hover:text-[#00ff88] transition-colors" />
                   </button>
                 </div>
               </div>
