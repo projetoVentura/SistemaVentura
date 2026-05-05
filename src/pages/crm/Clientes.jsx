@@ -117,55 +117,59 @@ export function Clientes() {
         {filteredClientes.map((cliente) => (
           <div
             key={cliente.id}
-            className="bg-bg-card rounded-xl border border-border p-5 hover:shadow-md transition-shadow"
+            className="bg-[#1a1a1a] rounded-xl border border-[#222222] p-5 transition-all duration-300 hover:border-[#00ff88] hover:shadow-[0_0_15px_rgba(0,255,136,0.3)]"
           >
             <div className="flex items-start justify-between mb-3">
               <div>
-                <h3 className="font-semibold text-text-primary">{cliente.nome}</h3>
+                <h3 className="font-semibold text-white">{cliente.nome}</h3>
                 {cliente.empresa && (
-                  <p className="text-sm text-text-secondary">{cliente.empresa}</p>
+                  <p className="text-sm text-gray-400">{cliente.empresa}</p>
                 )}
               </div>
-              <Badge variant={cliente.status === 'ativo' ? 'success' : 'default'}>
+              <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                cliente.status === 'ativo'
+                  ? 'bg-[#004d00] text-[#00ff88] border border-[#00ff88]/30'
+                  : 'bg-[#333333] text-gray-400 border border-[#444444]'
+              }`}>
                 {cliente.status === 'ativo' ? 'Ativo' : 'Inativo'}
-              </Badge>
+              </span>
             </div>
 
-            <div className="space-y-2 text-sm text-text-secondary mb-4">
+            <div className="space-y-2 text-sm text-gray-400 mb-4">
               <div className="flex items-center gap-2">
-                <Mail className="w-4 h-4 text-text-muted flex-shrink-0" />
+                <Mail className="w-4 h-4 text-gray-400 flex-shrink-0" />
                 <span className="truncate">{cliente.email}</span>
               </div>
               <div className="flex items-center gap-2">
-                <Phone className="w-4 h-4 text-text-muted flex-shrink-0" />
+                <Phone className="w-4 h-4 text-gray-400 flex-shrink-0" />
                 <span>{cliente.telefone}</span>
               </div>
               {cliente.endereco && (
                 <div className="flex items-center gap-2">
-                  <MapPin className="w-4 h-4 text-text-muted flex-shrink-0" />
+                  <MapPin className="w-4 h-4 text-gray-400 flex-shrink-0" />
                   <span className="truncate">{cliente.endereco}</span>
                 </div>
               )}
             </div>
 
-            <div className="flex items-center justify-between pt-3 border-t border-border">
-              <span className="text-xs text-text-muted">
+            <div className="flex items-center justify-between pt-3 border-t border-[#222222]">
+              <span className="text-xs text-gray-500">
                 Cadastro: {formatDate(cliente.dataCadastro)}
               </span>
               <div className="flex gap-1">
                 <button
                   onClick={() => handleOpenModal(cliente)}
-                  className="p-1.5 rounded-lg hover:bg-bg-elevated transition-colors"
+                  className="p-1.5 rounded-lg hover:bg-[#222222] transition-colors group"
                   title="Editar"
                 >
-                  <Edit className="w-4 h-4 text-text-secondary" />
+                  <Edit className="w-4 h-4 text-white group-hover:text-[#00ff88] transition-colors" />
                 </button>
                 <button
                   onClick={() => setConfirmDelete(cliente.id)}
-                  className="p-1.5 rounded-lg hover:bg-danger-950 transition-colors"
+                  className="p-1.5 rounded-lg hover:bg-[#222222] transition-colors group"
                   title="Excluir"
                 >
-                  <Trash2 className="w-4 h-4 text-danger-400" />
+                  <Trash2 className="w-4 h-4 text-white group-hover:text-[#00ff88] transition-colors" />
                 </button>
               </div>
             </div>

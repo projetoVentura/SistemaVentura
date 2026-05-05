@@ -376,53 +376,53 @@ export function ControleAluguel() {
     <Layout title="Controle de Aluguel">
       {/* Stats */}
       <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-6">
-        <div className="bg-white rounded-xl border border-gray-200 p-4">
+        <div className="bg-bg-card rounded-xl border border-border p-4">
           <div className="flex items-center gap-3 mb-2">
-            <div className="p-2 bg-primary-100 rounded-lg">
-              <Package className="w-5 h-5 text-primary-600" />
+            <div className="p-2 bg-accent-light rounded-lg">
+              <Package className="w-5 h-5 text-accent" />
             </div>
-            <span className="text-sm text-gray-500">Total em Estoque</span>
+            <span className="text-sm text-text-secondary">Total em Estoque</span>
           </div>
-          <p className="text-2xl font-bold text-gray-900">{totalEquipamentos}</p>
+          <p className="text-2xl font-bold text-text-primary">{totalEquipamentos}</p>
         </div>
-        <div className="bg-white rounded-xl border border-gray-200 p-4">
+        <div className="bg-bg-card rounded-xl border border-border p-4">
           <div className="flex items-center gap-3 mb-2">
-            <div className="p-2 bg-success-100 rounded-lg">
-              <CheckCircle className="w-5 h-5 text-success-600" />
+            <div className="p-2 bg-success-950 rounded-lg">
+              <CheckCircle className="w-5 h-5 text-success-400" />
             </div>
-            <span className="text-sm text-gray-500">Disponíveis</span>
+            <span className="text-sm text-text-secondary">Disponíveis</span>
           </div>
-          <p className="text-2xl font-bold text-success-600">{totalDisponivel}</p>
+          <p className="text-2xl font-bold text-success-400">{totalDisponivel}</p>
         </div>
-        <div className="bg-white rounded-xl border border-gray-200 p-4">
+        <div className="bg-bg-card rounded-xl border border-border p-4">
           <div className="flex items-center gap-3 mb-2">
-            <div className="p-2 bg-warning-100 rounded-lg">
-              <ArrowUpCircle className="w-5 h-5 text-warning-600" />
+            <div className="p-2 bg-warning-950 rounded-lg">
+              <ArrowUpCircle className="w-5 h-5 text-warning-400" />
             </div>
-            <span className="text-sm text-gray-500">Alugados/Reservados</span>
+            <span className="text-sm text-text-secondary">Alugados/Reservados</span>
           </div>
-          <p className="text-2xl font-bold text-warning-600">{totalAlugado}</p>
+          <p className="text-2xl font-bold text-warning-400">{totalAlugado}</p>
         </div>
-        <div className="bg-white rounded-xl border border-gray-200 p-4">
+        <div className="bg-bg-card rounded-xl border border-border p-4">
           <div className="flex items-center gap-3 mb-2">
-            <div className="p-2 bg-accent-100 rounded-lg">
-              <ArrowRightLeft className="w-5 h-5 text-accent-600" />
+            <div className="p-2 bg-accent-light rounded-lg">
+              <ArrowRightLeft className="w-5 h-5 text-accent" />
             </div>
-            <span className="text-sm text-gray-500">Aluguéis Ativos</span>
+            <span className="text-sm text-text-secondary">Aluguéis Ativos</span>
           </div>
-          <p className="text-2xl font-bold text-accent-600">{alugueisAtivos.length}</p>
+          <p className="text-2xl font-bold text-accent">{alugueisAtivos.length}</p>
         </div>
       </div>
 
       {/* Tabs */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
-        <div className="flex gap-2 border-b border-gray-200">
+        <div className="flex gap-2 border-b border-border">
           <button
             onClick={() => setActiveTab('equipamentos')}
             className={`px-4 py-2 text-sm font-medium transition-colors border-b-2 ${
               activeTab === 'equipamentos'
-                ? 'border-primary-600 text-primary-600'
-                : 'border-transparent text-gray-500 hover:text-gray-700'
+                ? 'border-accent text-accent'
+                : 'border-transparent text-text-muted hover:text-text-secondary'
             }`}
           >
             Equipamentos
@@ -431,8 +431,8 @@ export function ControleAluguel() {
             onClick={() => setActiveTab('alugueis')}
             className={`px-4 py-2 text-sm font-medium transition-colors border-b-2 ${
               activeTab === 'alugueis'
-                ? 'border-primary-600 text-primary-600'
-                : 'border-transparent text-gray-500 hover:text-gray-700'
+                ? 'border-accent text-accent'
+                : 'border-transparent text-text-muted hover:text-text-secondary'
             }`}
           >
             Aluguéis
@@ -456,7 +456,7 @@ export function ControleAluguel() {
       {/* Filters */}
       <div className="flex flex-col sm:flex-row gap-3 mb-4">
         <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-text-muted" />
           <input
             type="text"
             placeholder={
@@ -466,14 +466,14 @@ export function ControleAluguel() {
             }
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-9 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+            className="w-full pl-9 pr-4 py-2 border border-border rounded-lg text-sm bg-bg-main text-text-primary placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent"
           />
         </div>
         {activeTab === 'equipamentos' && (
           <select
             value={filterCategoria}
             onChange={(e) => setFilterCategoria(e.target.value)}
-            className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
+            className="px-3 py-2 border border-border rounded-lg text-sm bg-bg-main text-text-primary focus:outline-none focus:ring-2 focus:ring-accent"
           >
             <option value="todas">Todas Categorias</option>
             {Object.entries(categoriaConfig).map(([value, config]) => (
@@ -487,7 +487,7 @@ export function ControleAluguel() {
           <select
             value={filterStatus}
             onChange={(e) => setFilterStatus(e.target.value)}
-            className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
+            className="px-3 py-2 border border-border rounded-lg text-sm bg-bg-main text-text-primary focus:outline-none focus:ring-2 focus:ring-accent"
           >
             <option value="todos">Todos Status</option>
             {Object.entries(statusAluguelConfig).map(([value, config]) => (
@@ -508,11 +508,11 @@ export function ControleAluguel() {
             return (
               <div
                 key={equip.id}
-                className="bg-white rounded-xl border border-gray-200 p-5 hover:shadow-md transition-shadow"
+                className="bg-bg-card rounded-xl border border-border p-5 hover:border-[#00ff88] hover:shadow-[0_0_15px_rgba(0,255,136,0.3)] transition-all duration-300"
               >
                 <div className="flex items-start justify-between mb-3">
                   <div>
-                    <h3 className="font-semibold text-gray-900">{equip.nome}</h3>
+                    <h3 className="font-semibold text-text-primary">{equip.nome}</h3>
                     <Badge variant={categoriaConfig[equip.categoria]?.color || 'default'}>
                       {categoriaConfig[equip.categoria]?.label || equip.categoria}
                     </Badge>
@@ -524,11 +524,11 @@ export function ControleAluguel() {
 
                 {/* Availability bar */}
                 <div className="mb-3">
-                  <div className="flex justify-between text-xs text-gray-500 mb-1">
+                  <div className="flex justify-between text-xs text-text-muted mb-1">
                     <span>Disponível: {equip.quantidadeDisponivel}/{equip.quantidadeTotal}</span>
                     <span>{Math.round(percentDisponivel)}%</span>
                   </div>
-                  <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+                  <div className="w-full h-2 bg-bg-elevated rounded-full overflow-hidden">
                     <div
                       className={`h-full rounded-full transition-all ${
                         percentDisponivel > 50
@@ -542,27 +542,27 @@ export function ControleAluguel() {
                   </div>
                 </div>
 
-                <div className="space-y-2 text-sm text-gray-600 mb-4">
+                <div className="space-y-2 text-sm text-text-secondary mb-4">
                   <div className="flex items-center gap-2">
-                    <MapPin className="w-4 h-4 text-gray-400 flex-shrink-0" />
+                    <MapPin className="w-4 h-4 text-text-muted flex-shrink-0" />
                     <span className="truncate">{equip.localizacao || 'Não definido'}</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <DollarSign className="w-4 h-4 text-gray-400 flex-shrink-0" />
+                    <DollarSign className="w-4 h-4 text-text-muted flex-shrink-0" />
                     <span>{formatCurrency(equip.valorUnitario)}/dia</span>
                   </div>
                 </div>
 
                 {equip.observacoes && (
-                  <p className="text-xs text-gray-400 mb-3 line-clamp-2">{equip.observacoes}</p>
+                  <p className="text-xs text-text-muted mb-3 line-clamp-2">{equip.observacoes}</p>
                 )}
 
-                <div className="flex gap-1 pt-3 border-t border-gray-100">
+                <div className="flex gap-1 pt-3 border-t border-border">
                   <button
                     onClick={() => handleOpenEquipModal(equip)}
-                    className="flex-1 p-2 rounded-lg hover:bg-gray-100 transition-colors text-sm text-gray-600"
+                    className="flex-1 p-2 rounded-lg hover:bg-bg-elevated transition-colors text-sm text-text-secondary group"
                   >
-                    <Edit className="w-4 h-4 inline mr-1" />
+                    <Edit className="w-4 h-4 inline mr-1 text-white group-hover:text-[#00ff88] transition-colors" />
                     Editar
                   </button>
                   <button
@@ -570,9 +570,9 @@ export function ControleAluguel() {
                       setConfirmDelete(equip.id);
                       setDeleteType('equip');
                     }}
-                    className="flex-1 p-2 rounded-lg hover:bg-danger-50 transition-colors text-sm text-danger-600"
+                    className="flex-1 p-2 rounded-lg hover:bg-danger-950 transition-colors text-sm text-danger-400 group"
                   >
-                    <Trash2 className="w-4 h-4 inline mr-1" />
+                    <Trash2 className="w-4 h-4 inline mr-1 text-white group-hover:text-[#00ff88] transition-colors" />
                     Excluir
                   </button>
                 </div>
@@ -583,28 +583,28 @@ export function ControleAluguel() {
       ) : (
         <div className="space-y-3">
           {filteredAlugueis.length === 0 && (
-            <div className="text-center py-12 bg-white rounded-xl border border-gray-200">
-              <ArrowUpCircle className="w-12 h-12 text-gray-300 mx-auto mb-3" />
-              <p className="text-gray-500">Nenhum aluguel encontrado.</p>
+            <div className="text-center py-12 bg-bg-card rounded-xl border border-border">
+              <ArrowUpCircle className="w-12 h-12 text-text-muted mx-auto mb-3" />
+              <p className="text-text-secondary">Nenhum aluguel encontrado.</p>
             </div>
           )}
           {filteredAlugueis.map((aluguel) => (
             <div
               key={aluguel.id}
-              className="bg-white rounded-xl border border-gray-200 p-4 hover:shadow-md transition-shadow"
+              className="bg-bg-card rounded-xl border border-border p-4 hover:border-[#00ff88] hover:shadow-[0_0_10px_rgba(0,255,136,0.2)] transition-all duration-300"
             >
               <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-1">
-                    <h3 className="font-semibold text-gray-900">{aluguel.equipamentoNome}</h3>
+                    <h3 className="font-semibold text-text-primary">{aluguel.equipamentoNome}</h3>
                     <Badge variant={statusAluguelConfig[aluguel.status].color}>
                       {statusAluguelConfig[aluguel.status].label}
                     </Badge>
-                    <span className="text-sm text-gray-500">x{aluguel.quantidade}</span>
+                    <span className="text-sm text-text-secondary">x{aluguel.quantidade}</span>
                   </div>
-                  <p className="text-sm text-gray-500">{aluguel.cliente}</p>
+                  <p className="text-sm text-text-secondary">{aluguel.cliente}</p>
                   {aluguel.evento && (
-                    <p className="text-xs text-gray-400 mt-0.5">
+                    <p className="text-xs text-text-muted mt-0.5">
                       <Package className="w-3 h-3 inline mr-1" />
                       {aluguel.evento}
                     </p>
@@ -613,17 +613,17 @@ export function ControleAluguel() {
 
                 <div className="flex flex-wrap items-center gap-4 text-sm">
                   <div>
-                    <p className="text-xs text-gray-400">Saída</p>
-                    <p className="font-medium">{formatDate(aluguel.dataSaida)}</p>
+                    <p className="text-xs text-text-muted">Saída</p>
+                    <p className="font-medium text-text-primary">{formatDate(aluguel.dataSaida)}</p>
                   </div>
                   <div>
-                    <p className="text-xs text-gray-400">Retorno</p>
-                    <p className="font-medium">{formatDate(aluguel.dataRetorno)}</p>
+                    <p className="text-xs text-text-muted">Retorno</p>
+                    <p className="font-medium text-text-primary">{formatDate(aluguel.dataRetorno)}</p>
                   </div>
                   <select
                     value={aluguel.status}
                     onChange={(e) => handleStatusChange(aluguel.id, e.target.value)}
-                    className="px-2 py-1 border border-gray-200 rounded text-xs focus:outline-none focus:ring-1 focus:ring-primary-500"
+                    className="px-2 py-1 border border-border rounded text-xs bg-bg-main text-text-primary focus:outline-none focus:ring-1 focus:ring-accent"
                   >
                     {Object.entries(statusAluguelConfig).map(([value, config]) => (
                       <option key={value} value={value}>
@@ -634,26 +634,26 @@ export function ControleAluguel() {
                   <div className="flex gap-1">
                     <button
                       onClick={() => handleOpenAluguelModal(aluguel)}
-                      className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
+                      className="p-2 rounded-lg hover:bg-bg-elevated transition-colors group"
                       title="Editar"
                     >
-                      <Edit className="w-4 h-4 text-gray-500" />
+                      <Edit className="w-4 h-4 text-white group-hover:text-[#00ff88] transition-colors" />
                     </button>
                     <button
                       onClick={() => {
                         setConfirmDelete(aluguel.id);
                         setDeleteType('aluguel');
                       }}
-                      className="p-2 rounded-lg hover:bg-danger-50 transition-colors"
+                      className="p-2 rounded-lg hover:bg-danger-950 transition-colors group"
                       title="Excluir"
                     >
-                      <Trash2 className="w-4 h-4 text-danger-500" />
+                      <Trash2 className="w-4 h-4 text-white group-hover:text-[#00ff88] transition-colors" />
                     </button>
                   </div>
                 </div>
               </div>
               {aluguel.observacoes && (
-                <p className="text-xs text-gray-400 mt-2 pt-2 border-t border-gray-100">
+                <p className="text-xs text-text-muted mt-2 pt-2 border-t border-border">
                   {aluguel.observacoes}
                 </p>
               )}
