@@ -58,9 +58,15 @@ export function Dashboard() {
     }
   };
 
-   return (
-    <Layout title="Dashboard">
+  return (
+    <Layout>
       <div className="w-[95%] mx-auto">
+        {/* Cabeçalho próprio */}
+        <div className="mb-6">
+          <h1 className="text-2xl font-bold text-white mb-1">Dashboard</h1>
+          <p className="text-sm text-[#888888]">Visão geral do sistema</p>
+        </div>
+
         {/* BLOCK 1: KPIs - Horizontal line with 4 cards */}
         <div className="grid grid-cols-4 gap-5 mb-5">
           {stats.map((stat) => (
@@ -80,7 +86,7 @@ export function Dashboard() {
         {/* BLOCK 2: Two columns - Orçamentos Recentes and Próximos Eventos */}
         <div className="grid grid-cols-2 gap-5 mb-5 clear-both">
           {/* Left Column: Orçamentos Recentes */}
-          <div className="bg-[#111111] border border-[#222222] rounded-lg p-5">
+          <div className="bg-[#111111] border border-[#222222] rounded-xl p-5">
             <h3 className="text-sm font-semibold text-white mb-3">Orçamentos Recentes</h3>
             <div className="divide-y divide-[#222222]">
               {orcamentosData.slice(0, 5).map((orcamento) => (
@@ -108,7 +114,7 @@ export function Dashboard() {
           </div>
 
           {/* Right Column: Próximos Eventos */}
-          <div className="bg-[#111111] border border-[#222222] rounded-lg p-5">
+          <div className="bg-[#111111] border border-[#222222] rounded-xl p-5">
             <h3 className="text-sm font-semibold text-white mb-3">Próximos Eventos</h3>
             <div className="divide-y divide-[#222222]">
               {proximosEventos.map((evento, index) => (
@@ -128,7 +134,7 @@ export function Dashboard() {
         </div>
 
         {/* BLOCK 3: Acesso Rápido - Horizontal line at the bottom */}
-        <div className="bg-[#111111] border border-[#222222] rounded-lg p-5">
+        <div className="bg-[#111111] border border-[#222222] rounded-xl p-5">
           <h3 className="text-sm font-semibold text-white mb-3">Acesso Rápido</h3>
           <div className="grid grid-cols-4 gap-5">
             {[
