@@ -84,8 +84,8 @@ export function Sidebar() {
       </div>
 
       {/* Menu Items */}
-      <nav className="flex-1 px-3 pb-4 overflow-y-auto">
-        <div className="space-y-1">
+      <nav className="flex-1 px-3 pb-6 overflow-y-auto">
+        <div className="space-y-2">
           {menuItems.map((item) => (
             <div key={item.path || item.label}>
               {item.children ? (
@@ -156,10 +156,10 @@ export function Sidebar() {
             </div>
           </div>
           <button
-            className="p-2 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-50 transition-colors"
-            title="Sair"
+            className="flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm font-medium text-gray-500 hover:text-gray-700 hover:bg-gray-50 transition-colors"
           >
             <LogOut className="w-4 h-4" />
+            <span>Sair</span>
           </button>
         </div>
       </div>
