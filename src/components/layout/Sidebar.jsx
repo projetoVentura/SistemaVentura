@@ -84,18 +84,18 @@ export function Sidebar() {
       </div>
 
       {/* Menu Items */}
-      <nav className="flex-1 px-3 pb-6 overflow-y-auto">
-        <div className="space-y-2">
+      <nav className="flex-1 px-4 pb-8 overflow-y-auto">
+        <div className="space-y-4">
           {menuItems.map((item) => (
             <div key={item.path || item.label}>
               {item.children ? (
                 <>
                   <button
                     onClick={() => toggleMenu(item.label)}
-                    className="flex items-center justify-between w-full px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 text-gray-600 hover:bg-gray-50"
+                    className="flex items-center justify-between w-full px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 text-gray-700 hover:bg-[#00ff88]/10 hover:text-gray-900"
                   >
                     <div className="flex items-center gap-3">
-                      <item.icon className="w-5 h-5 flex-shrink-0 text-gray-400" />
+                      <item.icon className="w-5 h-5 flex-shrink-0 text-gray-500" />
                       <span>{item.label}</span>
                     </div>
                     {expandedMenu[item.label] ? (
@@ -105,18 +105,18 @@ export function Sidebar() {
                     )}
                   </button>
                   {expandedMenu[item.label] && (
-                    <ul className="ml-4 mt-1 space-y-1 border-l-2 border-gray-100 pl-4">
+                    <ul className="ml-4 mt-2 space-y-2">
                       {item.children.map((child) => (
                         <li key={child.path}>
                           <NavLink
                             to={child.path}
-                            className={`block px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+                            className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 ${
                               isActivePath(child.path)
-                                ? 'bg-gray-900 text-white'
-                                : 'text-gray-600 hover:bg-gray-50'
+                                ? 'bg-gray-900 text-white font-bold'
+                                : 'text-gray-700 hover:bg-[#00ff88]/10'
                             }`}
                           >
-                            {child.label}
+                            <span>{child.label}</span>
                           </NavLink>
                         </li>
                       ))}
@@ -128,11 +128,11 @@ export function Sidebar() {
                    to={item.path}
                   className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 ${
                     isActivePath(item.path)
-                      ? 'bg-gray-900 text-white shadow-sm'
-                      : 'text-gray-600 hover:bg-gray-50'
+                      ? 'bg-gray-900 text-white font-bold shadow-sm'
+                      : 'text-gray-700 hover:bg-[#00ff88]/10'
                   }`}
                  >
-                  <item.icon className={`w-5 h-5 flex-shrink-0 ${isActivePath(item.path) ? 'text-white' : 'text-gray-400'}`} />
+                  <item.icon className={`w-5 h-5 flex-shrink-0 ${isActivePath(item.path) ? 'text-white' : 'text-gray-500'}`} />
                   <span>{item.label}</span>
                 </NavLink>
               )}
