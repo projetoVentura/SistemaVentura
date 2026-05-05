@@ -367,13 +367,13 @@ export function Equipe() {
 
       {/* Tabs */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
-        <div className="flex gap-2 border-b border-[#222222]">
+        <div className="flex gap-2">
           <button
             onClick={() => setActiveTab('membros')}
             className={`px-4 py-2 text-sm font-medium transition-colors border-b-2 ${
               activeTab === 'membros'
-                ? 'border-accent text-accent'
-                : 'border-transparent text-[#666666] hover:text-[#888888]'
+                ? 'text-[#00ff88] border-[#00ff88]'
+                : 'text-[#888888] border-transparent hover:text-white'
             }`}
           >
             Membros
@@ -382,40 +382,25 @@ export function Equipe() {
             onClick={() => setActiveTab('escalas')}
             className={`px-4 py-2 text-sm font-medium transition-colors border-b-2 ${
               activeTab === 'escalas'
-                ? 'border-accent text-accent'
-                : 'border-transparent text-[#666666] hover:text-[#888888]'
+                ? 'text-[#00ff88] border-[#00ff88]'
+                : 'text-[#888888] border-transparent hover:text-white'
             }`}
           >
             Escalas
           </button>
         </div>
+      </div>
 
-        <div className="flex gap-2">
-          <Button
-            onClick={() => activeTab === 'membros' ? handleOpenMembroModal() : handleOpenEscalaModal()}
-          >
-            <Plus className="w-4 h-4 mr-2" />
-            {activeTab === 'membros' ? 'Novo Membro' : 'Nova Escala'}
-          </Button>
-        </div>
+      {/* Action Button */}
+      <div className="mb-6">
+        <Button onClick={() => activeTab === 'membros' ? handleOpenMembroModal() : handleOpenEscalaModal()}>
+          <Plus className="w-4 h-4 mr-2" />
+          {activeTab === 'membros' ? 'Novo Membro' : 'Nova Escala'}
+        </Button>
       </div>
 
       {/* Filters */}
       <div className="flex flex-wrap gap-3 mb-4">
-        <div className="relative flex-1 min-w-[200px]">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#888888]" />
-          <input
-            type="text"
-            placeholder={
-              activeTab === 'membros'
-                ? 'Buscar membros...'
-                : 'Buscar por nome ou evento...'
-            }
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-9 pr-4 py-2 border border-[#222222] rounded-lg text-sm bg-[#0a0a0a] text-white placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-[#00ff88] focus:border-[#00ff88]"
-          />
-        </div>
         {activeTab === 'membros' ? (
           <>
             <select

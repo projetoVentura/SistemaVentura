@@ -150,42 +150,73 @@ export function Orcamentos() {
 
   return (
     <Layout title="Orçamentos">
-      {/* Tabs */}
-      <div className="flex border-b border-[#222222] mb-6">
-        {pipelineStatuses.map((status) => (
+       {/* Tabs */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+        <div className="flex gap-2">
           <button
-            key={status}
-            onClick={() => setFilterStatus(status)}
+            onClick={() => setFilterStatus('todos')}
             className={`px-4 py-2 text-sm font-medium transition-colors border-b-2 ${
-              filterStatus === status
+              filterStatus === 'todos'
                 ? 'text-[#00ff88] border-[#00ff88]'
                 : 'text-[#888888] border-transparent hover:text-white'
             }`}
           >
-            {statusConfig[status].label}
+            Todos
           </button>
-        ))}
-        <button
-          onClick={() => setFilterStatus('todos')}
-          className={`px-4 py-2 text-sm font-medium transition-colors border-b-2 ${
-            filterStatus === 'todos'
-              ? 'text-[#00ff88] border-[#00ff88]'
-              : 'text-[#888888] border-transparent hover:text-white'
-          }`}
-        >
-          Todos
-        </button>
+          {pipelineStatuses.map((status) => (
+            <button
+              key={status}
+              onClick={() => setFilterStatus(status)}
+              className={`px-4 py-2 text-sm font-medium transition-colors border-b-2 ${
+                filterStatus === status
+                  ? 'text-[#00ff88] border-[#00ff88]'
+                  : 'text-[#888888] border-transparent hover:text-white'
+              }`}
+            >
+              {statusConfig[status].label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Action Button */}
+      <div className="mb-6">
+        <Button onClick={() => handleOpenModal()}>
+          <Plus className="w-4 h-4 mr-2" />
+          Novo Orçamento
+        </Button>
       </div>
 
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
-        <div className="relative flex-1 max-w-md">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#888888]" />
-          <input
-            type="text"
-            placeholder="Buscar orçamentos..."
-            className="w-full pl-9 pr-4 py-2 bg-[#111111] border border-[#222222] rounded-lg text-sm text-white placeholder-[#666666] focus:outline-none focus:ring-2 focus:ring-[#00ff88]"
-          />
+        <div className="flex gap-2">
+          <button
+            onClick={() => setFilterStatus('todos')}
+            className={`px-4 py-2 text-sm font-medium transition-colors border-b-2 ${
+              filterStatus === 'todos'
+                ? 'text-[#00ff88] border-[#00ff88]'
+                : 'text-[#888888] border-transparent hover:text-white'
+            }`}
+          >
+            Todos
+          </button>
+          {pipelineStatuses.map((status) => (
+            <button
+              key={status}
+              onClick={() => setFilterStatus(status)}
+              className={`px-4 py-2 text-sm font-medium transition-colors border-b-2 ${
+                filterStatus === status
+                  ? 'text-[#00ff88] border-[#00ff88]'
+                  : 'text-[#888888] border-transparent hover:text-white'
+              }`}
+            >
+              {statusConfig[status].label}
+            </button>
+          ))}
         </div>
+      </div>
+
+      {/* Action Button */}
+      <div className="mb-6">
         <Button onClick={() => handleOpenModal()}>
           <Plus className="w-4 h-4 mr-2" />
           Novo Orçamento

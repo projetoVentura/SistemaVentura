@@ -260,50 +260,72 @@ export function Financeiro() {
         </div>
       </div>
 
-      {/* Month Navigation + View Tabs */}
+      {/* Tabs */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
-        <div className="flex items-center gap-2">
-          <Button variant="secondary" size="sm" onClick={prevMonth}>
-            <ChevronLeft className="w-4 h-4" />
-          </Button>
-          <h3 className="text-lg font-semibold text-white min-w-[160px] text-center">
-            {meses[filterMes]} {filterAno}
-          </h3>
-          <Button variant="secondary" size="sm" onClick={nextMonth}>
-            <ChevronRight className="w-4 h-4" />
-          </Button>
+        <div className="flex gap-2">
+          <button
+            onClick={() => setFilterTipo('todos')}
+            className={`px-4 py-2 text-sm font-medium transition-colors border-b-2 ${
+              filterTipo === 'todos'
+                ? 'text-[#00ff88] border-[#00ff88]'
+                : 'text-[#888888] border-transparent hover:text-white'
+            }`}
+          >
+            Todas
+          </button>
+          <button
+            onClick={() => setFilterTipo('entrada')}
+            className={`px-4 py-2 text-sm font-medium transition-colors border-b-2 ${
+              filterTipo === 'entrada'
+                ? 'text-[#00ff88] border-[#00ff88]'
+                : 'text-[#888888] border-transparent hover:text-white'
+            }`}
+          >
+            Entradas
+          </button>
+          <button
+            onClick={() => setFilterTipo('saida')}
+            className={`px-4 py-2 text-sm font-medium transition-colors border-b-2 ${
+              filterTipo === 'saida'
+                ? 'text-[#00ff88] border-[#00ff88]'
+                : 'text-[#888888] border-transparent hover:text-white'
+            }`}
+          >
+            Saídas
+          </button>
         </div>
+      </div>
 
-        <div className="flex items-center gap-2">
-          <div className="flex border border-[#222222] rounded-lg overflow-hidden">
-            <button
-              onClick={() => setViewMode('transacoes')}
-              className={`px-3 py-1.5 text-sm flex items-center gap-1.5 transition-colors ${
-                viewMode === 'transacoes'
-                  ? 'bg-[#00ff88] text-black'
-                  : 'bg-[#111111] text-[#888888] hover:bg-[#1a1a1a]'
-              }`}
-            >
-              <FileText className="w-4 h-4" />
-              Transações
-            </button>
-            <button
-              onClick={() => setViewMode('relatorio')}
-              className={`px-3 py-1.5 text-sm flex items-center gap-1.5 transition-colors ${
-                viewMode === 'relatorio'
-                  ? 'bg-[#00ff88] text-black'
-                  : 'bg-[#111111] text-[#888888] hover:bg-[#1a1a1a]'
-              }`}
-            >
-              <BarChart3 className="w-4 h-4" />
-              Relatório
-            </button>
-          </div>
-          <Button onClick={() => handleOpenModal()}>
-            <Plus className="w-4 h-4 mr-2" />
-            Nova Transação
-          </Button>
+      {/* View Mode & Action */}
+      <div className="flex items-center justify-between mb-6">
+        <div className="flex border border-[#222222] rounded-lg overflow-hidden">
+          <button
+            onClick={() => setViewMode('transacoes')}
+            className={`px-3 py-1.5 text-sm flex items-center gap-1.5 transition-colors ${
+              viewMode === 'transacoes'
+                ? 'bg-[#00ff88] text-black'
+                : 'bg-[#111111] text-[#888888] hover:bg-[#1a1a1a]'
+            }`}
+          >
+            <FileText className="w-4 h-4" />
+            Transações
+          </button>
+          <button
+            onClick={() => setViewMode('relatorio')}
+            className={`px-3 py-1.5 text-sm flex items-center gap-1.5 transition-colors ${
+              viewMode === 'relatorio'
+                ? 'bg-[#00ff88] text-black'
+                : 'bg-[#111111] text-[#888888] hover:bg-[#1a1a1a]'
+            }`}
+          >
+            <BarChart3 className="w-4 h-4" />
+            Relatório
+          </button>
         </div>
+        <Button onClick={() => handleOpenModal()}>
+          <Plus className="w-4 h-4 mr-2" />
+          Nova Transação
+        </Button>
       </div>
 
       {/* Filters */}

@@ -447,21 +447,7 @@ export function ControleAluguel() {
       </div>
 
       {/* Filters */}
-      <div className="flex flex-col sm:flex-row gap-3 mb-4">
-        <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#666666]" />
-          <input
-            type="text"
-            placeholder={
-              activeTab === 'equipamentos'
-                ? 'Buscar equipamentos...'
-                : 'Buscar por equipamento, cliente ou evento...'
-            }
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-9 pr-4 py-2 border border-[#222222] rounded-lg text-sm bg-[#0a0a0a] text-white placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-[#00ff88] focus:border-[#00ff88]"
-          />
-        </div>
+      <div className="flex flex-wrap gap-3 mb-4">
         {activeTab === 'equipamentos' && (
           <select
             value={filterCategoria}
@@ -476,20 +462,25 @@ export function ControleAluguel() {
             ))}
           </select>
         )}
-        {activeTab === 'alugueis' && (
-          <select
-            value={filterStatus}
-            onChange={(e) => setFilterStatus(e.target.value)}
-            className="px-3 py-2 border border-[#222222] rounded-lg text-sm bg-[#0a0a0a] text-white focus:outline-none focus:ring-2 focus:ring-[#00ff88]"
-          >
-            <option value="todos">Todos Status</option>
-            {Object.entries(statusAluguelConfig).map(([value, config]) => (
-              <option key={value} value={value}>
-                {config.label}
-              </option>
-            ))}
-          </select>
-        )}
+        <select
+          value={filterStatus}
+          onChange={(e) => setFilterStatus(e.target.value)}
+          className="px-3 py-2 border border-[#222222] rounded-lg text-sm bg-[#0a0a0a] text-white focus:outline-none focus:ring-2 focus:ring-[#00ff88]"
+        >
+          <option value="todos">Todos</option>
+          {activeTab === 'equipamentos' ? (
+            <>
+              <option value="disponivel">Disponível</option>
+              <option value="alugado">Alugado</option>
+              <option value="manutencao">Manutenção</option>
+            </>
+          ) : (
+            <>
+              <option value="ativo">Ativos</option>
+              <option value="finalizado">Finalizados</option>
+            </>
+          )}
+        </select>
       </div>
 
       {/* Content */}
