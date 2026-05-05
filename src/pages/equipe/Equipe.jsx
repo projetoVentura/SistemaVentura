@@ -333,8 +333,15 @@ export function Equipe() {
   const funcoesUnicas = [...new Set(membros.map((m) => m.funcao))];
 
   return (
-    <Layout title="Equipe">
-      {/* Stats */}
+    <Layout>
+      <div className="px-[30px] py-[30px]">
+        {/* Cabeçalho próprio */}
+        <div className="mb-6">
+          <h1 className="text-2xl font-bold text-white mb-1">Equipe</h1>
+          <p className="text-sm text-[#888888]">Gerencie membros e escalas</p>
+        </div>
+
+        {/* Stats */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
         <div className="bg-[#111111] rounded-xl border border-[#222222] p-5">
           <div className="flex items-center gap-3 mb-2">
@@ -895,7 +902,8 @@ export function Equipe() {
             ? 'Tem certeza que deseja excluir este membro? Esta ação não pode ser desfeita.'
             : 'Tem certeza que deseja excluir esta escala? Esta ação não pode ser desfeita.'
         }
-      />
+       />
+      </div>
     </Layout>
   );
 }

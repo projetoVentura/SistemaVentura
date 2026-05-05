@@ -272,8 +272,15 @@ export function Extras() {
   const totalNaoLidas = conversas.reduce((acc, c) => acc + c.naoLidas, 0);
 
   return (
-    <Layout title="Extras">
-      {/* Tabs */}
+    <Layout>
+      <div className="px-[30px] py-[30px]">
+        {/* Cabeçalho próprio */}
+        <div className="mb-6">
+          <h1 className="text-2xl font-bold text-white mb-1">Extras</h1>
+          <p className="text-sm text-[#888888]">WhatsApp e Importação de dados</p>
+        </div>
+
+        {/* Tabs */}
       <div className="flex gap-2 border-b border-[#222222] mb-6">
         <button
           onClick={() => setActiveTab('whatsapp')}
@@ -955,6 +962,7 @@ export function Extras() {
           </div>
         </div>
       </Modal>
+      </div>
     </Layout>
   );
 }
