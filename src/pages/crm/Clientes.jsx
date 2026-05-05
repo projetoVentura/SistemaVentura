@@ -31,6 +31,7 @@ export function Clientes() {
   const [formData, setFormData] = useState(emptyForm);
   const [errors, setErrors] = useState({});
   const [confirmDelete, setConfirmDelete] = useState(null);
+  const [activeTab, setActiveTab] = useState('leads');
 
   const filteredClientes = clientes.filter(
     (c) =>
@@ -112,11 +113,9 @@ export function Clientes() {
     return new Date(dateStr).toLocaleDateString('pt-BR');
   };
 
-  const [activeTab, setActiveTab] = useState('leads');
-
   return (
     <Layout title="CRM">
-      {/* CRM Tabs */}
+      {/* CRM Tabs - Barra horizontal no topo */}
       <div className="border-b border-[#222222] mb-6">
         <div className="flex gap-1 overflow-x-auto">
           {crmTabs.map((tab) => {
@@ -140,7 +139,7 @@ export function Clientes() {
         </div>
       </div>
 
-      {/* Content based on active tab */}
+      {/* Conteúdo baseado na aba ativa */}
       {activeTab === 'painel' && (
         <div className="text-center py-20 text-[#888888]">
           <LayoutDashboard className="w-16 h-16 mx-auto mb-4 text-[#333333]" />
@@ -152,31 +151,48 @@ export function Clientes() {
       {activeTab === 'leads' && (
         <>
           {/* Cards KPI */}
-          <div className="kpi-grid">
-            {[
-              { label: 'Total de Clientes', value: totalClientes, icon: Users },
-              { label: 'Clientes Ativos', value: clientesAtivos, icon: Users },
-              { label: 'Novos este Mês', value: novosEsteMes, icon: Users },
-              { label: 'Clientes Inativos', value: clientesInativos, icon: Users },
-            ].map((kpi) => (
-              <div
-                key={kpi.label}
-                className="kpi-card"
-              >
-                <div className="kpi-icon">
-                  <kpi.icon />
+          <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-6">
+            <div className="bg-[#111111] rounded-xl border border-[#222222] p-4">
+              <div className="flex items-center gap-3 mb-2">
+                <div className="p-2 bg-[#00ff88]/10 rounded-lg">
+                  <Users className="w-5 h-5 text-[#00ff88]" />
                 </div>
-                <p className="kpi-label">
-                  {kpi.label}
-                </p>
-                <p className="kpi-value">{kpi.value}</p>
+                <span className="text-sm text-[#888888]">Total de Clientes</span>
               </div>
-            ))}
+              <p className="text-2xl font-bold text-[#00ff88]">{totalClientes}</p>
+            </div>
+            <div className="bg-[#111111] rounded-xl border border-[#222222] p-4">
+              <div className="flex items-center gap-3 mb-2">
+                <div className="p-2 bg-[#00ff88]/10 rounded-lg">
+                  <Users className="w-5 h-5 text-[#00ff88]" />
+                </div>
+                <span className="text-sm text-[#888888]">Clientes Ativos</span>
+              </div>
+              <p className="text-2xl font-bold text-white">{clientesAtivos}</p>
+            </div>
+            <div className="bg-[#111111] rounded-xl border border-[#222222] p-4">
+              <div className="flex items-center gap-3 mb-2">
+                <div className="p-2 bg-[#00ff88]/10 rounded-lg">
+                  <Users className="w-5 h-5 text-[#00ff88]" />
+                </div>
+                <span className="text-sm text-[#888888]">Novos este Mês</span>
+              </div>
+              <p className="text-2xl font-bold text-white">{novosEsteMes}</p>
+            </div>
+            <div className="bg-[#111111] rounded-xl border border-[#222222] p-4">
+              <div className="flex items-center gap-3 mb-2">
+                <div className="p-2 bg-[#222222] rounded-lg">
+                  <Users className="w-5 h-5 text-[#666666]" />
+                </div>
+                <span className="text-sm text-[#888888]">Clientes Inativos</span>
+              </div>
+              <p className="text-2xl font-bold text-[#888888]">{clientesInativos}</p>
+            </div>
           </div>
 
           {/* Action Button */}
           <div className="mb-6">
-            <Button onClick={() => handleOpenModal()} className="btn-primary">
+            <Button onClick={() => handleOpenModal()} className="bg-[#00ff88] hover:bg-[#00cc70] text-black">
               <Plus className="w-4 h-4 mr-2" />
               Novo Cliente
             </Button>
@@ -195,11 +211,11 @@ export function Clientes() {
           </div>
 
           {/* Grid de Clientes */}
-          <div className="clientes-grid">
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             {filteredClientes.map((cliente) => (
               <div
                 key={cliente.id}
-                className="cliente-card"
+                className="bg-[#111111] rounded-xl border border-[#222222] p-5 hover:border-[#00ff88] transition-all"
               >
                 <div className="flex items-start justify-between mb-3">
                   <div>
@@ -299,6 +315,7 @@ export function Clientes() {
         </div>
       )}
 
+      {/* Modal de Cliente */}
       <Modal
         isOpen={isModalOpen}
         onClose={handleCloseModal}
@@ -366,6 +383,7 @@ export function Clientes() {
         </form>
       </Modal>
 
+      {/* Confirm Dialog */}
       <ConfirmDialog
         isOpen={!!confirmDelete}
         onClose={() => setConfirmDelete(null)}
