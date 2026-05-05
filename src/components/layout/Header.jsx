@@ -17,8 +17,8 @@ export function Header({ title }) {
     <header className="bg-[#0a0a0a] border-b border-[#222222] px-6 py-4 sticky top-0 z-10">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-xl font-semibold text-white">{title}</h2>
-          <p className="text-xs text-[#888888] mt-0.5">{subtitles[title] || ''}</p>
+          <h2 className="text-xl font-bold text-white">{title}</h2>
+          <p className="text-sm text-[#888888] mt-0.5">{subtitles[title] || ''}</p>
         </div>
         <div className="flex items-center gap-4">
           <div className="relative hidden sm:block">
@@ -31,7 +31,7 @@ export function Header({ title }) {
           </div>
           <button className="relative p-2 rounded-lg hover:bg-[#1a1a1a] transition-colors">
             <Bell className="w-5 h-5 text-[#888888]" />
-            <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-danger-500 rounded-full" />
+            <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-[#00ff88] rounded-full" />
           </button>
         </div>
       </div>

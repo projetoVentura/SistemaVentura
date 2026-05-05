@@ -144,30 +144,30 @@ export function Fechamentos() {
   return (
     <Layout title="Fechamentos">
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-        <div className="bg-bg-card rounded-xl border border-border p-4">
+        <div className="bg-[#111111] rounded-xl border border-[#222222] p-4">
           <div className="flex items-center gap-3 mb-2">
             <div className="p-2 bg-accent-light rounded-lg">
               <TrendingUp className="w-5 h-5 text-accent" />
             </div>
-            <span className="text-sm text-text-secondary">Total Geral</span>
+            <span className="text-sm text-[#888888]">Total Geral</span>
           </div>
-          <p className="text-2xl font-bold text-text-primary">{formatCurrency(totalGeral)}</p>
+          <p className="text-2xl font-bold text-white">{formatCurrency(totalGeral)}</p>
         </div>
-        <div className="bg-bg-card rounded-xl border border-border p-4">
+        <div className="bg-[#111111] rounded-xl border border-[#222222] p-4">
           <div className="flex items-center gap-3 mb-2">
             <div className="p-2 bg-success-950 rounded-lg">
               <CheckCircle className="w-5 h-5 text-success-400" />
             </div>
-            <span className="text-sm text-text-secondary">Recebido</span>
+            <span className="text-sm text-[#888888]">Recebido</span>
           </div>
           <p className="text-2xl font-bold text-success-400">{formatCurrency(totalPago)}</p>
         </div>
-        <div className="bg-bg-card rounded-xl border border-border p-4">
+        <div className="bg-[#111111] rounded-xl border border-[#222222] p-4">
           <div className="flex items-center gap-3 mb-2">
             <div className="p-2 bg-warning-950 rounded-lg">
               <DollarSign className="w-5 h-5 text-warning-400" />
             </div>
-            <span className="text-sm text-text-secondary">Pendente</span>
+            <span className="text-sm text-[#888888]">Pendente</span>
           </div>
           <p className="text-2xl font-bold text-warning-400">{formatCurrency(totalPendente)}</p>
         </div>
@@ -180,7 +180,7 @@ export function Fechamentos() {
             className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
               filterStatus === 'todos'
                 ? 'bg-accent text-bg-main'
-                : 'bg-bg-card text-text-secondary border border-border hover:bg-bg-elevated'
+                : 'bg-[#111111] text-[#888888] border border-[#222222] hover:bg-[#1a1a1a]'
             }`}
           >
             Todos
@@ -192,7 +192,7 @@ export function Fechamentos() {
               className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
                 filterStatus === value
                   ? 'bg-accent text-bg-main'
-                  : 'bg-bg-card text-text-secondary border border-border hover:bg-bg-elevated'
+                  : 'bg-[#111111] text-[#888888] border border-[#222222] hover:bg-[#1a1a1a]'
               }`}
             >
               {config.label}
@@ -209,25 +209,25 @@ export function Fechamentos() {
         {filteredFechamentos.map((fechamento) => (
           <div
             key={fechamento.id}
-            className="bg-bg-card rounded-xl border border-border p-4 flex flex-col lg:flex-row lg:items-center justify-between gap-4"
+            className="bg-[#111111] rounded-xl border border-[#222222] p-4 flex flex-col lg:flex-row lg:items-center justify-between gap-4"
           >
             <div className="flex-1">
               <div className="flex items-center gap-2 mb-1">
-                <h3 className="font-medium text-text-primary">{fechamento.titulo}</h3>
+                <h3 className="font-medium text-white">{fechamento.titulo}</h3>
                 <Badge variant={statusPagamentoConfig[fechamento.statusPagamento].color}>
                   {statusPagamentoConfig[fechamento.statusPagamento].label}
                 </Badge>
               </div>
-              <p className="text-sm text-text-secondary">{fechamento.clienteNome}</p>
+              <p className="text-sm text-[#888888]">{fechamento.clienteNome}</p>
             </div>
 
             <div className="flex flex-wrap items-center gap-4 text-sm">
-              <div className="flex items-center gap-1.5 text-text-secondary">
+              <div className="flex items-center gap-1.5 text-[#888888]">
                 <Calendar className="w-4 h-4" />
                 <span>Fechamento: {formatDate(fechamento.dataFechamento)}</span>
               </div>
               {fechamento.dataEvento && (
-                <div className="flex items-center gap-1.5 text-text-secondary">
+                <div className="flex items-center gap-1.5 text-[#888888]">
                   <Calendar className="w-4 h-4" />
                   <span>Evento: {formatDate(fechamento.dataEvento)}</span>
                 </div>
@@ -245,10 +245,10 @@ export function Fechamentos() {
               <div className="flex gap-1">
                 <button
                   onClick={() => handleOpenModal(fechamento)}
-                  className="p-2 rounded-lg hover:bg-bg-elevated transition-colors"
+                  className="p-2 rounded-lg hover:bg-[#1a1a1a] transition-colors"
                   title="Editar"
                 >
-                  <Edit className="w-4 h-4 text-text-secondary" />
+                  <Edit className="w-4 h-4 text-[#888888]" />
                 </button>
                 <button
                   onClick={() => setConfirmDelete(fechamento.id)}
@@ -265,7 +265,7 @@ export function Fechamentos() {
 
       {filteredFechamentos.length === 0 && (
         <div className="text-center py-12">
-          <p className="text-text-secondary">Nenhum fechamento encontrado.</p>
+          <p className="text-[#888888]">Nenhum fechamento encontrado.</p>
         </div>
       )}
 

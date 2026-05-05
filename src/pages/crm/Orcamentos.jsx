@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Layout } from '../../components/layout/Layout';
 import { Button, Input, Modal, Badge, ConfirmDialog, Textarea, Select } from '../../components/ui';
-import { Plus, Edit, Trash2, Eye } from 'lucide-react';
+import { Plus, Edit, Trash2, Eye, Search } from 'lucide-react';
 import { orcamentos as mockOrcamentos, clientes as mockClientes } from '../../data/mockData';
 
 const statusConfig = {
@@ -150,31 +150,41 @@ export function Orcamentos() {
 
   return (
     <Layout title="Orçamentos">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
-        <div className="flex gap-2 flex-wrap">
+      {/* Tabs */}
+      <div className="flex border-b border-[#222222] mb-6">
+        {pipelineStatuses.map((status) => (
           <button
-            onClick={() => setFilterStatus('todos')}
-            className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
-              filterStatus === 'todos'
-                ? 'bg-accent text-bg-main'
-                : 'bg-bg-card text-text-secondary border border-border hover:bg-bg-elevated'
+            key={status}
+            onClick={() => setFilterStatus(status)}
+            className={`px-4 py-2 text-sm font-medium transition-colors border-b-2 ${
+              filterStatus === status
+                ? 'text-[#00ff88] border-[#00ff88]'
+                : 'text-[#888888] border-transparent hover:text-white'
             }`}
           >
-            Todos
+            {statusConfig[status].label}
           </button>
-          {pipelineStatuses.map((status) => (
-            <button
-              key={status}
-              onClick={() => setFilterStatus(status)}
-              className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
-                filterStatus === status
-                  ? 'bg-accent text-bg-main'
-                  : 'bg-bg-card text-text-secondary border border-border hover:bg-bg-elevated'
-              }`}
-            >
-              {statusConfig[status].label}
-            </button>
-          ))}
+        ))}
+        <button
+          onClick={() => setFilterStatus('todos')}
+          className={`px-4 py-2 text-sm font-medium transition-colors border-b-2 ${
+            filterStatus === 'todos'
+              ? 'text-[#00ff88] border-[#00ff88]'
+              : 'text-[#888888] border-transparent hover:text-white'
+          }`}
+        >
+          Todos
+        </button>
+      </div>
+
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+        <div className="relative flex-1 max-w-md">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#888888]" />
+          <input
+            type="text"
+            placeholder="Buscar orçamentos..."
+            className="w-full pl-9 pr-4 py-2 bg-[#111111] border border-[#222222] rounded-lg text-sm text-white placeholder-[#666666] focus:outline-none focus:ring-2 focus:ring-[#00ff88]"
+          />
         </div>
         <Button onClick={() => handleOpenModal()}>
           <Plus className="w-4 h-4 mr-2" />
@@ -187,9 +197,9 @@ export function Orcamentos() {
           {pipelineStatuses.map((status) => {
             const statusOrcamentos = orcamentos.filter((o) => o.status === status);
             return (
-              <div key={status} className="bg-bg-card rounded-xl p-4 border border-border">
+              <div key={status} className="bg-[#111111] rounded-xl p-4 border border-[#222222]">
                 <div className="flex items-center justify-between mb-3">
-                  <h3 className="font-semibold text-sm text-text-primary">
+                  <h3 className="font-semibold text-sm text-white">
                     {statusConfig[status].label}
                   </h3>
                   <Badge variant={statusConfig[status].color}>
@@ -200,12 +210,12 @@ export function Orcamentos() {
                   {statusOrcamentos.map((orcamento) => (
                     <div
                       key={orcamento.id}
-                      className="bg-bg-main rounded-lg p-3 border border-border hover:border-accent/50 transition-colors"
+                      className="bg-[#0a0a0a] rounded-lg p-3 border border-[#222222] hover:border-[#00ff88]/50 transition-colors"
                     >
-                      <h4 className="font-medium text-sm text-text-primary mb-1">
+                      <h4 className="font-medium text-sm text-white mb-1">
                         {orcamento.titulo}
                       </h4>
-                      <p className="text-xs text-text-secondary mb-2">{orcamento.clienteNome}</p>
+                      <p className="text-xs text-[#888888] mb-2">{orcamento.clienteNome}</p>
                       <div className="flex items-center justify-between">
                         <span className="text-sm font-semibold text-accent">
                           {formatCurrency(orcamento.valor)}
@@ -216,17 +226,17 @@ export function Orcamentos() {
                               setViewingOrcamento(orcamento);
                               setIsViewModalOpen(true);
                             }}
-                            className="p-1 rounded hover:bg-bg-elevated"
+                            className="p-1 rounded hover:bg-[#1a1a1a]"
                             title="Visualizar"
                           >
-                            <Eye className="w-3.5 h-3.5 text-text-secondary" />
+                            <Eye className="w-3.5 h-3.5 text-[#888888]" />
                           </button>
                           <button
                             onClick={() => handleOpenModal(orcamento)}
-                            className="p-1 rounded hover:bg-bg-elevated"
+                            className="p-1 rounded hover:bg-[#1a1a1a]"
                             title="Editar"
                           >
-                            <Edit className="w-3.5 h-3.5 text-text-secondary" />
+                            <Edit className="w-3.5 h-3.5 text-[#888888]" />
                           </button>
                           <button
                             onClick={() => setConfirmDelete(orcamento.id)}
@@ -238,11 +248,11 @@ export function Orcamentos() {
                         </div>
                       </div>
                       {status !== 'recusado' && status !== 'aprovado' && (
-                        <div className="mt-2 pt-2 border-t border-border">
+                        <div className="mt-2 pt-2 border-t border-[#222222]">
                           <select
                             value={orcamento.status}
                             onChange={(e) => handleChangeStatus(orcamento.id, e.target.value)}
-                            className="w-full text-xs border border-border rounded px-2 py-1 bg-bg-main text-text-primary focus:outline-none focus:ring-1 focus:ring-accent"
+                            className="w-full text-xs border border-[#222222] rounded px-2 py-1 bg-[#0a0a0a] text-white focus:outline-none focus:ring-1 focus:ring-[#00ff88]"
                           >
                             {pipelineStatuses.map((s) => (
                               <option key={s} value={s}>
@@ -264,23 +274,23 @@ export function Orcamentos() {
           {filteredOrcamentos.map((orcamento) => (
             <div
               key={orcamento.id}
-              className="bg-bg-card rounded-xl border border-border p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3"
+              className="bg-[#111111] rounded-xl border border-[#222222] p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3"
             >
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-1">
-                  <h3 className="font-medium text-text-primary">{orcamento.titulo}</h3>
+                  <h3 className="font-medium text-white">{orcamento.titulo}</h3>
                   <Badge variant={statusConfig[orcamento.status].color}>
                     {statusConfig[orcamento.status].label}
                   </Badge>
                 </div>
-                <p className="text-sm text-text-secondary">{orcamento.clienteNome}</p>
+                <p className="text-sm text-[#888888]">{orcamento.clienteNome}</p>
               </div>
               <div className="flex items-center gap-4">
                 <div className="text-right">
                   <p className="text-lg font-semibold text-accent">
                     {formatCurrency(orcamento.valor)}
                   </p>
-                  <p className="text-xs text-text-muted">
+                  <p className="text-xs text-[#666666]">
                     Válido até {formatDate(orcamento.dataValidade)}
                   </p>
                 </div>
@@ -290,17 +300,17 @@ export function Orcamentos() {
                       setViewingOrcamento(orcamento);
                       setIsViewModalOpen(true);
                     }}
-                    className="p-2 rounded-lg hover:bg-bg-elevated transition-colors"
+                    className="p-2 rounded-lg hover:bg-[#1a1a1a] transition-colors"
                     title="Visualizar"
                   >
-                    <Eye className="w-4 h-4 text-text-secondary" />
+                    <Eye className="w-4 h-4 text-[#888888]" />
                   </button>
                   <button
                     onClick={() => handleOpenModal(orcamento)}
-                    className="p-2 rounded-lg hover:bg-bg-elevated transition-colors"
+                    className="p-2 rounded-lg hover:bg-[#1a1a1a] transition-colors"
                     title="Editar"
                   >
-                    <Edit className="w-4 h-4 text-text-secondary" />
+                    <Edit className="w-4 h-4 text-[#888888]" />
                   </button>
                   <button
                     onClick={() => setConfirmDelete(orcamento.id)}
@@ -398,7 +408,7 @@ export function Orcamentos() {
         {viewingOrcamento && (
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <h3 className="text-lg font-semibold text-text-primary">
+              <h3 className="text-lg font-semibold text-white">
                 {viewingOrcamento.titulo}
               </h3>
               <Badge variant={statusConfig[viewingOrcamento.status].color}>
@@ -407,46 +417,46 @@ export function Orcamentos() {
             </div>
             <div className="grid grid-cols-2 gap-4 text-sm">
               <div>
-                <p className="text-text-muted">Cliente</p>
-                <p className="font-medium text-text-primary">{viewingOrcamento.clienteNome}</p>
+                <p className="text-[#666666]">Cliente</p>
+                <p className="font-medium text-white">{viewingOrcamento.clienteNome}</p>
               </div>
               <div>
-                <p className="text-text-muted">Valor</p>
+                <p className="text-[#666666]">Valor</p>
                 <p className="font-medium text-accent">
                   {formatCurrency(viewingOrcamento.valor)}
                 </p>
               </div>
               <div>
-                <p className="text-text-muted">Data de Criação</p>
-                <p className="font-medium text-text-primary">{formatDate(viewingOrcamento.dataCriacao)}</p>
+                <p className="text-[#666666]">Data de Criação</p>
+                <p className="font-medium text-white">{formatDate(viewingOrcamento.dataCriacao)}</p>
               </div>
               <div>
-                <p className="text-text-muted">Validade</p>
-                <p className="font-medium text-text-primary">{formatDate(viewingOrcamento.dataValidade)}</p>
+                <p className="text-[#666666]">Validade</p>
+                <p className="font-medium text-white">{formatDate(viewingOrcamento.dataValidade)}</p>
               </div>
             </div>
             {viewingOrcamento.descricao && (
               <div>
-                <p className="text-text-muted text-sm mb-1">Descrição</p>
-                <p className="text-sm text-text-secondary">{viewingOrcamento.descricao}</p>
+                <p className="text-[#666666] text-sm mb-1">Descrição</p>
+                <p className="text-sm text-[#888888]">{viewingOrcamento.descricao}</p>
               </div>
             )}
             {viewingOrcamento.itens && viewingOrcamento.itens.length > 0 && (
               <div>
-                <p className="text-text-muted text-sm mb-2">Itens</p>
-                <div className="border border-border rounded-lg overflow-hidden">
+                <p className="text-[#666666] text-sm mb-2">Itens</p>
+                <div className="border border-[#222222] rounded-lg overflow-hidden">
                   <table className="w-full text-sm">
-                    <thead className="bg-bg-main">
+                    <thead className="bg-[#0a0a0a]">
                       <tr>
-                        <th className="text-left px-4 py-2 font-medium text-text-secondary">Equipamento</th>
-                        <th className="text-center px-4 py-2 font-medium text-text-secondary">Qtd</th>
+                        <th className="text-left px-4 py-2 font-medium text-[#888888]">Equipamento</th>
+                        <th className="text-center px-4 py-2 font-medium text-[#888888]">Qtd</th>
                       </tr>
                     </thead>
                     <tbody>
                       {viewingOrcamento.itens.map((item, index) => (
-                        <tr key={index} className="border-t border-border">
-                          <td className="px-4 py-2 text-text-primary">{item.nome}</td>
-                          <td className="px-4 py-2 text-center text-text-primary">{item.quantidade}</td>
+                        <tr key={index} className="border-t border-[#222222]">
+                          <td className="px-4 py-2 text-white">{item.nome}</td>
+                          <td className="px-4 py-2 text-center text-white">{item.quantidade}</td>
                         </tr>
                       ))}
                     </tbody>

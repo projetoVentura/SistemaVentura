@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Layout } from '../../components/layout/Layout';
-import { Button, Input, Modal, Badge, ConfirmDialog, Select, Textarea } from '../../components/ui';
+import { Button, Input, Modal, ConfirmDialog, Select, Textarea } from '../../components/ui';
 import {
   TrendingUp,
   TrendingDown,
@@ -9,15 +9,12 @@ import {
   Plus,
   Edit,
   Trash2,
-  Calendar,
-  Filter,
   ArrowDownCircle,
   ArrowUpCircle,
   BarChart3,
   FileText,
   ChevronLeft,
   ChevronRight,
-  X,
 } from 'lucide-react';
 import { transacoes as mockTransacoes } from '../../data/mockData';
 
@@ -115,7 +112,7 @@ export function Financeiro() {
       (t.fornecedor && t.fornecedor.toLowerCase().includes(searchTerm.toLowerCase()));
     const matchesTipo = filterTipo === 'todos' || t.tipo === filterTipo;
     const matchesStatus = filterStatus === 'todos' || t.status === filterStatus;
-    const allCategorias = { ...categoriaEntradaConfig, ...categoriaSaidaConfig };
+    const allCategorias = { ...categoriaEntradaConfig, ...categoriaSaidaConfig }; // eslint-disable-line no-unused-vars
     const matchesCategoria = filterCategoria === 'todas' || t.categoria === filterCategoria;
     return matchesMonth && matchesSearch && matchesTipo && matchesStatus && matchesCategoria;
   });

@@ -96,15 +96,28 @@ export function Clientes() {
 
   return (
     <Layout title="Clientes">
+      {/* Tabs */}
+      <div className="flex border-b border-[#222222] mb-6">
+        <button className="px-4 py-2 text-sm font-medium text-[#00ff88] border-b-2 border-[#00ff88]">
+          Todos os Clientes
+        </button>
+        <button className="px-4 py-2 text-sm font-medium text-[#888888] hover:text-white transition-colors">
+          Ativos
+        </button>
+        <button className="px-4 py-2 text-sm font-medium text-[#888888] hover:text-white transition-colors">
+          Inativos
+        </button>
+      </div>
+
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
         <div className="relative flex-1 max-w-md">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-text-secondary" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#888888]" />
           <input
             type="text"
             placeholder="Buscar clientes..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-9 pr-4 py-2 border border-border rounded-lg text-sm bg-bg-main text-text-primary placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent"
+            className="w-full pl-9 pr-4 py-2 bg-[#111111] border border-[#222222] rounded-lg text-sm text-white placeholder-[#666666] focus:outline-none focus:ring-2 focus:ring-[#00ff88] focus:border-[#00ff88]"
           />
         </div>
         <Button onClick={() => handleOpenModal()}>
@@ -117,59 +130,59 @@ export function Clientes() {
         {filteredClientes.map((cliente) => (
           <div
             key={cliente.id}
-            className="bg-[#1a1a1a] rounded-xl border border-[#222222] p-5 transition-all duration-300 hover:border-[#00ff88] hover:shadow-[0_0_15px_rgba(0,255,136,0.3)]"
+            className="bg-[#111111] border border-[#222222] rounded-xl p-5 transition-all duration-300 hover:border-[#00ff88]/50"
           >
             <div className="flex items-start justify-between mb-3">
               <div>
                 <h3 className="font-semibold text-white">{cliente.nome}</h3>
                 {cliente.empresa && (
-                  <p className="text-sm text-gray-400">{cliente.empresa}</p>
+                  <p className="text-sm text-[#888888]">{cliente.empresa}</p>
                 )}
               </div>
               <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
                 cliente.status === 'ativo'
-                  ? 'bg-[#004d00] text-[#00ff88] border border-[#00ff88]/30'
-                  : 'bg-[#333333] text-gray-400 border border-[#444444]'
+                  ? 'bg-[#00ff88]/10 text-[#00ff88] border border-[#00ff88]/30'
+                  : 'bg-[#222222] text-[#888888] border border-[#333333]'
               }`}>
                 {cliente.status === 'ativo' ? 'Ativo' : 'Inativo'}
               </span>
             </div>
 
-            <div className="space-y-2 text-sm text-gray-400 mb-4">
+            <div className="space-y-2 text-sm text-[#888888] mb-4">
               <div className="flex items-center gap-2">
-                <Mail className="w-4 h-4 text-gray-400 flex-shrink-0" />
-                <span className="truncate">{cliente.email}</span>
+                <Mail className="w-4 h-4 text-[#666666] flex-shrink-0" />
+                <span className="truncate text-white">{cliente.email}</span>
               </div>
               <div className="flex items-center gap-2">
-                <Phone className="w-4 h-4 text-gray-400 flex-shrink-0" />
-                <span>{cliente.telefone}</span>
+                <Phone className="w-4 h-4 text-[#666666] flex-shrink-0" />
+                <span className="text-white">{cliente.telefone}</span>
               </div>
               {cliente.endereco && (
                 <div className="flex items-center gap-2">
-                  <MapPin className="w-4 h-4 text-gray-400 flex-shrink-0" />
-                  <span className="truncate">{cliente.endereco}</span>
+                  <MapPin className="w-4 h-4 text-[#666666] flex-shrink-0" />
+                  <span className="truncate text-[#888888]">{cliente.endereco}</span>
                 </div>
               )}
             </div>
 
             <div className="flex items-center justify-between pt-3 border-t border-[#222222]">
-              <span className="text-xs text-gray-500">
+              <span className="text-xs text-[#666666]">
                 Cadastro: {formatDate(cliente.dataCadastro)}
               </span>
               <div className="flex gap-1">
                 <button
                   onClick={() => handleOpenModal(cliente)}
-                  className="p-1.5 rounded-lg hover:bg-[#222222] transition-colors group"
+                  className="p-1.5 rounded-lg hover:bg-[#1a1a1a] transition-colors"
                   title="Editar"
                 >
-                  <Edit className="w-4 h-4 text-white group-hover:text-[#00ff88] transition-colors" />
+                  <Edit className="w-4 h-4 text-[#888888] hover:text-[#00ff88] transition-colors" />
                 </button>
                 <button
                   onClick={() => setConfirmDelete(cliente.id)}
-                  className="p-1.5 rounded-lg hover:bg-[#222222] transition-colors group"
+                  className="p-1.5 rounded-lg hover:bg-[#1a1a1a] transition-colors"
                   title="Excluir"
                 >
-                  <Trash2 className="w-4 h-4 text-white group-hover:text-[#00ff88] transition-colors" />
+                  <Trash2 className="w-4 h-4 text-[#888888] hover:text-[#00ff88] transition-colors" />
                 </button>
               </div>
             </div>
@@ -179,7 +192,7 @@ export function Clientes() {
 
       {filteredClientes.length === 0 && (
         <div className="text-center py-12">
-          <p className="text-text-secondary">Nenhum cliente encontrado.</p>
+          <p className="text-[#888888]">Nenhum cliente encontrado.</p>
         </div>
       )}
 

@@ -488,8 +488,8 @@ export function Calendario() {
             placeholder="João Silva, Maria Santos, Pedro Costa"
           />
 
-          <div className="border-t border-border pt-4">
-            <h4 className="font-medium text-text-primary mb-3 flex items-center gap-2">
+          <div className="border-t border-[#222222] pt-4">
+            <h4 className="font-medium text-white mb-3 flex items-center gap-2">
               <Package className="w-4 h-4" />
               Materiais do Evento
             </h4>
@@ -504,7 +504,7 @@ export function Calendario() {
                     setFormData({ ...formData, materiais: newMateriais });
                   }}
                   placeholder="Nome do equipamento"
-                  className="flex-1 px-3 py-2 border border-border rounded-lg text-sm bg-bg-main text-text-primary focus:outline-none focus:ring-2 focus:ring-accent"
+                  className="flex-1 px-3 py-2 border border-[#222222] rounded-lg text-sm bg-[#0a0a0a] text-white focus:outline-none focus:ring-2 focus:ring-[#00ff88]"
                 />
                 <input
                   type="number"
@@ -515,7 +515,7 @@ export function Calendario() {
                     setFormData({ ...formData, materiais: newMateriais });
                   }}
                   placeholder="Qtd"
-                  className="w-20 px-3 py-2 border border-border rounded-lg text-sm bg-bg-main text-text-primary focus:outline-none focus:ring-2 focus:ring-accent"
+                  className="w-20 px-3 py-2 border border-[#222222] rounded-lg text-sm bg-[#0a0a0a] text-white focus:outline-none focus:ring-2 focus:ring-[#00ff88]"
                 />
                 <button
                   type="button"
@@ -568,7 +568,7 @@ export function Calendario() {
         {viewingEvento && (
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <h3 className="text-lg font-semibold text-text-primary">
+              <h3 className="text-lg font-semibold text-white">
                 {viewingEvento.titulo}
               </h3>
               <Badge variant={statusConfig[viewingEvento.status].color}>
@@ -577,16 +577,16 @@ export function Calendario() {
             </div>
 
             {viewingEvento.descricao && (
-              <p className="text-sm text-text-secondary">{viewingEvento.descricao}</p>
+              <p className="text-sm text-[#888888]">{viewingEvento.descricao}</p>
             )}
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <p className="text-sm text-text-muted mb-1 flex items-center gap-1.5">
+                <p className="text-sm text-[#666666] mb-1 flex items-center gap-1.5">
                   <CalendarIcon className="w-4 h-4" />
                   Data
                 </p>
-                <p className="text-sm font-medium text-text-primary">
+                <p className="text-sm font-medium text-white">
                   {formatDate(viewingEvento.data)}
                   {viewingEvento.dataFim && (
                     <span> até {formatDate(viewingEvento.dataFim)}</span>
@@ -594,33 +594,33 @@ export function Calendario() {
                 </p>
               </div>
               <div>
-                <p className="text-sm text-text-muted mb-1 flex items-center gap-1.5">
+                <p className="text-sm text-[#666666] mb-1 flex items-center gap-1.5">
                   <Clock className="w-4 h-4" />
                   Horário
                 </p>
-                <p className="text-sm font-medium text-text-primary">
+                <p className="text-sm font-medium text-white">
                   {viewingEvento.horarioInicio} - {viewingEvento.horarioFim}
                 </p>
               </div>
               <div>
-                <p className="text-sm text-text-muted mb-1 flex items-center gap-1.5">
+                <p className="text-sm text-[#666666] mb-1 flex items-center gap-1.5">
                   <MapPin className="w-4 h-4" />
                   Local
                 </p>
-                <p className="text-sm font-medium text-text-primary">{viewingEvento.local}</p>
+                <p className="text-sm font-medium text-white">{viewingEvento.local}</p>
               </div>
               <div>
-                <p className="text-sm text-text-muted mb-1 flex items-center gap-1.5">
+                <p className="text-sm text-[#666666] mb-1 flex items-center gap-1.5">
                   <User className="w-4 h-4" />
                   Cliente
                 </p>
-                <p className="text-sm font-medium text-text-primary">{viewingEvento.cliente}</p>
+                <p className="text-sm font-medium text-white">{viewingEvento.cliente}</p>
               </div>
             </div>
 
             {viewingEvento.equipe && viewingEvento.equipe.length > 0 && (
               <div>
-                <p className="text-sm text-text-muted mb-2">Equipe</p>
+                <p className="text-sm text-[#666666] mb-2">Equipe</p>
                 <div className="flex flex-wrap gap-2">
                   {viewingEvento.equipe.map((membro, index) => (
                     <Badge key={index} variant="info">
@@ -633,24 +633,24 @@ export function Calendario() {
 
             {viewingEvento.materiais && viewingEvento.materiais.length > 0 && (
               <div>
-                <p className="text-sm text-text-muted mb-2">Materiais</p>
-                <div className="border border-border rounded-lg overflow-hidden">
+                <p className="text-sm text-[#666666] mb-2">Materiais</p>
+                <div className="border border-[#222222] rounded-lg overflow-hidden">
                   <table className="w-full text-sm">
-                    <thead className="bg-bg-main">
+                    <thead className="bg-[#0a0a0a]">
                       <tr>
-                        <th className="text-left px-4 py-2 font-medium text-text-secondary">
+                        <th className="text-left px-4 py-2 font-medium text-[#888888]">
                           Equipamento
                         </th>
-                        <th className="text-center px-4 py-2 font-medium text-text-secondary">
+                        <th className="text-center px-4 py-2 font-medium text-[#888888]">
                           Quantidade
                         </th>
                       </tr>
                     </thead>
                     <tbody>
                       {viewingEvento.materiais.map((item, index) => (
-                        <tr key={index} className="border-t border-border">
-                          <td className="px-4 py-2 text-text-primary">{item.nome}</td>
-                          <td className="px-4 py-2 text-center text-text-primary">{item.quantidade}</td>
+                        <tr key={index} className="border-t border-[#222222]">
+                          <td className="px-4 py-2 text-white">{item.nome}</td>
+                          <td className="px-4 py-2 text-center text-white">{item.quantidade}</td>
                         </tr>
                       ))}
                     </tbody>

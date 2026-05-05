@@ -1,5 +1,5 @@
 import { Layout } from '../components/layout/Layout';
-import { Users, FileText, CheckCircle, DollarSign, Calendar } from 'lucide-react';
+import { Users, FileText, CheckCircle, DollarSign, Calendar, Package, ArrowUpCircle } from 'lucide-react';
 import { clientes, orcamentos, fechamentos } from '../data/mockData';
 
   export function Dashboard() {
@@ -7,6 +7,8 @@ import { clientes, orcamentos, fechamentos } from '../data/mockData';
     const orcamentosPendentes = orcamentos.filter((o) => o.status === 'pendente').length;
     const totalFechado = fechamentos.reduce((acc, f) => acc + f.valor, 0);
     const orcamentosAprovados = orcamentos.filter((o) => o.status === 'aprovado').length;
+    const totalEquipamentos = 48; // Mock
+    const alugueisAtivos = 12; // Mock
 
     const formatCurrency = (value) => {
       return new Intl.NumberFormat('pt-BR', {
@@ -36,6 +38,16 @@ import { clientes, orcamentos, fechamentos } from '../data/mockData';
         value: orcamentosAprovados,
         icon: CheckCircle,
       },
+      {
+        label: 'Equipamentos',
+        value: totalEquipamentos,
+        icon: Package,
+      },
+      {
+        label: 'Aluguéis Ativos',
+        value: alugueisAtivos,
+        icon: ArrowUpCircle,
+      },
     ];
 
   const proximosEventos = [
@@ -50,21 +62,21 @@ import { clientes, orcamentos, fechamentos } from '../data/mockData';
 
   return (
     <Layout title="Dashboard">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
         {stats.map((stat) => (
           <div
             key={stat.label}
-            className="bg-[#111111] border border-[#222222] rounded-lg p-4 hover:border-[#00ff88] transition-all duration-300"
+            className="bg-[#111111] border border-[#222222] rounded-xl p-4 hover:border-[#00ff88]/50 transition-all duration-300"
           >
-            <div className="flex items-start gap-3 mb-3">
-              <div className="p-2 rounded-md bg-[#00ff88]/10">
+            <div className="mb-3">
+              <div className="p-2 rounded-lg bg-[#00ff88]/10 inline-block">
                 <stat.icon className="w-5 h-5 text-[#00ff88]" />
               </div>
             </div>
             <p className="text-xs font-medium text-[#888888] uppercase tracking-wider mb-1">
               {stat.label}
             </p>
-            <p className="text-3xl font-bold text-white">{stat.value}</p>
+            <p className="text-2xl font-bold text-white">{stat.value}</p>
           </div>
         ))}
       </div>
