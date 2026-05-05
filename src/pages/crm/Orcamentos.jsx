@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Layout } from '../../components/layout/Layout';
 import { Button, Input, Modal, Badge, ConfirmDialog, Textarea, Select } from '../../components/ui';
-import { Plus, Edit, Trash2, Eye, ArrowRight } from 'lucide-react';
+import { Plus, Edit, Trash2, Eye } from 'lucide-react';
 import { orcamentos as mockOrcamentos, clientes as mockClientes } from '../../data/mockData';
 
 const statusConfig = {

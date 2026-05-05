@@ -1,54 +1,42 @@
 import { Layout } from '../components/layout/Layout';
-import { Card } from '../components/ui';
-import { Users, FileText, CheckCircle, DollarSign, Calendar, Package } from 'lucide-react';
+import { Users, FileText, CheckCircle, DollarSign, Calendar } from 'lucide-react';
 import { clientes, orcamentos, fechamentos } from '../data/mockData';
 
-export function Dashboard() {
-  const totalClientes = clientes.filter((c) => c.status === 'ativo').length;
-  const orcamentosPendentes = orcamentos.filter((o) => o.status === 'pendente').length;
-  const totalFechado = fechamentos.reduce((acc, f) => acc + f.valor, 0);
-  const orcamentosAprovados = orcamentos.filter((o) => o.status === 'aprovado').length;
+  export function Dashboard() {
+    const totalClientes = clientes.filter((c) => c.status === 'ativo').length;
+    const orcamentosPendentes = orcamentos.filter((o) => o.status === 'pendente').length;
+    const totalFechado = fechamentos.reduce((acc, f) => acc + f.valor, 0);
+    const orcamentosAprovados = orcamentos.filter((o) => o.status === 'aprovado').length;
 
-  const formatCurrency = (value) => {
-    return new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL',
-    }).format(value);
-  };
+    const formatCurrency = (value) => {
+      return new Intl.NumberFormat('pt-BR', {
+        style: 'currency',
+        currency: 'BRL',
+      }).format(value);
+    };
 
-  const stats = [
-    {
-      label: 'Clientes Ativos',
-      value: totalClientes,
-      icon: Users,
-      color: 'primary',
-    },
-    {
-      label: 'Orçamentos Pendentes',
-      value: orcamentosPendentes,
-      icon: FileText,
-      color: 'warning',
-    },
-    {
-      label: 'Total Fechado',
-      value: formatCurrency(totalFechado),
-      icon: DollarSign,
-      color: 'success',
-    },
-    {
-      label: 'Orçamentos Aprovados',
-      value: orcamentosAprovados,
-      icon: CheckCircle,
-      color: 'info',
-    },
-  ];
-
-  const colorClasses = {
-    primary: 'bg-accent-light text-accent',
-    warning: 'bg-warning-950 text-warning-400',
-    success: 'bg-success-950 text-success-400',
-    info: 'bg-accent-light text-accent',
-  };
+    const stats = [
+      {
+        label: 'Clientes Ativos',
+        value: totalClientes,
+        icon: Users,
+      },
+      {
+        label: 'Orçamentos Pendentes',
+        value: orcamentosPendentes,
+        icon: FileText,
+      },
+      {
+        label: 'Total Fechado',
+        value: formatCurrency(totalFechado),
+        icon: DollarSign,
+      },
+      {
+        label: 'Orçamentos Aprovados',
+        value: orcamentosAprovados,
+        icon: CheckCircle,
+      },
+    ];
 
   const proximosEventos = [
     { data: '2024-08-20', titulo: 'Gala Beneficente', cliente: 'Ana Paula Ferreira' },

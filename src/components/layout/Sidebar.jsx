@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import {
   LayoutDashboard,
   Users,
@@ -56,9 +56,15 @@ const menuItems = [
 
 export function Sidebar() {
   const [expandedMenu, setExpandedMenu] = useState({});
+  const location = useLocation();
 
   const toggleMenu = (label) => {
     setExpandedMenu((prev) => ({ ...prev, [label]: !prev[label] }));
+  };
+
+  const isActivePath = (path) => {
+    if (path === '/') return location.pathname === '/';
+    return location.pathname.startsWith(path);
   };
 
   return (
@@ -95,13 +101,11 @@ export function Sidebar() {
                         <li key={child.path}>
                           <NavLink
                             to={child.path}
-                          className={({ isActive }) =>
-                                `block px-3 py-1.5 rounded text-sm transition-colors ${
-                                  isActive
-                                    ? 'bg-[#1a1a1a] text-[#00ff88] font-medium border-l-3 border-l-[#00ff88] pl-2'
-                                    : 'text-[#888888] hover:text-white hover:bg-[#1a1a1a]'
-                                }`
-                              }
+                            className={`block px-3 py-1.5 rounded text-sm transition-colors ${
+                              isActivePath(child.path)
+                                ? 'bg-[#1a1a1a] text-[#00ff88] font-medium border-l-3 border-l-[#00ff88] pl-2'
+                                : 'text-[#888888] hover:text-white hover:bg-[#1a1a1a]'
+                            }`}
                           >
                             {child.label}
                           </NavLink>
@@ -113,15 +117,13 @@ export function Sidebar() {
               ) : (
                 <NavLink
                    to={item.path}
-                  className={({ isActive }) =>
-                      `flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors relative ${
-                        isActive
-                          ? 'bg-[#1a1a1a] text-white font-medium border-l-3 border-l-[#00ff88]'
-                          : 'text-[#888888] hover:bg-[#1a1a1a] hover:text-white'
-                      }`
-                    }
+                  className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors relative ${
+                    isActivePath(item.path)
+                      ? 'bg-[#1a1a1a] text-white font-medium border-l-3 border-l-[#00ff88]'
+                      : 'text-[#888888] hover:bg-[#1a1a1a] hover:text-white'
+                  }`}
                  >
-                  <item.icon className={`w-5 h-5 flex-shrink-0 ${isActive ? 'text-[#00ff88]' : 'text-[#888888]'}`} />
+                  <item.icon className={`w-5 h-5 flex-shrink-0 ${isActivePath(item.path) ? 'text-[#00ff88]' : 'text-[#888888]'}`} />
                   <span>{item.label}</span>
                 </NavLink>
               )}

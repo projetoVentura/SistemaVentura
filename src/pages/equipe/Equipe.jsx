@@ -15,10 +15,6 @@ import {
   DollarSign,
   Clock,
   Briefcase,
-  UserCheck,
-  UserX,
-  CheckCircle,
-  XCircle,
 } from 'lucide-react';
 import { equipe as mockEquipe, escalas as mockEscalas } from '../../data/mockData';
 

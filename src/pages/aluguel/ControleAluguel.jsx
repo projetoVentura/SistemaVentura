@@ -4,20 +4,14 @@ import { Button, Input, Modal, Badge, ConfirmDialog, Select, Textarea } from '..
 import {
   Package,
   ArrowUpCircle,
-  ArrowDownCircle,
+  CheckCircle,
+  ArrowRightLeft,
   Search,
   Plus,
   Edit,
   Trash2,
-  AlertTriangle,
-  CheckCircle,
-  Clock,
   MapPin,
   DollarSign,
-  AlertCircle,
-  ArrowRightLeft,
-  List,
-  LayoutGrid,
 } from 'lucide-react';
 import { equipamentos as mockEquipamentos, alugueis as mockAlugueis, clientes as mockClientes } from '../../data/mockData';
 
@@ -242,7 +236,6 @@ export function ControleAluguel() {
     }
 
     if (editingAluguel) {
-      const qtdDiff = quantidade - editingAluguel.quantidade;
       setAlugueis((prev) =>
         prev.map((a) =>
           a.id === editingAluguel.id

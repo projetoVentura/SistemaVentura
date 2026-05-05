@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Layout } from '../../components/layout/Layout';
-import { Button, Input, Modal, Badge, ConfirmDialog, Textarea } from '../../components/ui';
+import { Button, Input, Modal, ConfirmDialog, Textarea } from '../../components/ui';
 import { Plus, Search, Edit, Trash2, Phone, Mail, MapPin } from 'lucide-react';
 import { clientes as mockClientes } from '../../data/mockData';
 
