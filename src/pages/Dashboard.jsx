@@ -58,7 +58,7 @@ export function Dashboard() {
     }
   };
 
-  return (
+   return (
     <Layout title="Dashboard">
       <div className="w-[95%] mx-auto">
         {/* BLOCK 1: KPIs - Horizontal line with 4 cards */}
@@ -66,7 +66,7 @@ export function Dashboard() {
           {stats.map((stat) => (
             <div
               key={stat.label}
-              className="bg-[#111111] border border-[#222222] rounded-lg p-5"
+              className="bg-[#111111] border border-[#222222] rounded-xl p-5 hover:border-[#00ff88] transition-all"
             >
               <div className="flex items-center gap-2 mb-2">
                 <stat.icon className="w-4 h-4 text-[#00ff88]" />

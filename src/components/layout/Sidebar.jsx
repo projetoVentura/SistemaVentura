@@ -77,7 +77,7 @@ export function Sidebar() {
   };
 
   return (
-    <aside className="sidebar-fixed">
+    <aside className="fixed top-0 left-0 h-screen w-[220px] bg-[#111111] border-r border-[#222222] flex flex-col z-50 overflow-hidden">
       {/* Logo */}
       <div className="sidebar-logo">
         <div className="flex items-center gap-3">
