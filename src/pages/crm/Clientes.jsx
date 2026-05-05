@@ -115,205 +115,208 @@ export function Clientes() {
 
   return (
     <Layout title="CRM">
-      {/* CRM Tabs - Barra horizontal no topo */}
-      <div className="border-b border-[#222222] mb-6">
-        <div className="flex gap-1 overflow-x-auto">
-          {crmTabs.map((tab) => {
-            const Icon = tab.icon;
-            const isActive = activeTab === tab.id;
-            return (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center gap-2 px-4 py-3 text-sm font-medium transition-all border-b-2 -mb-[1px] ${
-                  isActive
-                    ? 'border-[#00ff88] text-white font-bold'
-                    : 'border-transparent text-[#888888] hover:text-[#00ff88]'
-                }`}
-              >
-                <Icon className="w-4 h-4" />
-                {tab.label}
-              </button>
-            );
-          })}
+      {/* Conteúdo com padding 30px */}
+      <div className="px-[30px] py-[30px]">
+        {/* CRM Tabs - Barra horizontal logo abaixo do título */}
+        <div className="border-b border-[#222222] mb-6">
+          <div className="flex gap-1 overflow-x-auto">
+            {crmTabs.map((tab) => {
+              const Icon = tab.icon;
+              const isActive = activeTab === tab.id;
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`flex items-center gap-2 px-4 py-3 text-sm font-medium transition-all border-b-2 -mb-[1px] ${
+                    isActive
+                      ? 'border-[#00ff88] text-white font-bold'
+                      : 'border-transparent text-[#888888] hover:text-[#00ff88]'
+                  }`}
+                >
+                  <Icon className="w-4 h-4" />
+                  {tab.label}
+                </button>
+              );
+            })}
+          </div>
         </div>
-      </div>
 
-      {/* Conteúdo baseado na aba ativa */}
-      {activeTab === 'painel' && (
-        <div className="text-center py-20 text-[#888888]">
-          <LayoutDashboard className="w-16 h-16 mx-auto mb-4 text-[#333333]" />
-          <h3 className="text-xl font-semibold text-white mb-2">Painel CRM</h3>
-          <p>Visão geral das métricas e atividades do CRM</p>
-        </div>
-      )}
-
-      {activeTab === 'leads' && (
-        <>
-          {/* Cards KPI */}
-          <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-6">
-            <div className="bg-[#111111] rounded-xl border border-[#222222] p-4">
-              <div className="flex items-center gap-3 mb-2">
-                <div className="p-2 bg-[#00ff88]/10 rounded-lg">
-                  <Users className="w-5 h-5 text-[#00ff88]" />
-                </div>
-                <span className="text-sm text-[#888888]">Total de Clientes</span>
-              </div>
-              <p className="text-2xl font-bold text-[#00ff88]">{totalClientes}</p>
-            </div>
-            <div className="bg-[#111111] rounded-xl border border-[#222222] p-4">
-              <div className="flex items-center gap-3 mb-2">
-                <div className="p-2 bg-[#00ff88]/10 rounded-lg">
-                  <Users className="w-5 h-5 text-[#00ff88]" />
-                </div>
-                <span className="text-sm text-[#888888]">Clientes Ativos</span>
-              </div>
-              <p className="text-2xl font-bold text-white">{clientesAtivos}</p>
-            </div>
-            <div className="bg-[#111111] rounded-xl border border-[#222222] p-4">
-              <div className="flex items-center gap-3 mb-2">
-                <div className="p-2 bg-[#00ff88]/10 rounded-lg">
-                  <Users className="w-5 h-5 text-[#00ff88]" />
-                </div>
-                <span className="text-sm text-[#888888]">Novos este Mês</span>
-              </div>
-              <p className="text-2xl font-bold text-white">{novosEsteMes}</p>
-            </div>
-            <div className="bg-[#111111] rounded-xl border border-[#222222] p-4">
-              <div className="flex items-center gap-3 mb-2">
-                <div className="p-2 bg-[#222222] rounded-lg">
-                  <Users className="w-5 h-5 text-[#666666]" />
-                </div>
-                <span className="text-sm text-[#888888]">Clientes Inativos</span>
-              </div>
-              <p className="text-2xl font-bold text-[#888888]">{clientesInativos}</p>
-            </div>
+        {/* Conteúdo baseado na aba ativa */}
+        {activeTab === 'painel' && (
+          <div className="text-center py-20 text-[#888888]">
+            <LayoutDashboard className="w-16 h-16 mx-auto mb-4 text-[#333333]" />
+            <h3 className="text-xl font-semibold text-white mb-2">Painel CRM</h3>
+            <p>Visão geral das métricas e atividades do CRM</p>
           </div>
+        )}
 
-          {/* Action Button */}
-          <div className="mb-6">
-            <Button onClick={() => handleOpenModal()} className="bg-[#00ff88] hover:bg-[#00cc70] text-black">
-              <Plus className="w-4 h-4 mr-2" />
-              Novo Cliente
-            </Button>
-          </div>
+        {activeTab === 'leads' && (
+          <>
+            {/* Grid de Resumo - Cards KPI em linha horizontal limpa */}
+            <div className="grid grid-cols-4 gap-4 mb-6">
+              <div className="bg-[#111111] rounded-xl border border-[#222222] p-4">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="p-2 bg-[#00ff88]/10 rounded-lg">
+                    <Users className="w-5 h-5 text-[#00ff88]" />
+                  </div>
+                  <span className="text-sm text-[#888888]">Total de Clientes</span>
+                </div>
+                <p className="text-2xl font-bold text-[#00ff88]">{totalClientes}</p>
+              </div>
+              <div className="bg-[#111111] rounded-xl border border-[#222222] p-4">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="p-2 bg-[#00ff88]/10 rounded-lg">
+                    <Users className="w-5 h-5 text-[#00ff88]" />
+                  </div>
+                  <span className="text-sm text-[#888888]">Clientes Ativos</span>
+                </div>
+                <p className="text-2xl font-bold text-white">{clientesAtivos}</p>
+              </div>
+              <div className="bg-[#111111] rounded-xl border border-[#222222] p-4">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="p-2 bg-[#00ff88]/10 rounded-lg">
+                    <Users className="w-5 h-5 text-[#00ff88]" />
+                  </div>
+                  <span className="text-sm text-[#888888]">Novos este Mês</span>
+                </div>
+                <p className="text-2xl font-bold text-white">{novosEsteMes}</p>
+              </div>
+              <div className="bg-[#111111] rounded-xl border border-[#222222] p-4">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="p-2 bg-[#222222] rounded-lg">
+                    <Users className="w-5 h-5 text-[#666666]" />
+                  </div>
+                  <span className="text-sm text-[#888888]">Clientes Inativos</span>
+                </div>
+                <p className="text-2xl font-bold text-[#888888]">{clientesInativos}</p>
+              </div>
+            </div>
 
-          {/* Search */}
-          <div className="relative mb-4">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#666666]" />
-            <input
-              type="text"
-              placeholder="Buscar clientes..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-9 pr-4 py-2 border border-[#222222] rounded-lg text-sm bg-[#111111] text-white placeholder-[#666666] focus:outline-none focus:ring-2 focus:ring-[#00ff88] focus:border-[#00ff88]"
-            />
-          </div>
+            {/* Ações e Busca - Linha própria com espaçamento */}
+            <div className="flex items-center justify-between mb-6 gap-4">
+              <Button onClick={() => handleOpenModal()} className="bg-[#00ff88] hover:bg-[#00cc70] text-black flex-shrink-0">
+                <Plus className="w-4 h-4 mr-2" />
+                Novo Cliente
+              </Button>
+              <div className="relative flex-1 max-w-md">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#666666]" />
+                <input
+                  type="text"
+                  placeholder="Buscar clientes..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-full pl-9 pr-4 py-2 border border-[#222222] rounded-lg text-sm bg-[#111111] text-white placeholder-[#666666] focus:outline-none focus:ring-2 focus:ring-[#00ff88] focus:border-[#00ff88]"
+                />
+              </div>
+            </div>
 
-          {/* Grid de Clientes */}
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-            {filteredClientes.map((cliente) => (
-              <div
-                key={cliente.id}
-                className="bg-[#111111] rounded-xl border border-[#222222] p-5 hover:border-[#00ff88] transition-all"
-              >
-                <div className="flex items-start justify-between mb-3">
-                  <div>
+            {/* Grade de Clientes - Grid de 3 colunas com margin 15px entre cartões */}
+            <div className="grid grid-cols-3 gap-[15px]">
+              {filteredClientes.map((cliente) => (
+                <div
+                  key={cliente.id}
+                  className="bg-[#111111] rounded-xl border border-[#222222] p-5 hover:border-[#00ff88] transition-all relative"
+                >
+                  {/* Status no canto superior direito */}
+                  <div className="absolute top-5 right-5">
+                    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                      cliente.status === 'ativo'
+                        ? 'bg-[#00ff88]/10 text-[#00ff88] border border-[#00ff88]/30'
+                        : 'bg-[#222222] text-[#888888] border border-[#333333]'
+                    }`}>
+                      {cliente.status === 'ativo' ? 'Ativo' : 'Inativo'}
+                    </span>
+                  </div>
+
+                  <div className="mb-3 pr-20">
                     <h3 className="font-semibold text-white">{cliente.nome}</h3>
                     {cliente.empresa && (
                       <p className="text-sm text-[#888888]">{cliente.empresa}</p>
                     )}
                   </div>
-                  <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                    cliente.status === 'ativo'
-                      ? 'bg-[#00ff88]/10 text-[#00ff88] border border-[#00ff88]/30'
-                      : 'bg-[#222222] text-[#888888] border border-[#333333]'
-                  }`}>
-                    {cliente.status === 'ativo' ? 'Ativo' : 'Inativo'}
-                  </span>
-                </div>
 
-                <div className="space-y-2 text-sm text-[#888888] mb-4">
-                  <div className="flex items-center gap-2">
-                    <Mail className="w-4 h-4 text-[#666666] flex-shrink-0" />
-                    <span className="truncate text-white">{cliente.email}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Phone className="w-4 h-4 text-[#666666] flex-shrink-0" />
-                    <span className="text-white">{cliente.telefone}</span>
-                  </div>
-                  {cliente.endereco && (
+                  <div className="space-y-2 text-sm text-[#888888] mb-4">
                     <div className="flex items-center gap-2">
-                      <MapPin className="w-4 h-4 text-[#666666] flex-shrink-0" />
-                      <span className="truncate text-[#888888]">{cliente.endereco}</span>
+                      <Mail className="w-4 h-4 text-[#666666] flex-shrink-0" />
+                      <span className="truncate text-white">{cliente.email}</span>
                     </div>
-                  )}
-                </div>
+                    <div className="flex items-center gap-2">
+                      <Phone className="w-4 h-4 text-[#666666] flex-shrink-0" />
+                      <span className="text-white">{cliente.telefone}</span>
+                    </div>
+                    {cliente.endereco && (
+                      <div className="flex items-center gap-2">
+                        <MapPin className="w-4 h-4 text-[#666666] flex-shrink-0" />
+                        <span className="truncate text-[#888888]">{cliente.endereco}</span>
+                      </div>
+                    )}
+                  </div>
 
-                <div className="flex items-center justify-between pt-3 border-t border-[#222222]">
-                  <span className="text-xs text-[#666666]">
-                    Cadastro: {formatDate(cliente.dataCadastro)}
-                  </span>
-                  <div className="flex gap-1">
-                    <button
-                      onClick={() => handleOpenModal(cliente)}
-                      className="p-1.5 rounded-lg hover:bg-[#1a1a1a] transition-colors"
-                      title="Editar"
-                    >
-                      <Edit className="w-4 h-4 text-[#888888] hover:text-[#00ff88] transition-colors" />
-                    </button>
-                    <button
-                      onClick={() => setConfirmDelete(cliente.id)}
-                      className="p-1.5 rounded-lg hover:bg-[#1a1a1a] transition-colors"
-                      title="Excluir"
-                    >
-                      <Trash2 className="w-4 h-4 text-[#888888] hover:text-[#00ff88] transition-colors" />
-                    </button>
+                  <div className="flex items-center justify-between pt-3 border-t border-[#222222]">
+                    <span className="text-xs text-[#666666]">
+                      Cadastro: {formatDate(cliente.dataCadastro)}
+                    </span>
+                    <div className="flex gap-1">
+                      <button
+                        onClick={() => handleOpenModal(cliente)}
+                        className="p-1.5 rounded-lg hover:bg-[#1a1a1a] transition-colors"
+                        title="Editar"
+                      >
+                        <Edit className="w-4 h-4 text-[#888888] hover:text-[#00ff88] transition-colors" />
+                      </button>
+                      <button
+                        onClick={() => setConfirmDelete(cliente.id)}
+                        className="p-1.5 rounded-lg hover:bg-[#1a1a1a] transition-colors"
+                        title="Excluir"
+                      >
+                        <Trash2 className="w-4 h-4 text-[#888888] hover:text-[#00ff88] transition-colors" />
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
-
-          {filteredClientes.length === 0 && (
-            <div className="text-center py-12">
-              <p className="text-[#888888]">Nenhum cliente encontrado.</p>
+              ))}
             </div>
-          )}
-        </>
-      )}
 
-      {activeTab === 'pipeline' && (
-        <div className="text-center py-20 text-[#888888]">
-          <GitBranch className="w-16 h-16 mx-auto mb-4 text-[#333333]" />
-          <h3 className="text-xl font-semibold text-white mb-2">Pipeline de Vendas</h3>
-          <p>Funil de vendas e oportunidades</p>
-        </div>
-      )}
+            {filteredClientes.length === 0 && (
+              <div className="text-center py-12">
+                <p className="text-[#888888]">Nenhum cliente encontrado.</p>
+              </div>
+            )}
+          </>
+        )}
 
-      {activeTab === 'calendario' && (
-        <div className="text-center py-20 text-[#888888]">
-          <Calendar className="w-16 h-16 mx-auto mb-4 text-[#333333]" />
-          <h3 className="text-xl font-semibold text-white mb-2">Calendário</h3>
-          <p>Eventos e compromissos</p>
-        </div>
-      )}
+        {activeTab === 'pipeline' && (
+          <div className="text-center py-20 text-[#888888]">
+            <GitBranch className="w-16 h-16 mx-auto mb-4 text-[#333333]" />
+            <h3 className="text-xl font-semibold text-white mb-2">Pipeline de Vendas</h3>
+            <p>Funil de vendas e oportunidades</p>
+          </div>
+        )}
 
-      {activeTab === 'importar' && (
-        <div className="text-center py-20 text-[#888888]">
-          <Upload className="w-16 h-16 mx-auto mb-4 text-[#333333]" />
-          <h3 className="text-xl font-semibold text-white mb-2">Importar</h3>
-          <p>Importe contatos e leads de arquivos CSV/XLSX</p>
-        </div>
-      )}
+        {activeTab === 'calendario' && (
+          <div className="text-center py-20 text-[#888888]">
+            <Calendar className="w-16 h-16 mx-auto mb-4 text-[#333333]" />
+            <h3 className="text-xl font-semibold text-white mb-2">Calendário</h3>
+            <p>Eventos e compromissos</p>
+          </div>
+        )}
 
-      {activeTab === 'integracoes' && (
-        <div className="text-center py-20 text-[#888888]">
-          <Plug className="w-16 h-16 mx-auto mb-4 text-[#333333]" />
-          <h3 className="text-xl font-semibold text-white mb-2">Integrações</h3>
-          <p>Conecte com WhatsApp, Instagram e outras plataformas</p>
-        </div>
-      )}
+        {activeTab === 'importar' && (
+          <div className="text-center py-20 text-[#888888]">
+            <Upload className="w-16 h-16 mx-auto mb-4 text-[#333333]" />
+            <h3 className="text-xl font-semibold text-white mb-2">Importar</h3>
+            <p>Importe contatos e leads de arquivos CSV/XLSX</p>
+          </div>
+        )}
+
+        {activeTab === 'integracoes' && (
+          <div className="text-center py-20 text-[#888888]">
+            <Plug className="w-16 h-16 mx-auto mb-4 text-[#333333]" />
+            <h3 className="text-xl font-semibold text-white mb-2">Integrações</h3>
+            <p>Conecte com WhatsApp, Instagram e outras plataformas</p>
+          </div>
+        )}
+      </div>
 
       {/* Modal de Cliente */}
       <Modal
