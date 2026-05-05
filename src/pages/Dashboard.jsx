@@ -1,54 +1,50 @@
 import { Layout } from '../components/layout/Layout';
 import { Users, FileText, CheckCircle, DollarSign, Calendar, Package, ArrowUpCircle } from 'lucide-react';
-import { clientes, orcamentos, fechamentos } from '../data/mockData';
+import { clientes as mockClientes, orcamentos as mockOrcamentos, fechamentos as mockFechamentos } from '../data/mockData';
 
-  export function Dashboard() {
-    const totalClientes = clientes.filter((c) => c.status === 'ativo').length;
-    const orcamentosPendentes = orcamentos.filter((o) => o.status === 'pendente').length;
-    const totalFechado = fechamentos.reduce((acc, f) => acc + f.valor, 0);
-    const orcamentosAprovados = orcamentos.filter((o) => o.status === 'aprovado').length;
-    const totalEquipamentos = 48; // Mock
-    const alugueisAtivos = 12; // Mock
+export function Dashboard() {
+  const clientes = mockClientes || [];
+  const orcamentos = mockOrcamentos || [];
+  const fechamentos = mockFechamentos || [];
 
-    const formatCurrency = (value) => {
+  const totalClientes = clientes.filter((c) => c.status === 'ativo').length;
+  const orcamentosPendentes = orcamentos.filter((o) => o.status === 'pendente').length;
+  const totalFechado = fechamentos.reduce((acc, f) => acc + (f.valor || 0), 0);
+  const orcamentosAprovados = orcamentos.filter((o) => o.status === 'aprovado').length;
+
+  const formatCurrency = (value) => {
+    try {
       return new Intl.NumberFormat('pt-BR', {
         style: 'currency',
         currency: 'BRL',
       }).format(value);
-    };
+    } catch (e) {
+      return `R$ ${value}`;
+    }
+  };
 
-    const stats = [
-      {
-        label: 'Clientes Ativos',
-        value: totalClientes,
-        icon: Users,
-      },
-      {
-        label: 'Orçamentos Pendentes',
-        value: orcamentosPendentes,
-        icon: FileText,
-      },
-      {
-        label: 'Total Fechado',
-        value: formatCurrency(totalFechado),
-        icon: DollarSign,
-      },
-      {
-        label: 'Orçamentos Aprovados',
-        value: orcamentosAprovados,
-        icon: CheckCircle,
-      },
-      {
-        label: 'Equipamentos',
-        value: totalEquipamentos,
-        icon: Package,
-      },
-      {
-        label: 'Aluguéis Ativos',
-        value: alugueisAtivos,
-        icon: ArrowUpCircle,
-      },
-    ];
+  const stats = [
+    {
+      label: 'Clientes Ativos',
+      value: totalClientes,
+      icon: Users,
+    },
+    {
+      label: 'Orçamentos Pendentes',
+      value: orcamentosPendentes,
+      icon: FileText,
+    },
+    {
+      label: 'Total Fechado',
+      value: formatCurrency(totalFechado),
+      icon: DollarSign,
+    },
+    {
+      label: 'Orçamentos Aprovados',
+      value: orcamentosAprovados,
+      icon: CheckCircle,
+    },
+  ];
 
   const proximosEventos = [
     { data: '2024-08-20', titulo: 'Gala Beneficente', cliente: 'Ana Paula Ferreira' },
@@ -57,12 +53,17 @@ import { clientes, orcamentos, fechamentos } from '../data/mockData';
   ];
 
   const formatDate = (dateStr) => {
-    return new Date(dateStr).toLocaleDateString('pt-BR');
+    try {
+      return new Date(dateStr).toLocaleDateString('pt-BR');
+    } catch (e) {
+      return dateStr;
+    }
   };
 
   return (
     <Layout title="Dashboard">
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
+      {/* Cards de Métricas */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         {stats.map((stat) => (
           <div
             key={stat.label}
@@ -81,7 +82,9 @@ import { clientes, orcamentos, fechamentos } from '../data/mockData';
         ))}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      {/* Seções de Conteúdo */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        {/* Orçamentos Recentes */}
         <div className="bg-[#111111] border border-[#222222] rounded-lg p-5">
           <h3 className="font-semibold text-white mb-4">Orçamentos Recentes</h3>
           <div className="space-y-3">
@@ -117,6 +120,7 @@ import { clientes, orcamentos, fechamentos } from '../data/mockData';
           </div>
         </div>
 
+        {/* Próximos Eventos */}
         <div className="bg-[#111111] border border-[#222222] rounded-lg p-5">
           <h3 className="font-semibold text-white mb-4">Próximos Eventos</h3>
           <div className="space-y-3">
@@ -139,6 +143,7 @@ import { clientes, orcamentos, fechamentos } from '../data/mockData';
         </div>
       </div>
 
+      {/* Acesso Rápido */}
       <div className="mt-6">
         <div className="bg-[#111111] border border-[#222222] rounded-lg p-5">
           <h3 className="font-semibold text-white mb-4">Acesso Rápido</h3>
