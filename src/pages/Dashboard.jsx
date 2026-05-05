@@ -60,73 +60,77 @@ export function Dashboard() {
 
   return (
     <Layout title="Dashboard">
-      {/* SEÇÃO 1: KPIs (4 cards em linha, menor altura) */}
-      <div className="kpi-section">
-        {stats.map((stat) => (
-          <div
-            key={stat.label}
-            className="kpi-card-compact"
-          >
-            <div className="kpi-icon-compact">
-              <stat.icon className="w-5 h-5 text-[#00ff88]" />
+      <div className="w-[95%] mx-auto">
+        {/* SEÇÃO 1: KPIs em linha horizontal, compactos */}
+        <div className="grid grid-cols-4 gap-4 mb-4">
+          {stats.map((stat) => (
+            <div
+              key={stat.label}
+              className="bg-[#111111] border border-[#222222] rounded-lg p-3"
+            >
+              <div className="flex items-center gap-2 mb-1">
+                <stat.icon className="w-4 h-4 text-[#00ff88]" />
+                <p className="text-xs text-[#888888] uppercase tracking-wider">{stat.label}</p>
+              </div>
+              <p className="text-lg font-bold text-white">{stat.value}</p>
             </div>
-            <p className="kpi-label-compact">{stat.label}</p>
-            <p className="kpi-value-compact">{stat.value}</p>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
 
-      {/* SEÇÃO 2: Conteúdo Principal (2 colunas iguais: 1fr 1fr) */}
-      <div className="main-content-grid">
-        {/* Coluna Esquerda: Orçamentos Recentes */}
-        <div className="content-card">
-          <h3 className="content-card-title">Orçamentos Recentes</h3>
-          <div className="content-list">
-            {orcamentosData.slice(0, 5).map((orcamento) => (
-              <div
-                key={orcamento.id}
-                className="content-list-item"
-              >
-                <div>
-                  <p className="content-item-title">{orcamento.titulo}</p>
-                  <p className="content-item-subtitle">{orcamento.clienteNome}</p>
+        {/* SEÇÃO 2: Duas colunas (1fr 1fr) */}
+        <div className="grid grid-cols-2 gap-4 mb-4">
+          {/* Coluna Esquerda: Orçamentos Recentes */}
+          <div className="bg-[#111111] border border-[#222222] rounded-lg p-4">
+            <h3 className="text-sm font-semibold text-white mb-3">Orçamentos Recentes</h3>
+            <div className="divide-y divide-[#222222]">
+              {orcamentosData.slice(0, 5).map((orcamento) => (
+                <div
+                  key={orcamento.id}
+                  className="flex items-center justify-between py-2"
+                >
+                  <div>
+                    <p className="text-sm text-white">{orcamento.titulo}</p>
+                    <p className="text-xs text-[#888888]">{orcamento.clienteNome}</p>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-sm font-semibold text-[#00ff88]">{formatCurrency(orcamento.valor)}</p>
+                    <span className={`text-xs px-2 py-0.5 rounded ${
+                      orcamento.status === 'aprovado'
+                        ? 'bg-[#00ff88]/10 text-[#00ff88]'
+                        : 'bg-[#443807] text-[#facc15]'
+                    }`}>
+                      {orcamento.status.charAt(0).toUpperCase() + orcamento.status.slice(1)}
+                    </span>
+                  </div>
                 </div>
-                <div className="text-right">
-                  <p className="content-item-value">{formatCurrency(orcamento.valor)}</p>
-                  <span className={`status-badge ${orcamento.status}`}>
-                    {orcamento.status.charAt(0).toUpperCase() + orcamento.status.slice(1)}
-                  </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Coluna Direita: Próximos Eventos */}
+          <div className="bg-[#111111] border border-[#222222] rounded-lg p-4">
+            <h3 className="text-sm font-semibold text-white mb-3">Próximos Eventos</h3>
+            <div className="divide-y divide-[#222222]">
+              {proximosEventos.map((evento, index) => (
+                <div
+                  key={index}
+                  className="flex items-center justify-between py-2"
+                >
+                  <div>
+                    <p className="text-sm text-white">{evento.titulo}</p>
+                    <p className="text-xs text-[#888888]">{evento.cliente}</p>
+                  </div>
+                  <span className="text-xs text-[#666666]">{formatDate(evento.data)}</span>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* Coluna Direita: Próximos Eventos */}
-        <div className="content-card">
-          <h3 className="content-card-title">Próximos Eventos</h3>
-          <div className="content-list">
-            {proximosEventos.map((evento, index) => (
-              <div
-                key={index}
-                className="event-list-item"
-              >
-                <div className="flex-1">
-                  <p className="content-item-title">{evento.titulo}</p>
-                  <p className="content-item-subtitle">{evento.cliente}</p>
-                </div>
-                <span className="event-date">{formatDate(evento.data)}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* SEÇÃO 3: Acesso Rápido (margin-top: 30px) */}
-      <div className="quick-access-section">
-        <div className="content-card">
-          <h3 className="content-card-title">Acesso Rápido</h3>
-          <div className="quick-access-grid">
+        {/* SEÇÃO 3: Acesso Rápido (cards menores, em linha) */}
+        <div className="bg-[#111111] border border-[#222222] rounded-lg p-4">
+          <h3 className="text-sm font-semibold text-white mb-3">Acesso Rápido</h3>
+          <div className="grid grid-cols-4 gap-4">
             {[
               { label: 'Novo Cliente', icon: Users, href: '/crm/clientes' },
               { label: 'Novo Orçamento', icon: FileText, href: '/crm/orcamentos' },
@@ -136,10 +140,10 @@ export function Dashboard() {
               <a
                 key={item.label}
                 href={item.href}
-                className="quick-access-card"
+                className="flex flex-col items-center gap-2 p-3 bg-[#1a1a1a] rounded-lg hover:bg-[#222222] hover:border-[#00ff88] border border-transparent transition-all"
               >
-                <item.icon className="w-6 h-6 text-[#00ff88]" />
-                <span className="quick-access-label">{item.label}</span>
+                <item.icon className="w-5 h-5 text-[#00ff88]" />
+                <span className="text-xs text-white text-center">{item.label}</span>
               </a>
             ))}
           </div>
