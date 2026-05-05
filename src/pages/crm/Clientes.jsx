@@ -116,9 +116,8 @@ export function Clientes() {
   return (
     <Layout title="CRM">
       <div className="px-[30px] py-[30px]">
-        {/* Seção 1: Cabeçalho - Título e Abas */}
+        {/* Seção 1: Cabeçalho - Apenas Abas (sem título duplicado) */}
         <div className="mb-6">
-          <h1 className="text-2xl font-bold text-white mb-4">CRM</h1>
           <div className="border-b border-[#222222]">
             <div className="flex gap-1 overflow-x-auto">
               {crmTabs.map((tab) => {
@@ -146,7 +145,9 @@ export function Clientes() {
         {/* Conteúdo baseado na aba ativa */}
         {activeTab === 'painel' && (
           <div className="text-center py-20 text-[#888888]">
-            <LayoutDashboard className="w-16 h-16 mx-auto mb-4 text-[#333333]" />
+            <div className="w-16 h-16 mx-auto mb-4 bg-[#00ff88]/10 rounded-full flex items-center justify-center">
+              {/* LayoutDashboard icon removed as requested */}
+            </div>
             <h3 className="text-xl font-semibold text-white mb-2">Painel CRM</h3>
             <p>Visão geral das métricas e atividades do CRM</p>
           </div>
@@ -154,47 +155,47 @@ export function Clientes() {
 
         {activeTab === 'leads' && (
           <>
-            {/* Seção 2: Grid de Resumo - Cards KPI */}
+            {/* Grid de Resumo - Cards KPI */}
             <div className="grid grid-cols-4 gap-4 mb-6">
-              <div className="bg-[#111111] rounded-xl border border-[#222222] p-4">
-                <div className="flex items-center gap-3 mb-2">
+              <div className="bg-[#111111] border border-[#222222] rounded-lg p-3">
+                <div className="flex items-center gap-2 mb-1">
                   <div className="p-2 bg-[#00ff88]/10 rounded-lg">
-                    <Users className="w-5 h-5 text-[#00ff88]" />
+                    <Users className="w-4 h-4 text-[#00ff88]" />
                   </div>
-                  <span className="text-sm text-[#888888]">Total de Clientes</span>
+                  <p className="text-xs text-[#888888] uppercase tracking-wider">Total de Clientes</p>
                 </div>
-                <p className="text-2xl font-bold text-[#00ff88]">{totalClientes}</p>
+                <p className="text-lg font-bold text-white">{totalClientes}</p>
               </div>
-              <div className="bg-[#111111] rounded-xl border border-[#222222] p-4">
-                <div className="flex items-center gap-3 mb-2">
+              <div className="bg-[#111111] border border-[#222222] rounded-lg p-3">
+                <div className="flex items-center gap-2 mb-1">
                   <div className="p-2 bg-[#00ff88]/10 rounded-lg">
-                    <Users className="w-5 h-5 text-[#00ff88]" />
+                    <Users className="w-4 h-4 text-[#00ff88]" />
                   </div>
-                  <span className="text-sm text-[#888888]">Clientes Ativos</span>
+                  <p className="text-xs text-[#888888] uppercase tracking-wider">Clientes Ativos</p>
                 </div>
-                <p className="text-2xl font-bold text-white">{clientesAtivos}</p>
+                <p className="text-lg font-bold text-white">{clientesAtivos}</p>
               </div>
-              <div className="bg-[#111111] rounded-xl border border-[#222222] p-4">
-                <div className="flex items-center gap-3 mb-2">
+              <div className="bg-[#111111] border border-[#222222] rounded-lg p-3">
+                <div className="flex items-center gap-2 mb-1">
                   <div className="p-2 bg-[#00ff88]/10 rounded-lg">
-                    <Users className="w-5 h-5 text-[#00ff88]" />
+                    <Users className="w-4 h-4 text-[#00ff88]" />
                   </div>
-                  <span className="text-sm text-[#888888]">Novos este Mês</span>
+                  <p className="text-xs text-[#888888] uppercase tracking-wider">Novos este Mês</p>
                 </div>
-                <p className="text-2xl font-bold text-white">{novosEsteMes}</p>
+                <p className="text-lg font-bold text-white">{novosEsteMes}</p>
               </div>
-              <div className="bg-[#111111] rounded-xl border border-[#222222] p-4">
-                <div className="flex items-center gap-3 mb-2">
+              <div className="bg-[#111111] border border-[#222222] rounded-lg p-3">
+                <div className="flex items-center gap-2 mb-1">
                   <div className="p-2 bg-[#222222] rounded-lg">
-                    <Users className="w-5 h-5 text-[#666666]" />
+                    <Users className="w-4 h-4 text-[#666666]" />
                   </div>
-                  <span className="text-sm text-[#888888]">Clientes Inativos</span>
+                  <p className="text-xs text-[#888888] uppercase tracking-wider">Clientes Inativos</p>
                 </div>
-                <p className="text-2xl font-bold text-[#888888]">{clientesInativos}</p>
+                <p className="text-lg font-bold text-[#888888]">{clientesInativos}</p>
               </div>
             </div>
 
-            {/* Seção 3: Barra de Ações - Botão e Busca */}
+            {/* Ações e Busca */}
             <div className="flex items-center justify-between mb-6 gap-4">
               <Button onClick={() => handleOpenModal()} className="bg-[#00ff88] hover:bg-[#00cc70] text-black flex-shrink-0">
                 <Plus className="w-4 h-4 mr-2" />
@@ -212,7 +213,7 @@ export function Clientes() {
               </div>
             </div>
 
-            {/* Seção 4: Grade de Clientes - Grid 3 colunas */}
+            {/* Grade de Clientes */}
             <div className="grid grid-cols-3 gap-5">
               {filteredClientes.map((cliente) => (
                 <div

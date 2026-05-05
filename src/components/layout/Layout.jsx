@@ -7,7 +7,7 @@ export function Layout({ children, title }) {
       <Sidebar />
       <div style={{ marginLeft: '220px', flex: 1, display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
         <Header title={title} />
-        <main style={{ flex: 1, padding: '24px', backgroundColor: '#0a0a0a' }}>
+        <main style={{ flex: 1, padding: '24px', backgroundColor: '#0a0a0a', minHeight: '100vh' }}>
           {children}
         </main>
       </div>

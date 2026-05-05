@@ -336,32 +336,32 @@ export function Equipe() {
     <Layout title="Equipe">
       {/* Stats */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-        <div className="bg-[#111111] rounded-xl border border-[#222222] p-4">
+        <div className="bg-[#111111] rounded-xl border border-[#222222] p-5">
           <div className="flex items-center gap-3 mb-2">
-            <div className="p-2 bg-accent-light rounded-lg">
-              <Users className="w-5 h-5 text-accent" />
+            <div className="p-2 bg-[#00ff88]/10 rounded-lg">
+              <Users className="w-5 h-5 text-[#00ff88]" />
             </div>
             <span className="text-sm text-[#888888]">Membros Ativos</span>
           </div>
           <p className="text-2xl font-bold text-white">{membrosAtivos}</p>
         </div>
-        <div className="bg-[#111111] rounded-xl border border-[#222222] p-4">
+        <div className="bg-[#111111] rounded-xl border border-[#222222] p-5">
           <div className="flex items-center gap-3 mb-2">
-            <div className="p-2 bg-accent-light rounded-lg">
-              <Calendar className="w-5 h-5 text-accent" />
+            <div className="p-2 bg-[#00ff88]/10 rounded-lg">
+              <Calendar className="w-5 h-5 text-[#00ff88]" />
             </div>
             <span className="text-sm text-[#888888]">Escalas no Mês</span>
           </div>
-          <p className="text-2xl font-bold text-accent">{escalasMes.length}</p>
+          <p className="text-2xl font-bold text-[#00ff88]">{escalasMes.length}</p>
         </div>
-        <div className="bg-[#111111] rounded-xl border border-[#222222] p-4">
+        <div className="bg-[#111111] rounded-xl border border-[#222222] p-5">
           <div className="flex items-center gap-3 mb-2">
-            <div className="p-2 bg-success-950 rounded-lg">
-              <Briefcase className="w-5 h-5 text-success-400" />
+            <div className="p-2 bg-[#00ff88]/10 rounded-lg">
+              <Briefcase className="w-5 h-5 text-[#00ff88]" />
             </div>
             <span className="text-sm text-[#888888]">Eventos no Mês</span>
           </div>
-          <p className="text-2xl font-bold text-success-400">{eventosMes}</p>
+          <p className="text-2xl font-bold text-[#00ff88]">{eventosMes}</p>
         </div>
       </div>
 
@@ -518,7 +518,7 @@ export function Equipe() {
                     setConfirmDelete(membro.id);
                     setDeleteType('membro');
                   }}
-                  className="flex-1 p-2 rounded-lg hover:bg-danger-950 transition-colors text-sm text-danger-400"
+                  className="flex-1 p-2 rounded-lg hover:bg-red-900/20 transition-colors text-sm text-red-400"
                 >
                   <Trash2 className="w-4 h-4 inline mr-1" />
                   Excluir
@@ -559,10 +559,10 @@ export function Equipe() {
                               key={escala.id}
                               className={`px-1 py-0.5 rounded text-xs truncate ${
                                 escala.status === 'confirmado'
-                                  ? 'bg-success-950 text-success-400 border border-success-700'
+                                  ? 'bg-[#00ff88]/10 text-[#00ff88] border border-success-700'
                                   : escala.status === 'pendente'
-                                  ? 'bg-warning-950 text-warning-400 border border-warning-700'
-                                  : 'bg-danger-950 text-danger-400 border border-danger-700'
+                                  ? 'bg-yellow-900/30 text-yellow-400 border border-warning-700'
+                                  : 'bg-red-900/20 text-red-400 border border-danger-700'
                               }`}
                             >
                               {escala.membroNome.split(' ')[0]}
@@ -593,7 +593,7 @@ export function Equipe() {
               return (
                 <div
                   key={escala.id}
-                  className="bg-[#111111] rounded-xl border border-[#222222] p-4 hover:shadow-md transition-shadow"
+                  className="bg-[#111111] rounded-xl border border-[#222222] p-5 hover:shadow-md transition-shadow"
                 >
                   <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
                     <div className="flex items-start gap-3 flex-1">
@@ -658,10 +658,10 @@ export function Equipe() {
                           setConfirmDelete(escala.id);
                           setDeleteType('escala');
                         }}
-                        className="p-2 rounded-lg hover:bg-danger-950 transition-colors"
+                        className="p-2 rounded-lg hover:bg-red-900/20 transition-colors"
                         title="Excluir"
                       >
-                        <Trash2 className="w-4 h-4 text-danger-400" />
+                        <Trash2 className="w-4 h-4 text-red-400" />
                       </button>
                     </div>
                   </div>

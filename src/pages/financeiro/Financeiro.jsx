@@ -220,7 +220,7 @@ export function Financeiro() {
     <Layout title="Financeiro">
       {/* Stats */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-        <div className="bg-[#111111] border border-[#222222] rounded-lg p-4 hover:border-[#00ff88] transition-all duration-300">
+        <div className="bg-[#111111] border border-[#222222] rounded-xl p-5 hover:border-[#00ff88] transition-all duration-300">
           <div className="flex items-start gap-3 mb-3">
             <div className="p-2 bg-[#00ff88]/10 rounded-md">
               <ArrowUpCircle className="w-5 h-5 text-[#00ff88]" />
@@ -229,7 +229,7 @@ export function Financeiro() {
           <p className="text-xs font-medium text-[#888888] uppercase tracking-wider mb-1">Total Entradas</p>
           <p className="text-3xl font-bold text-white">{formatCurrency(totalEntradas)}</p>
         </div>
-        <div className="bg-[#111111] border border-[#222222] rounded-lg p-4 hover:border-[#00ff88] transition-all duration-300">
+        <div className="bg-[#111111] border border-[#222222] rounded-xl p-5 hover:border-[#00ff88] transition-all duration-300">
           <div className="flex items-start gap-3 mb-3">
             <div className="p-2 bg-[#450a0a]/50 rounded-md">
               <ArrowDownCircle className="w-5 h-5 text-[#ef4444]" />
@@ -238,7 +238,7 @@ export function Financeiro() {
           <p className="text-xs font-medium text-[#888888] uppercase tracking-wider mb-1">Total Saídas</p>
           <p className="text-3xl font-bold text-white">{formatCurrency(totalSaidas)}</p>
         </div>
-        <div className="bg-[#111111] border border-[#222222] rounded-lg p-4 hover:border-[#00ff88] transition-all duration-300">
+        <div className="bg-[#111111] border border-[#222222] rounded-xl p-5 hover:border-[#00ff88] transition-all duration-300">
           <div className="flex items-start gap-3 mb-3">
             <div className={`p-2 rounded-md ${saldo >= 0 ? 'bg-[#00ff88]/10' : 'bg-[#450a0a]/50'}`}>
               <DollarSign className={`w-5 h-5 ${saldo >= 0 ? 'text-[#00ff88]' : 'text-[#ef4444]'}`} />
@@ -249,7 +249,7 @@ export function Financeiro() {
             {formatCurrency(saldo)}
           </p>
         </div>
-        <div className="bg-[#111111] border border-[#222222] rounded-lg p-4 hover:border-[#00ff88] transition-all duration-300">
+        <div className="bg-[#111111] border border-[#222222] rounded-xl p-5 hover:border-[#00ff88] transition-all duration-300">
           <div className="flex items-start gap-3 mb-3">
             <div className="p-2 bg-[#443807]/50 rounded-md">
               <TrendingUp className="w-5 h-5 text-[#facc15]" />

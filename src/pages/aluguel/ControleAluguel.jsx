@@ -371,8 +371,8 @@ export function ControleAluguel() {
       <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-6">
         <div className="bg-[#111111] rounded-xl border border-[#222222] p-4">
           <div className="flex items-center gap-3 mb-2">
-            <div className="p-2 bg-accent-light rounded-lg">
-              <Package className="w-5 h-5 text-accent" />
+            <div className="p-2 bg-[#00ff88]/10 rounded-lg">
+              <Package className="w-5 h-5 text-[#00ff88]" />
             </div>
             <span className="text-sm text-[#888888]">Total em Estoque</span>
           </div>
@@ -380,30 +380,30 @@ export function ControleAluguel() {
         </div>
         <div className="bg-[#111111] rounded-xl border border-[#222222] p-4">
           <div className="flex items-center gap-3 mb-2">
-            <div className="p-2 bg-success-950 rounded-lg">
-              <CheckCircle className="w-5 h-5 text-success-400" />
+            <div className="p-2 bg-[#00ff88]/10 rounded-lg">
+              <CheckCircle className="w-5 h-5 text-[#00ff88]" />
             </div>
             <span className="text-sm text-[#888888]">Disponíveis</span>
           </div>
-          <p className="text-2xl font-bold text-success-400">{totalDisponivel}</p>
+          <p className="text-2xl font-bold text-[#00ff88]">{totalDisponivel}</p>
         </div>
         <div className="bg-[#111111] rounded-xl border border-[#222222] p-4">
           <div className="flex items-center gap-3 mb-2">
-            <div className="p-2 bg-warning-950 rounded-lg">
-              <ArrowUpCircle className="w-5 h-5 text-warning-400" />
+            <div className="p-2 bg-yellow-900/30 rounded-lg">
+              <ArrowUpCircle className="w-5 h-5 text-yellow-400" />
             </div>
             <span className="text-sm text-[#888888]">Alugados/Reservados</span>
           </div>
-          <p className="text-2xl font-bold text-warning-400">{totalAlugado}</p>
+          <p className="text-2xl font-bold text-yellow-400">{totalAlugado}</p>
         </div>
         <div className="bg-[#111111] rounded-xl border border-[#222222] p-4">
           <div className="flex items-center gap-3 mb-2">
-            <div className="p-2 bg-accent-light rounded-lg">
-              <ArrowRightLeft className="w-5 h-5 text-accent" />
+            <div className="p-2 bg-[#00ff88]/10 rounded-lg">
+              <ArrowRightLeft className="w-5 h-5 text-[#00ff88]" />
             </div>
             <span className="text-sm text-[#888888]">Aluguéis Ativos</span>
           </div>
-          <p className="text-2xl font-bold text-accent">{alugueisAtivos.length}</p>
+          <p className="text-2xl font-bold text-[#00ff88]">{alugueisAtivos.length}</p>
         </div>
       </div>
 
@@ -414,7 +414,7 @@ export function ControleAluguel() {
             onClick={() => setActiveTab('equipamentos')}
             className={`px-4 py-2 text-sm font-medium transition-colors border-b-2 ${
               activeTab === 'equipamentos'
-                ? 'border-accent text-accent'
+                ? 'border-accent text-[#00ff88]'
                 : 'border-transparent text-[#666666] hover:text-[#888888]'
             }`}
           >
@@ -424,7 +424,7 @@ export function ControleAluguel() {
             onClick={() => setActiveTab('alugueis')}
             className={`px-4 py-2 text-sm font-medium transition-colors border-b-2 ${
               activeTab === 'alugueis'
-                ? 'border-accent text-accent'
+                ? 'border-accent text-[#00ff88]'
                 : 'border-transparent text-[#666666] hover:text-[#888888]'
             }`}
           >
@@ -516,10 +516,10 @@ export function ControleAluguel() {
                     <div
                       className={`h-full rounded-full transition-all ${
                         percentDisponivel > 50
-                          ? 'bg-success-500'
+                          ? 'bg-[#00ff88]'
                           : percentDisponivel > 20
-                          ? 'bg-warning-500'
-                          : 'bg-danger-500'
+                          ? 'bg-yellow-400'
+                          : 'bg-red-500'
                       }`}
                       style={{ width: `${percentDisponivel}%` }}
                     />
@@ -554,7 +554,7 @@ export function ControleAluguel() {
                       setConfirmDelete(equip.id);
                       setDeleteType('equip');
                     }}
-                    className="flex-1 p-2 rounded-lg hover:bg-danger-950 transition-colors text-sm text-danger-400 group"
+                    className="flex-1 p-2 rounded-lg hover:bg-red-900/20 transition-colors text-sm text-danger-400 group"
                   >
                     <Trash2 className="w-4 h-4 inline mr-1 text-white group-hover:text-[#00ff88] transition-colors" />
                     Excluir
@@ -628,7 +628,7 @@ export function ControleAluguel() {
                         setConfirmDelete(aluguel.id);
                         setDeleteType('aluguel');
                       }}
-                      className="p-2 rounded-lg hover:bg-danger-950 transition-colors group"
+                      className="p-2 rounded-lg hover:bg-red-900/20 transition-colors group"
                       title="Excluir"
                     >
                       <Trash2 className="w-4 h-4 text-white group-hover:text-[#00ff88] transition-colors" />
@@ -658,7 +658,7 @@ export function ControleAluguel() {
         title={editingEquip ? 'Editar Equipamento' : 'Novo Equipamento'}
         size="lg"
       >
-        <form onSubmit={handleEquipSubmit} className="space-y-4">
+        <div className="space-y-4">
           <Input
             label="Nome do Equipamento"
             name="nome"
@@ -717,11 +717,11 @@ export function ControleAluguel() {
             <Button variant="secondary" onClick={() => setIsEquipModalOpen(false)}>
               Cancelar
             </Button>
-            <Button type="submit">
+            <Button type="button" onClick={handleEquipSubmit}>
               {editingEquip ? 'Salvar Alterações' : 'Cadastrar Equipamento'}
             </Button>
           </div>
-        </form>
+        </div>
       </Modal>
 
       {/* Rental Modal */}
@@ -736,7 +736,7 @@ export function ControleAluguel() {
         title={editingAluguel ? 'Editar Aluguel' : 'Novo Aluguel'}
         size="lg"
       >
-        <form onSubmit={handleAluguelSubmit} className="space-y-4">
+        <div className="space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <Select
               label="Equipamento"
@@ -814,11 +814,11 @@ export function ControleAluguel() {
             <Button variant="secondary" onClick={() => setIsAluguelModalOpen(false)}>
               Cancelar
             </Button>
-            <Button type="submit">
+            <Button type="button" onClick={handleAluguelSubmit}>
               {editingAluguel ? 'Salvar Alterações' : 'Registrar Aluguel'}
             </Button>
           </div>
-        </form>
+        </div>
       </Modal>
 
       {/* Confirm Dialog */}

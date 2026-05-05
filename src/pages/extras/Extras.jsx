@@ -279,14 +279,14 @@ export function Extras() {
           onClick={() => setActiveTab('whatsapp')}
           className={`px-4 py-2 text-sm font-medium flex items-center gap-2 transition-colors border-b-2 ${
             activeTab === 'whatsapp'
-              ? 'border-accent text-accent'
+              ? 'border-[#00ff88] text-[#00ff88]'
               : 'border-transparent text-[#666666] hover:text-[#888888]'
           }`}
         >
           <MessageCircle className="w-4 h-4" />
           WhatsApp
           {totalNaoLidas > 0 && (
-            <span className="bg-accent text-bg-main text-xs px-1.5 py-0.5 rounded-full">
+            <span className="bg-[#00ff88] text-black text-xs px-1.5 py-0.5 rounded-full">
               {totalNaoLidas}
             </span>
           )}
@@ -295,7 +295,7 @@ export function Extras() {
           onClick={() => setActiveTab('importar')}
           className={`px-4 py-2 text-sm font-medium flex items-center gap-2 transition-colors border-b-2 ${
             activeTab === 'importar'
-              ? 'border-accent text-accent'
+              ? 'border-[#00ff88] text-[#00ff88]'
               : 'border-transparent text-[#666666] hover:text-[#888888]'
           }`}
         >
@@ -306,7 +306,7 @@ export function Extras() {
           onClick={() => setActiveTab('filtros')}
           className={`px-4 py-2 text-sm font-medium flex items-center gap-2 transition-colors border-b-2 ${
             activeTab === 'filtros'
-              ? 'border-accent text-accent'
+              ? 'border-[#00ff88] text-[#00ff88]'
               : 'border-transparent text-[#666666] hover:text-[#888888]'
           }`}
         >
@@ -344,11 +344,11 @@ export function Extras() {
                   key={conversa.id}
                   onClick={() => handleSelectConversa(conversa)}
                   className={`w-full text-left p-4 border-b border-[#222222] hover:bg-[#1a1a1a] transition-colors ${
-                    selectedConversa?.id === conversa.id ? 'bg-accent-light' : ''
+                    selectedConversa?.id === conversa.id ? 'bg-[#00ff88]/10' : ''
                   }`}
                 >
                   <div className="flex items-start gap-3">
-                    <div className="w-10 h-10 rounded-full bg-accent flex items-center justify-center text-bg-main text-sm font-semibold flex-shrink-0">
+                    <div className="w-10 h-10 rounded-full bg-[#00ff88] flex items-center justify-center text-black text-sm font-semibold flex-shrink-0">
                       {conversa.contato.split(' ').map((n) => n[0]).slice(0, 2).join('')}
                     </div>
                     <div className="flex-1 min-w-0">
@@ -365,7 +365,7 @@ export function Extras() {
                       </p>
                     </div>
                     {conversa.naoLidas > 0 && (
-                      <span className="bg-accent text-bg-main text-xs w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0">
+                      <span className="bg-[#00ff88] text-black text-xs w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0">
                         {conversa.naoLidas}
                       </span>
                     )}
@@ -387,7 +387,7 @@ export function Extras() {
                   >
                     <ChevronDown className="w-5 h-5 rotate-90 text-[#888888]" />
                   </button>
-                  <div className="w-10 h-10 rounded-full bg-accent flex items-center justify-center text-bg-main text-sm font-semibold">
+                  <div className="w-10 h-10 rounded-full bg-[#00ff88] flex items-center justify-center text-black text-sm font-semibold">
                     {selectedConversa.contato.split(' ').map((n) => n[0]).slice(0, 2).join('')}
                   </div>
                   <div>
@@ -413,14 +413,14 @@ export function Extras() {
                     <div
                       className={`max-w-[75%] rounded-2xl px-4 py-2.5 text-sm ${
                         msg.de === 'sistema'
-                          ? 'bg-accent text-bg-main rounded-br-md'
+                          ? 'bg-[#00ff88] text-black rounded-br-md'
                           : 'bg-[#111111] text-white rounded-bl-md border border-[#222222]'
                       }`}
                     >
                       <p className="whitespace-pre-line">{msg.texto}</p>
                       <p
                         className={`text-xs mt-1 ${
-                          msg.de === 'sistema' ? 'text-accent-light' : 'text-[#666666]'
+                          msg.de === 'sistema' ? 'text-[#00ff88]' : 'text-[#666666]'
                         } text-right`}
                       >
                         {formatMessageTime(msg.data)}
@@ -471,7 +471,7 @@ export function Extras() {
                   <button
                     onClick={handleSendMessage}
                     disabled={!messageInput.trim()}
-                    className="p-2 rounded-lg bg-accent text-bg-main hover:bg-accent-hover transition-colors disabled:opacity-50"
+                    className="p-2 rounded-lg bg-[#00ff88] text-black hover:bg-[#00ff88]-hover transition-colors disabled:opacity-50"
                   >
                     <Send className="w-5 h-5" />
                   </button>
@@ -494,7 +494,7 @@ export function Extras() {
         <div className="max-w-3xl mx-auto">
           <div className="bg-[#111111] rounded-xl border border-[#222222] p-6">
             <h3 className="font-semibold text-white mb-6 flex items-center gap-2">
-              <FileSpreadsheet className="w-5 h-5 text-accent" />
+              <FileSpreadsheet className="w-5 h-5 text-[#00ff88]" />
               Importar Dados
             </h3>
 
@@ -517,7 +517,7 @@ export function Extras() {
                     }}
                     className={`flex-1 p-3 rounded-lg border-2 text-sm font-medium flex items-center justify-center gap-2 transition-colors ${
                       importType === type.value
-                        ? 'border-accent bg-accent-light text-accent'
+                        ? 'border-[#00ff88] bg-[#00ff88]-light text-[#00ff88]'
                         : 'border-[#222222] hover:border-[#222222] text-[#888888]'
                     }`}
                   >
@@ -532,7 +532,7 @@ export function Extras() {
               <>
                 {/* Upload Area */}
                 <div
-                  className="border-2 border-dashed border-[#222222] rounded-xl p-8 text-center hover:border-accent transition-colors cursor-pointer"
+                  className="border-2 border-dashed border-[#222222] rounded-xl p-8 text-center hover:border-[#00ff88] transition-colors cursor-pointer"
                   onClick={() => document.getElementById('csv-upload')?.click()}
                 >
                   <Upload className="w-12 h-12 text-[#666666] mx-auto mb-3" />
@@ -554,7 +554,7 @@ export function Extras() {
                   <p className="text-xs text-[#666666]">Não tem um arquivo?</p>
                   <button
                     onClick={generateSampleCSV}
-                    className="text-sm text-accent hover:text-[#00ff88]-hover font-medium flex items-center gap-1"
+                    className="text-sm text-[#00ff88] hover:text-[#00cc70] font-medium flex items-center gap-1"
                   >
                     <Download className="w-4 h-4" />
                     Baixar modelo CSV
@@ -649,7 +649,7 @@ export function Extras() {
               className="flex items-center justify-between w-full"
             >
               <h3 className="font-semibold text-white flex items-center gap-2">
-                <Filter className="w-5 h-5 text-accent" />
+                <Filter className="w-5 h-5 text-[#00ff88]" />
                 Filtros Avançados
               </h3>
               {showAdvanced ? (
@@ -764,7 +764,7 @@ export function Extras() {
               {/* Clientes */}
               <div className="bg-[#111111] rounded-xl border border-[#222222] p-5">
                 <h4 className="font-medium text-white mb-3 flex items-center gap-2">
-                  <User className="w-4 h-4 text-accent" />
+                  <User className="w-4 h-4 text-[#00ff88]" />
                   Clientes ({activeFilterResults.clientes.length})
                 </h4>
                 {activeFilterResults.clientes.length === 0 ? (
@@ -804,7 +804,7 @@ export function Extras() {
               {/* Orçamentos */}
               <div className="bg-[#111111] rounded-xl border border-[#222222] p-5">
                 <h4 className="font-medium text-white mb-3 flex items-center gap-2">
-                  <FileSpreadsheet className="w-4 h-4 text-accent" />
+                  <FileSpreadsheet className="w-4 h-4 text-[#00ff88]" />
                   Orçamentos ({activeFilterResults.orcamentos.length})
                 </h4>
                 {activeFilterResults.orcamentos.length === 0 ? (
@@ -826,7 +826,7 @@ export function Extras() {
                           <tr key={o.id} className="border-t border-[#222222]">
                             <td className="px-4 py-2 font-medium text-white">{o.titulo}</td>
                             <td className="px-4 py-2 text-[#888888]">{o.clienteNome}</td>
-                            <td className="px-4 py-2 text-right font-medium text-accent">
+                            <td className="px-4 py-2 text-right font-medium text-[#00ff88]">
                               {formatCurrency(o.valor)}
                             </td>
                             <td className="px-4 py-2">
@@ -856,7 +856,7 @@ export function Extras() {
               {/* Equipamentos */}
               <div className="bg-[#111111] rounded-xl border border-[#222222] p-5">
                 <h4 className="font-medium text-white mb-3 flex items-center gap-2">
-                  <Tag className="w-4 h-4 text-accent" />
+                  <Tag className="w-4 h-4 text-[#00ff88]" />
                   Equipamentos ({activeFilterResults.equipamentos.length})
                 </h4>
                 {activeFilterResults.equipamentos.length === 0 ? (
