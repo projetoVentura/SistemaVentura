@@ -65,7 +65,10 @@ export function Sidebar() {
 
   const isActivePath = (path) => {
     if (path === '/') return location.pathname === '/';
-    return location.pathname.startsWith(path);
+    if (path === '/crm/clientes' || path === '/crm/orcamentos' || path === '/crm/fechamentos') {
+      return location.pathname.startsWith('/crm');
+    }
+    return location.pathname === path;
   };
 
   return (

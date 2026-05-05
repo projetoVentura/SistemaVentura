@@ -23,6 +23,7 @@ export default function App() {
         <Route path="/financeiro" element={<Layout title="Financeiro"><Financeiro /></Layout>} />
         <Route path="/equipe" element={<Layout title="Equipe"><Equipe /></Layout>} />
         <Route path="/extras" element={<Layout title="Extras"><Extras /></Layout>} />
+        <Route path="*" element={<Layout title="Página"><div className="flex items-center justify-center h-[calc(100vh-73px)]"><p className="text-gray-500 text-lg">Página em construção</p></div></Layout>} />
       </Routes>
     </Router>
   );
