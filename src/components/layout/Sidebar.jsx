@@ -69,9 +69,9 @@ export function Sidebar() {
   };
 
   return (
-    <aside className="w-[220px] bg-white border-r border-gray-200 min-h-screen flex flex-col shadow-sm">
+    <aside className="sidebar-container">
       {/* Logo */}
-      <div className="p-6 pb-4">
+      <div className="sidebar-logo">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 bg-gray-900 rounded-lg flex items-center justify-center flex-shrink-0">
             <span className="text-white font-bold text-xl">VL</span>
@@ -84,8 +84,8 @@ export function Sidebar() {
       </div>
 
       {/* Menu Items */}
-      <nav className="flex-1 px-4 pb-8 overflow-y-auto">
-        <div>
+      <nav className="sidebar-nav">
+        <div className="sidebar-nav-list">
           {menuItems.map((item) => (
             <div key={item.path || item.label}>
               {item.children ? (
@@ -134,7 +134,7 @@ export function Sidebar() {
       </nav>
 
       {/* User Info */}
-      <div className="p-4 border-t border-gray-200">
+      <div className="sidebar-footer">
         <div className="mb-3">
           <p className="sidebar-footer-connected">Conectado como</p>
         </div>
