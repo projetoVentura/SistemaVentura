@@ -76,107 +76,111 @@ export function Dashboard() {
 
   return (
     <Layout title="Dashboard">
-      {/* Cards de Métricas */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-        {stats.map((stat) => (
-          <div
-            key={stat.label}
-            className="bg-[#111111] border border-[#222222] rounded-xl p-4 hover:border-[#00ff88]/50 transition-all duration-300"
-          >
-            <div className="mb-3">
-              <div className="p-2 rounded-lg bg-[#00ff88]/10 inline-block">
-                <stat.icon className="w-5 h-5 text-[#00ff88]" />
+      <div className="p-[40px]">
+        {/* Cards de Métricas - Grid 4 Colunas */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          {stats.map((stat) => (
+            <div
+              key={stat.label}
+              className="bg-[#1a1a1a] border border-[#222222] rounded-[12px] p-[20px] hover:border-[#00ff88]/50 transition-all duration-300"
+            >
+              <div className="mb-3">
+                <div className="p-2 rounded-lg bg-[#00ff88]/10 inline-block">
+                  <stat.icon className="w-5 h-5 text-[#00ff88]" />
+                </div>
               </div>
+              <p className="text-xs font-medium text-[#888888] uppercase tracking-wider mb-1">
+                {stat.label}
+              </p>
+              <p className="text-2xl font-bold text-white">{stat.value}</p>
             </div>
-            <p className="text-xs font-medium text-[#888888] uppercase tracking-wider mb-1">
-              {stat.label}
-            </p>
-            <p className="text-2xl font-bold text-white">{stat.value}</p>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
 
-      {/* Seções de Conteúdo */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-        {/* Orçamentos Recentes */}
-        <div className="bg-[#111111] border border-[#222222] rounded-lg p-5">
-          <h3 className="font-semibold text-white mb-4">Orçamentos Recentes</h3>
-          <div className="space-y-3">
-            {orcamentosData.slice(0, 5).map((orcamento) => (
-              <div
-                key={orcamento.id}
-                className="flex items-center justify-between py-2 border-b border-[#222222] last:border-0"
-              >
-                <div>
-                  <p className="text-sm font-medium text-white">{orcamento.titulo}</p>
-                  <p className="text-xs text-[#888888]">{orcamento.clienteNome}</p>
+        {/* Seções de Conteúdo - 2 Colunas Iguais */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-[24px] mb-6">
+          {/* Orçamentos Recentes */}
+          <div className="bg-[#1a1a1a] border border-[#222222] rounded-[12px] p-[20px]">
+            <h3 className="font-semibold text-white mb-4">Orçamentos Recentes</h3>
+            <div className="space-y-0">
+              {orcamentosData.slice(0, 5).map((orcamento, index) => (
+                <div
+                  key={orcamento.id}
+                  className={`flex items-center justify-between py-3 ${index < orcamentosData.slice(0, 5).length - 1 ? 'border-b border-[#222222]' : ''}`}
+                >
+                  <div>
+                    <p className="text-sm font-medium text-white">{orcamento.titulo}</p>
+                    <p className="text-xs text-[#888888]">{orcamento.clienteNome}</p>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-sm font-semibold text-[#00ff88]">
+                      {formatCurrency(orcamento.valor)}
+                    </p>
+                    <span
+                      className={`inline-block px-2 py-0.5 rounded-full text-xs font-medium ${
+                        orcamento.status === 'aprovado'
+                          ? 'bg-[#004430] text-[#00ff88] border border-[#00ff88]/30'
+                          : orcamento.status === 'pendente'
+                          ? 'bg-[#443807] text-[#facc15] border border-[#facc15]/30'
+                          : orcamento.status === 'recusado'
+                          ? 'bg-[#450a0a] text-[#ef4444] border border-[#ef4444]/30'
+                          : 'bg-[#1a1a1a] text-[#888888] border border-[#222222]'
+                      }`}
+                    >
+                      {orcamento.status.charAt(0).toUpperCase() + orcamento.status.slice(1)}
+                    </span>
+                  </div>
                 </div>
-                <div className="text-right">
-                  <p className="text-sm font-semibold text-[#00ff88]">
-                    {formatCurrency(orcamento.valor)}
-                  </p>
-                  <span
-                    className={`inline-block px-2 py-0.5 rounded-full text-xs font-medium ${
-                      orcamento.status === 'aprovado'
-                        ? 'bg-[#004430] text-[#00ff88] border border-[#00ff88]/30'
-                        : orcamento.status === 'pendente'
-                        ? 'bg-[#443807] text-[#facc15] border border-[#facc15]/30'
-                        : orcamento.status === 'recusado'
-                        ? 'bg-[#450a0a] text-[#ef4444] border border-[#ef4444]/30'
-                        : 'bg-[#1a1a1a] text-[#888888] border border-[#222222]'
-                    }`}
-                  >
-                    {orcamento.status.charAt(0).toUpperCase() + orcamento.status.slice(1)}
-                  </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Próximos Eventos */}
+          <div className="bg-[#1a1a1a] border border-[#222222] rounded-[12px] p-[20px]">
+            <h3 className="font-semibold text-white mb-4">Próximos Eventos</h3>
+            <div className="space-y-0">
+              {proximosEventos.map((evento, index) => (
+                <div
+                  key={index}
+                  className={`flex items-center gap-3 py-3 ${index < proximosEventos.length - 1 ? 'border-b border-[#222222]' : ''}`}
+                >
+                  <div className="p-2 bg-[#00ff88]/10 rounded-lg">
+                    <Calendar className="w-5 h-5 text-[#00ff88]" />
+                  </div>
+                  <div className="flex-1">
+                    <p className="text-sm font-medium text-white">{evento.titulo}</p>
+                    <p className="text-xs text-[#888888]">{evento.cliente}</p>
+                  </div>
+                  <span className="text-sm text-[#888888]">{formatDate(evento.data)}</span>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* Próximos Eventos */}
-        <div className="bg-[#111111] border border-[#222222] rounded-lg p-5">
-          <h3 className="font-semibold text-white mb-4">Próximos Eventos</h3>
-          <div className="space-y-3">
-            {proximosEventos.map((evento, index) => (
-              <div
-                key={index}
-                className="flex items-center gap-3 py-2 border-b border-[#222222] last:border-0"
-              >
-                <div className="p-2 bg-[#00ff88]/10 rounded-lg">
-                  <Calendar className="w-5 h-5 text-[#00ff88]" />
-                </div>
-                <div className="flex-1">
-                  <p className="text-sm font-medium text-white">{evento.titulo}</p>
-                  <p className="text-xs text-[#888888]">{evento.cliente}</p>
-                </div>
-                <span className="text-sm text-[#888888]">{formatDate(evento.data)}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Acesso Rápido */}
-      <div className="mt-6">
-        <div className="bg-[#111111] border border-[#222222] rounded-lg p-5">
-          <h3 className="font-semibold text-white mb-4">Acesso Rápido</h3>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            {[
-              { label: 'Novo Cliente', icon: Users, href: '/crm/clientes' },
-              { label: 'Novo Orçamento', icon: FileText, href: '/crm/orcamentos' },
-              { label: 'Novo Fechamento', icon: CheckCircle, href: '/crm/fechamentos' },
-              { label: 'Ver Calendário', icon: Calendar, href: '/calendario' },
-            ].map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                className="flex flex-col items-center gap-2 p-4 rounded-lg border border-[#222222] hover:border-[#00ff88] hover:bg-[#1a1a1a] transition-colors"
-              >
-                <item.icon className="w-6 h-6 text-[#00ff88]" />
-                <span className="text-sm font-medium text-white">{item.label}</span>
-              </a>
-            ))}
+        {/* Acesso Rápido - Cards Menores */}
+        <div className="mt-6">
+          <div className="bg-[#1a1a1a] border border-[#222222] rounded-[12px] p-[20px]">
+            <h3 className="font-semibold text-white mb-4">Acesso Rápido</h3>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+              {[
+                { label: 'Novo Cliente', icon: Users, href: '/crm/clientes' },
+                { label: 'Novo Orçamento', icon: FileText, href: '/crm/orcamentos' },
+                { label: 'Novo Fechamento', icon: CheckCircle, href: '/crm/fechamentos' },
+                { label: 'Ver Calendário', icon: Calendar, href: '/calendario' },
+              ].map((item) => (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  className="flex flex-col items-center gap-2 p-4 rounded-[12px] border border-[#222222] hover:border-[#00ff88] hover:bg-[#1a1a1a] transition-colors"
+                >
+                  <div className="p-2 bg-[#00ff88]/10 rounded-lg">
+                    <item.icon className="w-6 h-6 text-[#00ff88]" />
+                  </div>
+                  <span className="text-sm font-medium text-white text-center">{item.label}</span>
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       </div>
