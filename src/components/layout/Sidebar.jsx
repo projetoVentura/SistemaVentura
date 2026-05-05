@@ -85,36 +85,32 @@ export function Sidebar() {
 
       {/* Menu Items */}
       <nav className="flex-1 px-4 pb-8 overflow-y-auto">
-        <div className="space-y-4">
+        <div>
           {menuItems.map((item) => (
             <div key={item.path || item.label}>
               {item.children ? (
                 <>
                   <button
                     onClick={() => toggleMenu(item.label)}
-                    className="flex items-center justify-between w-full px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 text-gray-700 hover:bg-[#00ff88]/10 hover:text-gray-900"
+                    className="sidebar-nav-item"
                   >
                     <div className="flex items-center gap-3">
-                      <item.icon className="w-5 h-5 flex-shrink-0 text-gray-500" />
+                      <item.icon className="w-5 h-5 flex-shrink-0" />
                       <span>{item.label}</span>
                     </div>
                     {expandedMenu[item.label] ? (
-                      <ChevronDown className="w-4 h-4 text-gray-400" />
+                      <ChevronDown className="w-4 h-4" />
                     ) : (
-                      <ChevronRight className="w-4 h-4 text-gray-400" />
+                      <ChevronRight className="w-4 h-4" />
                     )}
                   </button>
                   {expandedMenu[item.label] && (
-                    <ul className="ml-4 mt-2 space-y-2">
+                    <ul className="ml-4 mt-2">
                       {item.children.map((child) => (
                         <li key={child.path}>
                           <NavLink
                             to={child.path}
-                            className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 ${
-                              isActivePath(child.path)
-                                ? 'bg-gray-900 text-white font-bold'
-                                : 'text-gray-700 hover:bg-[#00ff88]/10'
-                            }`}
+                            className={`sidebar-nav-item ${isActivePath(child.path) ? 'active' : ''}`}
                           >
                             <span>{child.label}</span>
                           </NavLink>
@@ -126,13 +122,9 @@ export function Sidebar() {
               ) : (
                 <NavLink
                    to={item.path}
-                  className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 ${
-                    isActivePath(item.path)
-                      ? 'bg-gray-900 text-white font-bold shadow-sm'
-                      : 'text-gray-700 hover:bg-[#00ff88]/10'
-                  }`}
+                  className={`sidebar-nav-item ${isActivePath(item.path) ? 'active' : ''}`}
                  >
-                  <item.icon className={`w-5 h-5 flex-shrink-0 ${isActivePath(item.path) ? 'text-white' : 'text-gray-500'}`} />
+                  <item.icon className="w-5 h-5 flex-shrink-0" />
                   <span>{item.label}</span>
                 </NavLink>
               )}
@@ -144,7 +136,7 @@ export function Sidebar() {
       {/* User Info */}
       <div className="p-4 border-t border-gray-200">
         <div className="mb-3">
-          <p className="text-xs text-gray-400 font-medium uppercase tracking-wider">Conectado como</p>
+          <p className="sidebar-footer-connected">Conectado como</p>
         </div>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -152,13 +144,13 @@ export function Sidebar() {
               <span className="text-white text-sm font-bold">A</span>
             </div>
             <div>
-              <p className="text-gray-900 text-sm font-bold leading-tight">Administrador</p>
+              <p className="sidebar-footer-name">Administrador</p>
             </div>
           </div>
           <button
-            className="flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm font-medium text-gray-500 hover:text-gray-700 hover:bg-gray-50 transition-colors"
+            className="sidebar-logout-btn"
           >
-            <LogOut className="w-4 h-4" />
+            <LogOut />
             <span>Sair</span>
           </button>
         </div>
