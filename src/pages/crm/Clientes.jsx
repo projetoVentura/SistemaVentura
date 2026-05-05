@@ -115,29 +115,31 @@ export function Clientes() {
 
   return (
     <Layout title="CRM">
-      {/* Conteúdo com padding 30px */}
       <div className="px-[30px] py-[30px]">
-        {/* CRM Tabs - Barra horizontal logo abaixo do título */}
-        <div className="border-b border-[#222222] mb-6">
-          <div className="flex gap-1 overflow-x-auto">
-            {crmTabs.map((tab) => {
-              const Icon = tab.icon;
-              const isActive = activeTab === tab.id;
-              return (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`flex items-center gap-2 px-4 py-3 text-sm font-medium transition-all border-b-2 -mb-[1px] ${
-                    isActive
-                      ? 'border-[#00ff88] text-white font-bold'
-                      : 'border-transparent text-[#888888] hover:text-[#00ff88]'
-                  }`}
-                >
-                  <Icon className="w-4 h-4" />
-                  {tab.label}
-                </button>
-              );
-            })}
+        {/* Seção 1: Cabeçalho - Título e Abas */}
+        <div className="mb-6">
+          <h1 className="text-2xl font-bold text-white mb-4">CRM</h1>
+          <div className="border-b border-[#222222]">
+            <div className="flex gap-1 overflow-x-auto">
+              {crmTabs.map((tab) => {
+                const Icon = tab.icon;
+                const isActive = activeTab === tab.id;
+                return (
+                  <button
+                    key={tab.id}
+                    onClick={() => setActiveTab(tab.id)}
+                    className={`flex items-center gap-2 px-4 py-3 text-sm font-medium transition-all border-b-2 -mb-[1px] ${
+                      isActive
+                        ? 'border-[#00ff88] text-white font-bold'
+                        : 'border-transparent text-[#888888] hover:text-[#00ff88]'
+                    }`}
+                  >
+                    <Icon className="w-4 h-4" />
+                    {tab.label}
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </div>
 
@@ -152,7 +154,7 @@ export function Clientes() {
 
         {activeTab === 'leads' && (
           <>
-            {/* Grid de Resumo - Cards KPI em linha horizontal limpa */}
+            {/* Seção 2: Grid de Resumo - Cards KPI */}
             <div className="grid grid-cols-4 gap-4 mb-6">
               <div className="bg-[#111111] rounded-xl border border-[#222222] p-4">
                 <div className="flex items-center gap-3 mb-2">
@@ -192,7 +194,7 @@ export function Clientes() {
               </div>
             </div>
 
-            {/* Ações e Busca - Linha própria com espaçamento */}
+            {/* Seção 3: Barra de Ações - Botão e Busca */}
             <div className="flex items-center justify-between mb-6 gap-4">
               <Button onClick={() => handleOpenModal()} className="bg-[#00ff88] hover:bg-[#00cc70] text-black flex-shrink-0">
                 <Plus className="w-4 h-4 mr-2" />
@@ -210,12 +212,12 @@ export function Clientes() {
               </div>
             </div>
 
-            {/* Grade de Clientes - Grid de 3 colunas com margin 15px entre cartões */}
-            <div className="grid grid-cols-3 gap-[15px]">
+            {/* Seção 4: Grade de Clientes - Grid 3 colunas */}
+            <div className="grid grid-cols-3 gap-5">
               {filteredClientes.map((cliente) => (
                 <div
                   key={cliente.id}
-                  className="bg-[#111111] rounded-xl border border-[#222222] p-5 hover:border-[#00ff88] transition-all relative"
+                  className="bg-[#111111] rounded-xl border border-[#222222] p-5 hover:border-[#00ff88] transition-all relative min-h-[200px]"
                 >
                   {/* Status no canto superior direito */}
                   <div className="absolute top-5 right-5">
