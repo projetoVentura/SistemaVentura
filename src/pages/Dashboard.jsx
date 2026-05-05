@@ -1,16 +1,30 @@
 import { Layout } from '../components/layout/Layout';
-import { Users, FileText, CheckCircle, DollarSign, Calendar, Package, ArrowUpCircle } from 'lucide-react';
-import { clientes as mockClientes, orcamentos as mockOrcamentos, fechamentos as mockFechamentos } from '../data/mockData';
+import { Users, FileText, CheckCircle, DollarSign, Calendar } from 'lucide-react';
+
+// Dados diretos no arquivo para garantir que sempre renderize
+const clientesData = [
+  { id: 1, nome: 'Ana Paula Ferreira', status: 'ativo' },
+  { id: 2, nome: 'Carlos Eduardo Santos', status: 'ativo' },
+  { id: 3, nome: 'Mariana Costa', status: 'ativo' },
+];
+
+const orcamentosData = [
+  { id: 1, titulo: 'Evento de Gala', clienteNome: 'Ana Paula Ferreira', valor: 15000, status: 'pendente' },
+  { id: 2, titulo: 'Casamento Silva', clienteNome: 'Carlos Eduardo Santos', valor: 8500, status: 'aprovado' },
+  { id: 3, titulo: 'Congresso Empresarial', clienteNome: 'Mariana Costa', valor: 22000, status: 'pendente' },
+];
+
+const fechamentosData = [
+  { id: 1, valor: 15000 },
+  { id: 2, valor: 8500 },
+  { id: 3, valor: 22000 },
+];
 
 export function Dashboard() {
-  const clientes = mockClientes || [];
-  const orcamentos = mockOrcamentos || [];
-  const fechamentos = mockFechamentos || [];
-
-  const totalClientes = clientes.filter((c) => c.status === 'ativo').length;
-  const orcamentosPendentes = orcamentos.filter((o) => o.status === 'pendente').length;
-  const totalFechado = fechamentos.reduce((acc, f) => acc + (f.valor || 0), 0);
-  const orcamentosAprovados = orcamentos.filter((o) => o.status === 'aprovado').length;
+  const totalClientes = clientesData.filter((c) => c.status === 'ativo').length;
+  const orcamentosPendentes = orcamentosData.filter((o) => o.status === 'pendente').length;
+  const totalFechado = fechamentosData.reduce((acc, f) => acc + (f.valor || 0), 0);
+  const orcamentosAprovados = orcamentosData.filter((o) => o.status === 'aprovado').length;
 
   const formatCurrency = (value) => {
     try {
@@ -88,7 +102,7 @@ export function Dashboard() {
         <div className="bg-[#111111] border border-[#222222] rounded-lg p-5">
           <h3 className="font-semibold text-white mb-4">Orçamentos Recentes</h3>
           <div className="space-y-3">
-            {orcamentos.slice(0, 5).map((orcamento) => (
+            {orcamentosData.slice(0, 5).map((orcamento) => (
               <div
                 key={orcamento.id}
                 className="flex items-center justify-between py-2 border-b border-[#222222] last:border-0"
