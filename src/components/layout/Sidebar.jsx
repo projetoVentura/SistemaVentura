@@ -72,22 +72,22 @@ export function Sidebar() {
   };
 
   return (
-    <aside className="sidebar-container">
+    <aside className="fixed top-0 left-0 h-screen w-[220px] bg-[#111111] border-r border-[#222222] flex flex-col z-50">
       {/* Logo */}
-      <div className="sidebar-logo">
+      <div className="px-4 py-5 border-b border-[#222222]">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-gray-900 rounded-lg flex items-center justify-center flex-shrink-0">
-            <span className="text-white font-bold text-xl">VL</span>
+          <div className="w-10 h-10 bg-[#00ff88] rounded-lg flex items-center justify-center flex-shrink-0">
+            <span className="text-black font-bold text-xl">VL</span>
           </div>
           <div>
-            <h1 className="text-gray-900 font-bold text-sm leading-tight">VENTURA</h1>
-            <p className="text-gray-500 text-xs leading-tight">Luz e Efeitos</p>
+            <h1 className="text-white font-bold text-sm leading-tight">VENTURA</h1>
+            <p className="text-[#888888] text-xs leading-tight">Luz e Efeitos</p>
           </div>
         </div>
       </div>
 
       {/* Menu Items */}
-      <nav className="sidebar-nav">
+      <nav className="flex-1 px-3 py-4 overflow-y-auto">
         <div className="sidebar-nav-list">
           {menuItems.map((item) => (
             <div key={item.path || item.label}>
@@ -95,7 +95,7 @@ export function Sidebar() {
                 <>
                   <button
                     onClick={() => toggleMenu(item.label)}
-                    className="sidebar-nav-item"
+                    className="flex items-center justify-between w-full px-3 py-2.5 rounded-lg text-[#888888] hover:text-white hover:bg-[#1a1a1a] transition-all text-sm"
                   >
                     <div className="flex items-center gap-3">
                       <item.icon className="w-5 h-5 flex-shrink-0" />
@@ -113,7 +113,11 @@ export function Sidebar() {
                         <li key={child.path}>
                           <NavLink
                             to={child.path}
-                            className={`sidebar-nav-item ${isActivePath(child.path) ? 'active' : ''}`}
+                            className={`flex items-center gap-3 w-full px-3 py-2.5 rounded-lg text-[#888888] hover:text-white hover:bg-[#1a1a1a] transition-all text-sm ${
+                              isActivePath(child.path)
+                                ? 'border-l-2 border-[#00ff88] text-white bg-[#1a1a1a] pl-[10px]'
+                                : ''
+                            }`}
                           >
                             <span>{child.label}</span>
                           </NavLink>
@@ -125,7 +129,11 @@ export function Sidebar() {
               ) : (
                 <NavLink
                    to={item.path}
-                  className={`sidebar-nav-item ${isActivePath(item.path) ? 'active' : ''}`}
+                  className={`flex items-center gap-3 w-full px-3 py-2.5 rounded-lg text-[#888888] hover:text-white hover:bg-[#1a1a1a] transition-all text-sm ${
+                    isActivePath(item.path)
+                      ? 'border-l-2 border-[#00ff88] text-white bg-[#1a1a1a] pl-[10px]'
+                      : ''
+                  }`}
                  >
                   <item.icon className="w-5 h-5 flex-shrink-0" />
                   <span>{item.label}</span>
@@ -137,21 +145,21 @@ export function Sidebar() {
       </nav>
 
       {/* User Info */}
-      <div className="sidebar-footer">
-        <div className="mb-3">
-          <p className="sidebar-footer-connected">Conectado como</p>
-        </div>
+      <div className="px-4 py-4 border-t border-[#222222]">
+          <div className="mb-2">
+            <p className="text-[#888888] text-xs">Conectado como</p>
+          </div>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-gray-900 rounded-full flex items-center justify-center flex-shrink-0">
-              <span className="text-white text-sm font-bold">A</span>
+            <div className="w-8 h-8 bg-[#00ff88] rounded-full flex items-center justify-center flex-shrink-0">
+              <span className="text-black text-sm font-bold">A</span>
             </div>
             <div>
-              <p className="sidebar-footer-name">Administrador</p>
+              <p className="text-white text-sm font-medium">Administrador</p>
             </div>
           </div>
           <button
-            className="sidebar-logout-btn"
+            className="flex items-center gap-1 text-[#888888] hover:text-red-400 transition-colors text-xs"
           >
             <LogOut />
             <span>Sair</span>

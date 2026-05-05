@@ -3,11 +3,11 @@ import { Header } from './Header';
 
 export function Layout({ children, title }) {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-[#0a0a0a] flex">
       <Sidebar />
-      <div className="ml-[220px] w-[calc(100%-220px)]">
+      <div className="ml-[220px] flex-1 flex flex-col min-h-screen">
         <Header title={title} />
-        <main className="p-6 bg-gray-50 min-h-[calc(100vh-73px)]">{children}</main>
+        <main className="flex-1 p-6 bg-[#0a0a0a]">{children}</main>
       </div>
     </div>
   );
