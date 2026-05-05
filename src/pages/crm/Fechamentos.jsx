@@ -146,8 +146,8 @@ export function Fechamentos() {
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
         <div className="bg-[#111111] rounded-xl border border-[#222222] p-4">
           <div className="flex items-center gap-3 mb-2">
-            <div className="p-2 bg-accent-light rounded-lg">
-              <TrendingUp className="w-5 h-5 text-accent" />
+            <div className="p-2 bg-[#00ff88]/10 rounded-lg">
+              <TrendingUp className="w-5 h-5 text-[#00ff88]" />
             </div>
             <span className="text-sm text-[#888888]">Total Geral</span>
           </div>
@@ -155,21 +155,21 @@ export function Fechamentos() {
         </div>
         <div className="bg-[#111111] rounded-xl border border-[#222222] p-4">
           <div className="flex items-center gap-3 mb-2">
-            <div className="p-2 bg-success-950 rounded-lg">
-              <CheckCircle className="w-5 h-5 text-success-400" />
+            <div className="p-2 bg-[#00ff88]/10 rounded-lg">
+              <CheckCircle className="w-5 h-5 text-[#00ff88]" />
             </div>
             <span className="text-sm text-[#888888]">Recebido</span>
           </div>
-          <p className="text-2xl font-bold text-success-400">{formatCurrency(totalPago)}</p>
+          <p className="text-2xl font-bold text-[#00ff88]">{formatCurrency(totalPago)}</p>
         </div>
         <div className="bg-[#111111] rounded-xl border border-[#222222] p-4">
           <div className="flex items-center gap-3 mb-2">
-            <div className="p-2 bg-warning-950 rounded-lg">
-              <DollarSign className="w-5 h-5 text-warning-400" />
+            <div className="p-2 bg-yellow-900/30 rounded-lg">
+              <DollarSign className="w-5 h-5 text-yellow-400" />
             </div>
             <span className="text-sm text-[#888888]">Pendente</span>
           </div>
-          <p className="text-2xl font-bold text-warning-400">{formatCurrency(totalPendente)}</p>
+          <p className="text-2xl font-bold text-yellow-400">{formatCurrency(totalPendente)}</p>
         </div>
       </div>
 
@@ -179,7 +179,7 @@ export function Fechamentos() {
             onClick={() => setFilterStatus('todos')}
             className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
               filterStatus === 'todos'
-                ? 'bg-accent text-bg-main'
+                ? 'bg-[#00ff88] text-black'
                 : 'bg-[#111111] text-[#888888] border border-[#222222] hover:bg-[#1a1a1a]'
             }`}
           >
@@ -191,7 +191,7 @@ export function Fechamentos() {
               onClick={() => setFilterStatus(value)}
               className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
                 filterStatus === value
-                  ? 'bg-accent text-bg-main'
+                  ? 'bg-[#00ff88] text-black'
                   : 'bg-[#111111] text-[#888888] border border-[#222222] hover:bg-[#1a1a1a]'
               }`}
             >
@@ -238,7 +238,7 @@ export function Fechamentos() {
                 </Badge>
               </div>
               <div className="text-right">
-                <p className="text-lg font-semibold text-accent">
+                <p className="text-lg font-semibold text-[#00ff88]">
                   {formatCurrency(fechamento.valor)}
                 </p>
               </div>
@@ -252,10 +252,10 @@ export function Fechamentos() {
                 </button>
                 <button
                   onClick={() => setConfirmDelete(fechamento.id)}
-                  className="p-2 rounded-lg hover:bg-danger-950 transition-colors"
+                  className="p-2 rounded-lg hover:bg-red-900/20 transition-colors"
                   title="Excluir"
                 >
-                  <Trash2 className="w-4 h-4 text-danger-400" />
+                  <Trash2 className="w-4 h-4 text-red-400" />
                 </button>
               </div>
             </div>
@@ -275,7 +275,7 @@ export function Fechamentos() {
         title={editingFechamento ? 'Editar Fechamento' : 'Novo Fechamento'}
         size="lg"
       >
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <Input
               label="Cliente"
@@ -349,11 +349,11 @@ export function Fechamentos() {
             <Button variant="secondary" onClick={handleCloseModal}>
               Cancelar
             </Button>
-            <Button type="submit">
+            <Button type="button" onClick={handleSubmit}>
               {editingFechamento ? 'Salvar Alterações' : 'Registrar Fechamento'}
             </Button>
           </div>
-        </form>
+        </div>
       </Modal>
 
       <ConfirmDialog
