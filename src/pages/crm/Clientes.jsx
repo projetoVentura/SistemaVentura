@@ -30,6 +30,15 @@ export function Clientes() {
       c.email.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const totalClientes = clientes.length;
+  const clientesAtivos = clientes.filter((c) => c.status === 'ativo').length;
+  const novosEsteMes = clientes.filter((c) => {
+    const data = new Date(c.dataCadastro);
+    const agora = new Date();
+    return data.getMonth() === agora.getMonth() && data.getFullYear() === agora.getFullYear();
+  }).length;
+  const clientesInativos = clientes.filter((c) => c.status === 'inativo').length;
+
   const validateForm = () => {
     const newErrors = {};
     if (!formData.nome.trim()) newErrors.nome = 'Nome é obrigatório';
@@ -96,36 +105,64 @@ export function Clientes() {
 
   return (
     <Layout title="Clientes">
-      {/* Tabs */}
-      <div className="flex border-b border-[#222222] mb-6">
-        <button className="px-4 py-2 text-sm font-medium text-[#00ff88] border-b-2 border-[#00ff88]">
-          Todos os Clientes
-        </button>
-        <button className="px-4 py-2 text-sm font-medium text-[#888888] hover:text-white transition-colors">
-          Ativos
-        </button>
-        <button className="px-4 py-2 text-sm font-medium text-[#888888] hover:text-white transition-colors">
-          Inativos
-        </button>
+      {/* Cards KPI */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        {[
+          { label: 'Total de Clientes', value: totalClientes, icon: Users },
+          { label: 'Clientes Ativos', value: clientesAtivos, icon: Users },
+          { label: 'Novos este Mês', value: novosEsteMes, icon: Users },
+          { label: 'Clientes Inativos', value: clientesInativos, icon: Users },
+        ].map((kpi) => (
+          <div
+            key={kpi.label}
+            className="bg-[#111111] border border-[#222222] rounded-xl p-4 hover:border-[#00ff88]/50 transition-all duration-300"
+          >
+            <div className="mb-3">
+              <div className="p-2 rounded-lg bg-[#00ff88]/10 inline-block">
+                <kpi.icon className="w-5 h-5 text-[#00ff88]" />
+              </div>
+            </div>
+            <p className="text-xs font-medium text-[#888888] uppercase tracking-wider mb-1">
+              {kpi.label}
+            </p>
+            <p className="text-2xl font-bold text-white">{kpi.value}</p>
+          </div>
+        ))}
       </div>
 
+      {/* Tabs e Busca */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
-        <div className="relative flex-1 max-w-md">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#888888]" />
-          <input
-            type="text"
-            placeholder="Buscar clientes..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-9 pr-4 py-2 bg-[#111111] border border-[#222222] rounded-lg text-sm text-white placeholder-[#666666] focus:outline-none focus:ring-2 focus:ring-[#00ff88] focus:border-[#00ff88]"
-          />
+        <div className="flex gap-2">
+          <button className="px-4 py-2 text-sm font-medium text-[#00ff88] border-b-2 border-[#00ff88]">
+            Todos os Clientes
+          </button>
+          <button className="px-4 py-2 text-sm font-medium text-[#888888] hover:text-white transition-colors">
+            Ativos
+          </button>
+          <button className="px-4 py-2 text-sm font-medium text-[#888888] hover:text-white transition-colors">
+            Inativos
+          </button>
         </div>
-        <Button onClick={() => handleOpenModal()}>
-          <Plus className="w-4 h-4 mr-2" />
-          Novo Cliente
-        </Button>
+
+        <div className="flex items-center gap-3">
+          <div className="relative flex-1 max-w-md">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#888888]" />
+            <input
+              type="text"
+              placeholder="Buscar clientes..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full pl-9 pr-4 py-2 bg-[#111111] border border-[#222222] rounded-lg text-sm text-white placeholder-[#666666] focus:outline-none focus:ring-2 focus:ring-[#00ff88]"
+            />
+          </div>
+          <Button onClick={() => handleOpenModal()} className="bg-[#00ff88] text-black hover:bg-[#00cc70]">
+            <Plus className="w-4 h-4 mr-2" />
+            Novo Cliente
+          </Button>
+        </div>
       </div>
 
+      {/* Grid de Clientes */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {filteredClientes.map((cliente) => (
           <div
