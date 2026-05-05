@@ -71,6 +71,11 @@ export function Sidebar() {
     return location.pathname === path;
   };
 
+  const isParentActive = (item) => {
+    if (!item.children) return false;
+    return item.children.some((child) => isActivePath(child.path));
+  };
+
   return (
     <aside className="sidebar-fixed">
       {/* Logo */}
@@ -90,12 +95,14 @@ export function Sidebar() {
       <nav className="sidebar-nav">
         <div className="sidebar-nav-list">
           {menuItems.map((item) => (
-            <div key={item.path || item.label}>
+            <div key={item.path || item.label} className="sidebar-item-container">
               {item.children ? (
                 <>
                   <button
                     onClick={() => toggleMenu(item.label)}
-                    className="flex items-center justify-between w-full px-3 py-2.5 rounded-lg text-[#888888] hover:text-white hover:bg-[#1a1a1a] transition-all text-sm"
+                    className={`sidebar-parent-item ${
+                      isParentActive(item) ? 'sidebar-item-active' : ''
+                    }`}
                   >
                     <div className="flex items-center gap-3">
                       <item.icon className="w-5 h-5 flex-shrink-0" />
@@ -108,14 +115,14 @@ export function Sidebar() {
                     )}
                   </button>
                   {expandedMenu[item.label] && (
-                    <ul className="ml-4 mt-2">
+                    <ul className="sidebar-children">
                       {item.children.map((child) => (
                         <li key={child.path}>
                           <NavLink
                             to={child.path}
-                            className={`flex items-center gap-3 w-full px-3 py-2.5 rounded-lg text-[#888888] hover:text-white hover:bg-[#1a1a1a] transition-all text-sm ${
+                            className={`sidebar-child-item ${
                               isActivePath(child.path)
-                                ? 'border-l-2 border-[#00ff88] text-white bg-[#1a1a1a] pl-[10px]'
+                                ? 'sidebar-child-active'
                                 : ''
                             }`}
                           >
@@ -129,9 +136,9 @@ export function Sidebar() {
               ) : (
                 <NavLink
                    to={item.path}
-                  className={`flex items-center gap-3 w-full px-3 py-2.5 rounded-lg text-[#888888] hover:text-white hover:bg-[#1a1a1a] transition-all text-sm ${
+                  className={`sidebar-item ${
                     isActivePath(item.path)
-                      ? 'border-l-2 border-[#00ff88] text-white bg-[#1a1a1a] pl-[10px]'
+                      ? 'sidebar-item-active'
                       : ''
                   }`}
                  >
