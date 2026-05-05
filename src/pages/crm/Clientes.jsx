@@ -31,7 +31,7 @@ export function Clientes() {
   const [formData, setFormData] = useState(emptyForm);
   const [errors, setErrors] = useState({});
   const [confirmDelete, setConfirmDelete] = useState(null);
-  const [activeTab, setActiveTab] = useState('leads');
+  const [activeTab, setActiveTab] = useState('painel');
 
   const filteredClientes = clientes.filter(
     (c) =>
@@ -327,7 +327,7 @@ export function Clientes() {
         title={editingCliente ? 'Editar Cliente' : 'Novo Cliente'}
         size="lg"
       >
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <Input
               label="Nome"
@@ -383,9 +383,9 @@ export function Clientes() {
             <Button variant="secondary" onClick={handleCloseModal}>
               Cancelar
             </Button>
-            <Button type="submit">{editingCliente ? 'Salvar Alterações' : 'Cadastrar Cliente'}</Button>
+            <Button type="button" onClick={handleSubmit}>{editingCliente ? 'Salvar Alterações' : 'Cadastrar Cliente'}</Button>
           </div>
-        </form>
+        </div>
       </Modal>
 
       {/* Confirm Dialog */}
