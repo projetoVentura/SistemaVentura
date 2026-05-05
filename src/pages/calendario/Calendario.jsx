@@ -202,11 +202,15 @@ export function Calendario() {
 
   return (
     <Layout>
-      <div className="px-[30px] py-[30px]">
+      <div style={{ padding: '32px' }}>
         {/* Cabeçalho próprio */}
-        <div className="mb-6">
-          <h1 className="text-2xl font-bold text-white mb-1">Calendário</h1>
-          <p className="text-sm text-[#888888]">Gerencie seus eventos e compromissos</p>
+        <div style={{ marginBottom: '32px' }}>
+          <h1 style={{ fontSize: '28px', fontWeight: '900', color: '#ffffff', letterSpacing: '-0.5px' }}>
+            Calendário
+          </h1>
+          <p style={{ color: '#888888', fontSize: '14px', marginTop: '4px' }}>
+            Gerencie seus eventos e compromissos
+          </p>
         </div>
 
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
@@ -388,177 +392,177 @@ export function Calendario() {
             </div>
           </div>
         )}
-      </div>
 
-      {/* View Modal */}
-      <Modal
-        isOpen={isViewModalOpen}
-        onClose={handleCloseViewModal}
-        title="Detalhes do Evento"
-        size="lg"
-      >
-        {viewingEvento && (
-          <div className="space-y-4">
-            <div>
-              <h3 className="text-lg font-semibold text-white">{viewingEvento.titulo}</h3>
-              <Badge variant={statusConfig[viewingEvento.status].color} className="mt-1">
-                {statusConfig[viewingEvento.status].label}
-              </Badge>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
-              <div className="flex items-center gap-2 text-[#888888]">
-                <CalendarIcon className="w-4 h-4" />
-                <span className="text-white">{formatDate(viewingEvento.data)}</span>
+        {/* View Modal */}
+        <Modal
+          isOpen={isViewModalOpen}
+          onClose={handleCloseViewModal}
+          title="Detalhes do Evento"
+          size="lg"
+        >
+          {viewingEvento && (
+            <div className="space-y-4">
+              <div>
+                <h3 className="text-lg font-semibold text-white">{viewingEvento.titulo}</h3>
+                <Badge variant={statusConfig[viewingEvento.status].color} className="mt-1">
+                  {statusConfig[viewingEvento.status].label}
+                </Badge>
               </div>
-              {viewingEvento.horarioInicio && (
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
                 <div className="flex items-center gap-2 text-[#888888]">
-                  <Clock className="w-4 h-4" />
-                  <span className="text-white">{viewingEvento.horarioInicio} - {viewingEvento.horarioFim}</span>
+                  <CalendarIcon className="w-4 h-4" />
+                  <span className="text-white">{formatDate(viewingEvento.data)}</span>
+                </div>
+                {viewingEvento.horarioInicio && (
+                  <div className="flex items-center gap-2 text-[#888888]">
+                    <Clock className="w-4 h-4" />
+                    <span className="text-white">{viewingEvento.horarioInicio} - {viewingEvento.horarioFim}</span>
+                  </div>
+                )}
+                <div className="flex items-center gap-2 text-[#888888]">
+                  <MapPin className="w-4 h-4" />
+                  <span className="text-white">{viewingEvento.local}</span>
+                </div>
+                <div className="flex items-center gap-2 text-[#888888]">
+                  <User className="w-4 h-4" />
+                  <span className="text-white">{viewingEvento.cliente}</span>
+                </div>
+              </div>
+              {viewingEvento.descricao && (
+                <div>
+                  <p className="text-sm text-[#888888] mb-1">Descrição</p>
+                  <p className="text-sm text-white">{viewingEvento.descricao}</p>
                 </div>
               )}
-              <div className="flex items-center gap-2 text-[#888888]">
-                <MapPin className="w-4 h-4" />
-                <span className="text-white">{viewingEvento.local}</span>
-              </div>
-              <div className="flex items-center gap-2 text-[#888888]">
-                <User className="w-4 h-4" />
-                <span className="text-white">{viewingEvento.cliente}</span>
-              </div>
-            </div>
-            {viewingEvento.descricao && (
-              <div>
-                <p className="text-sm text-[#888888] mb-1">Descrição</p>
-                <p className="text-sm text-white">{viewingEvento.descricao}</p>
-              </div>
-            )}
-            {viewingEvento.materiais && viewingEvento.materiais.length > 0 && (
-              <div>
-                <p className="text-sm text-[#888888] mb-1">Materiais</p>
-                <div className="flex flex-wrap gap-2">
-                  {viewingEvento.materiais.map((material, idx) => (
-                    <span key={idx} className="px-2 py-1 bg-[#222222] rounded text-xs text-white">
-                      <Package className="w-3 h-3 inline mr-1" />
-                      {material}
-                    </span>
-                  ))}
+              {viewingEvento.materiais && viewingEvento.materiais.length > 0 && (
+                <div>
+                  <p className="text-sm text-[#888888] mb-1">Materiais</p>
+                  <div className="flex flex-wrap gap-2">
+                    {viewingEvento.materiais.map((material, idx) => (
+                      <span key={idx} className="px-2 py-1 bg-[#222222] rounded text-xs text-white">
+                        <Package className="w-3 h-3 inline mr-1" />
+                        {material}
+                      </span>
+                    ))}
+                  </div>
                 </div>
+              )}
+              <div className="flex justify-end gap-3 pt-2">
+                <Button variant="secondary" onClick={handleCloseViewModal}>
+                  Fechar
+                </Button>
+                <Button onClick={() => {
+                  handleCloseViewModal();
+                  handleOpenModal(viewingEvento);
+                }}>
+                  Editar
+                </Button>
               </div>
-            )}
-            <div className="flex justify-end gap-3 pt-2">
-              <Button variant="secondary" onClick={handleCloseViewModal}>
-                Fechar
-              </Button>
-              <Button onClick={() => {
-                handleCloseViewModal();
-                handleOpenModal(viewingEvento);
-              }}>
-                Editar
-              </Button>
             </div>
-          </div>
-        )}
-      </Modal>
+          )}
+        </Modal>
 
-      {/* Form Modal */}
-      <Modal
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
-        title={editingEvento ? 'Editar Evento' : 'Novo Evento'}
-        size="lg"
-      >
-        <div className="space-y-4">
-          <Input
-            label="Título"
-            name="titulo"
-            value={formData.titulo}
-            onChange={(e) => setFormData({ ...formData, titulo: e.target.value })}
-            placeholder="Nome do evento"
-            required
-            error={errors.titulo}
-          />
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {/* Form Modal */}
+        <Modal
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+          title={editingEvento ? 'Editar Evento' : 'Novo Evento'}
+          size="lg"
+        >
+          <div className="space-y-4">
             <Input
-              label="Data"
-              name="data"
-              type="date"
-              value={formData.data}
-              onChange={(e) => setFormData({ ...formData, data: e.target.value })}
+              label="Título"
+              name="titulo"
+              value={formData.titulo}
+              onChange={(e) => setFormData({ ...formData, titulo: e.target.value })}
+              placeholder="Nome do evento"
               required
-              error={errors.data}
+              error={errors.titulo}
+            />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <Input
+                label="Data"
+                name="data"
+                type="date"
+                value={formData.data}
+                onChange={(e) => setFormData({ ...formData, data: e.target.value })}
+                required
+                error={errors.data}
+              />
+              <Select
+                label="Status"
+                name="status"
+                value={formData.status}
+                onChange={(e) => setFormData({ ...formData, status: e.target.value })}
+                options={[
+                  { value: 'pendente', label: 'Pendente' },
+                  { value: 'confirmado', label: 'Confirmado' },
+                  { value: 'cancelado', label: 'Cancelado' },
+                ]}
+              />
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <Input
+                label="Horário Início"
+                name="horarioInicio"
+                type="time"
+                value={formData.horarioInicio}
+                onChange={(e) => setFormData({ ...formData, horarioInicio: e.target.value })}
+              />
+              <Input
+                label="Horário Fim"
+                name="horarioFim"
+                type="time"
+                value={formData.horarioFim}
+                onChange={(e) => setFormData({ ...formData, horarioFim: e.target.value })}
+              />
+            </div>
+            <Input
+              label="Local"
+              name="local"
+              value={formData.local}
+              onChange={(e) => setFormData({ ...formData, local: e.target.value })}
+              placeholder="Local do evento"
+              required
+              error={errors.local}
             />
             <Select
-              label="Status"
-              name="status"
-              value={formData.status}
-              onChange={(e) => setFormData({ ...formData, status: e.target.value })}
+              label="Cliente"
+              name="cliente"
+              value={formData.cliente}
+              onChange={(e) => setFormData({ ...formData, cliente: e.target.value })}
               options={[
-                { value: 'pendente', label: 'Pendente' },
-                { value: 'confirmado', label: 'Confirmado' },
-                { value: 'cancelado', label: 'Cancelado' },
+                { value: '', label: 'Selecione...' },
+                ...mockClientes.map((c) => ({ value: c.nome, label: c.nome })),
               ]}
+              required
+              error={errors.cliente}
             />
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <Input
-              label="Horário Início"
-              name="horarioInicio"
-              type="time"
-              value={formData.horarioInicio}
-              onChange={(e) => setFormData({ ...formData, horarioInicio: e.target.value })}
+            <Textarea
+              label="Descrição"
+              name="descricao"
+              value={formData.descricao}
+              onChange={(e) => setFormData({ ...formData, descricao: e.target.value })}
+              placeholder="Informações adicionais..."
             />
-            <Input
-              label="Horário Fim"
-              name="horarioFim"
-              type="time"
-              value={formData.horarioFim}
-              onChange={(e) => setFormData({ ...formData, horarioFim: e.target.value })}
-            />
+            <div className="flex justify-end gap-3 pt-2">
+              <Button variant="secondary" onClick={handleCloseModal}>
+                Cancelar
+              </Button>
+              <Button type="button" onClick={handleSubmit}>{editingEvento ? 'Salvar Alterações' : 'Cadastrar Evento'}</Button>
+            </div>
           </div>
-          <Input
-            label="Local"
-            name="local"
-            value={formData.local}
-            onChange={(e) => setFormData({ ...formData, local: e.target.value })}
-            placeholder="Local do evento"
-            required
-            error={errors.local}
-          />
-          <Select
-            label="Cliente"
-            name="cliente"
-            value={formData.cliente}
-            onChange={(e) => setFormData({ ...formData, cliente: e.target.value })}
-            options={[
-              { value: '', label: 'Selecione...' },
-              ...mockClientes.map((c) => ({ value: c.nome, label: c.nome })),
-            ]}
-            required
-            error={errors.cliente}
-          />
-          <Textarea
-            label="Descrição"
-            name="descricao"
-            value={formData.descricao}
-            onChange={(e) => setFormData({ ...formData, descricao: e.target.value })}
-            placeholder="Informações adicionais..."
-          />
-          <div className="flex justify-end gap-3 pt-2">
-            <Button variant="secondary" onClick={handleCloseModal}>
-              Cancelar
-            </Button>
-            <Button type="button" onClick={handleSubmit}>{editingEvento ? 'Salvar Alterações' : 'Cadastrar Evento'}</Button>
-          </div>
-        </div>
-      </Modal>
+        </Modal>
 
-      {/* Confirm Dialog */}
-      <ConfirmDialog
-        isOpen={!!confirmDelete}
-        onClose={() => setConfirmDelete(null)}
-        onConfirm={() => handleDelete(confirmDelete)}
-        title="Excluir Evento"
-        message="Tem certeza que deseja excluir este evento? Esta ação não pode ser desfeita."
-      />
+        {/* Confirm Dialog */}
+        <ConfirmDialog
+          isOpen={!!confirmDelete}
+          onClose={() => setConfirmDelete(null)}
+          onConfirm={() => handleDelete(confirmDelete)}
+          title="Excluir Evento"
+          message="Tem certeza que deseja excluir este evento? Esta ação não pode ser desfeita."
+        />
+      </div>
     </Layout>
   );
 }

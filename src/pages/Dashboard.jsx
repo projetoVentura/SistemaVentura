@@ -60,11 +60,15 @@ export function Dashboard() {
 
   return (
     <Layout>
-      <div className="w-[95%] mx-auto">
+      <div style={{ padding: '32px' }}>
         {/* Cabeçalho próprio */}
-        <div className="mb-6">
-          <h1 className="text-2xl font-bold text-white mb-1">Dashboard</h1>
-          <p className="text-sm text-[#888888]">Visão geral do sistema</p>
+        <div style={{ marginBottom: '32px' }}>
+          <h1 style={{ fontSize: '28px', fontWeight: '900', color: '#ffffff', letterSpacing: '-0.5px' }}>
+            Dashboard
+          </h1>
+          <p style={{ color: '#888888', fontSize: '14px', marginTop: '4px' }}>
+            Visão geral do sistema
+          </p>
         </div>
 
         {/* BLOCK 1: KPIs - Horizontal line with 4 cards */}
@@ -84,7 +88,7 @@ export function Dashboard() {
         </div>
 
         {/* BLOCK 2: Two columns - Orçamentos Recentes and Próximos Eventos */}
-        <div className="grid grid-cols-2 gap-5 mb-5 clear-both">
+        <div className="grid grid-cols-2 gap-5 mb-5">
           {/* Left Column: Orçamentos Recentes */}
           <div className="bg-[#111111] border border-[#222222] rounded-xl p-5">
             <h3 className="text-sm font-semibold text-white mb-3">Orçamentos Recentes</h3>

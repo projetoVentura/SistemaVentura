@@ -105,11 +105,15 @@ export function Clientes() {
 
   return (
     <Layout>
-      <div className="px-[30px] py-[30px]">
+      <div style={{ padding: '32px' }}>
         {/* Cabeçalho próprio */}
-        <div className="mb-6">
-          <h1 className="text-2xl font-bold text-white mb-1">Clientes</h1>
-          <p className="text-sm text-[#888888]">Gerencie seus clientes e leads</p>
+        <div style={{ marginBottom: '32px' }}>
+          <h1 style={{ fontSize: '28px', fontWeight: '900', color: '#ffffff', letterSpacing: '-0.5px' }}>
+            Clientes
+          </h1>
+          <p style={{ color: '#888888', fontSize: '14px', marginTop: '4px' }}>
+            Gerencie seus clientes e leads
+          </p>
         </div>
 
         {/* KPIs */}
