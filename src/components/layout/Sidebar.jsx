@@ -14,11 +14,7 @@ import {
 import { useState } from 'react';
 
 const menuItems = [
-  {
-    label: 'Dashboard',
-    icon: LayoutDashboard,
-    path: '/',
-  },
+  { label: 'Dashboard', icon: LayoutDashboard, path: '/' },
   {
     label: 'CRM',
     icon: Users,
@@ -28,32 +24,37 @@ const menuItems = [
       { label: 'Fechamentos', path: '/crm/fechamentos' },
     ],
   },
-  {
-    label: 'Calendário',
-    icon: Calendar,
-    path: '/calendario',
-  },
-  {
-    label: 'Aluguel',
-    icon: Package,
-    path: '/aluguel',
-  },
-  {
-    label: 'Financeiro',
-    icon: DollarSign,
-    path: '/financeiro',
-  },
-  {
-    label: 'Equipe',
-    icon: UserCheck,
-    path: '/equipe',
-  },
-  {
-    label: 'Extras',
-    icon: MessageCircle,
-    path: '/extras',
-  },
+  { label: 'Calendário', icon: Calendar, path: '/calendario' },
+  { label: 'Aluguel', icon: Package, path: '/aluguel' },
+  { label: 'Financeiro', icon: DollarSign, path: '/financeiro' },
+  { label: 'Equipe', icon: UserCheck, path: '/equipe' },
+  { label: 'Extras', icon: MessageCircle, path: '/extras' },
 ];
+
+const itemStyle = {
+  display: 'flex',
+  alignItems: 'center',
+  gap: '10px',
+  width: '100%',
+  padding: '10px 12px',
+  borderRadius: '8px',
+  color: '#888888',
+  fontSize: '14px',
+  textDecoration: 'none',
+  transition: 'all 0.15s',
+  cursor: 'pointer',
+  background: 'none',
+  border: 'none',
+  justifyContent: 'flex-start',
+};
+
+const itemActiveStyle = {
+  ...itemStyle,
+  color: '#ffffff',
+  backgroundColor: '#1a1a1a',
+  borderLeft: '3px solid #00ff88',
+  paddingLeft: '9px',
+};
 
 export function Sidebar() {
   const [expandedMenu, setExpandedMenu] = useState({});
@@ -65,84 +66,85 @@ export function Sidebar() {
 
   const isActivePath = (path) => {
     if (path === '/') return location.pathname === '/';
-    if (path === '/crm/clientes' || path === '/crm/orcamentos' || path === '/crm/fechamentos') {
-      return location.pathname.startsWith('/crm');
-    }
-    return location.pathname === path;
+    return location.pathname.startsWith(path);
   };
 
   const isParentActive = (item) => {
     if (!item.children) return false;
-    return item.children.some((child) => isActivePath(child.path));
+    return item.children.some((child) => location.pathname.startsWith(child.path));
   };
 
   return (
-    <aside className="fixed top-0 left-0 h-screen w-[220px] bg-[#111111] border-r border-[#222222] flex flex-col z-50 overflow-hidden">
+    <aside style={{
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      height: '100vh',
+      width: '220px',
+      backgroundColor: '#111111',
+      borderRight: '1px solid #222222',
+      display: 'flex',
+      flexDirection: 'column',
+      zIndex: 50,
+      overflow: 'hidden',
+    }}>
       {/* Logo */}
-      <div className="sidebar-logo">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-[#00ff88] rounded-lg flex items-center justify-center flex-shrink-0">
-            <span className="text-black font-bold text-xl">VL</span>
+      <div style={{ padding: '20px 16px', borderBottom: '1px solid #222222' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <div style={{
+            width: '40px', height: '40px', backgroundColor: '#00ff88',
+            borderRadius: '8px', display: 'flex', alignItems: 'center',
+            justifyContent: 'center', flexShrink: 0,
+          }}>
+            <span style={{ color: '#000000', fontWeight: 'bold', fontSize: '18px' }}>VL</span>
           </div>
           <div>
-            <h1 className="text-white font-bold text-sm leading-tight">VENTURA</h1>
-            <p className="text-[#888888] text-xs leading-tight">Luz e Efeitos</p>
+            <h1 style={{ color: '#ffffff', fontWeight: 'bold', fontSize: '13px', lineHeight: 1.2 }}>VENTURA</h1>
+            <p style={{ color: '#888888', fontSize: '11px', lineHeight: 1.2 }}>Luz e Efeitos</p>
           </div>
         </div>
       </div>
 
-      {/* Menu Items */}
-      <nav className="sidebar-nav">
-        <div className="sidebar-nav-list">
+      {/* Menu */}
+      <nav style={{ flex: 1, padding: '12px', overflowY: 'auto' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
           {menuItems.map((item) => (
-            <div key={item.path || item.label} className="sidebar-item-container">
+            <div key={item.path || item.label}>
               {item.children ? (
                 <>
                   <button
                     onClick={() => toggleMenu(item.label)}
-                    className={`sidebar-parent-item ${
-                      isParentActive(item) ? 'sidebar-item-active' : ''
-                    }`}
+                    style={isParentActive(item) ? { ...itemActiveStyle, justifyContent: 'space-between' } : { ...itemStyle, justifyContent: 'space-between' }}
                   >
-                    <div className="flex items-center gap-3">
-                      <item.icon className="w-5 h-5 flex-shrink-0" />
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                      <item.icon style={{ width: '18px', height: '18px', flexShrink: 0 }} />
                       <span>{item.label}</span>
                     </div>
-                    {expandedMenu[item.label] ? (
-                      <ChevronDown className="w-4 h-4" />
-                    ) : (
-                      <ChevronRight className="w-4 h-4" />
-                    )}
+                    {expandedMenu[item.label]
+                      ? <ChevronDown style={{ width: '14px', height: '14px' }} />
+                      : <ChevronRight style={{ width: '14px', height: '14px' }} />
+                    }
                   </button>
                   {expandedMenu[item.label] && (
-                    <ul className="sidebar-children">
+                    <div style={{ marginLeft: '16px', marginTop: '2px', display: 'flex', flexDirection: 'column', gap: '2px' }}>
                       {item.children.map((child) => (
-                        <li key={child.path}>
-                          <NavLink
-                            to={child.path}
-                            className={`sidebar-child-item ${
-                              isActivePath(child.path)
-                                ? 'sidebar-child-active'
-                                : ''
-                            }`}
-                          >
-                            <span>{child.label}</span>
-                          </NavLink>
-                        </li>
+                        <NavLink
+                          key={child.path}
+                          to={child.path}
+                          style={isActivePath(child.path) ? itemActiveStyle : itemStyle}
+                        >
+                          <span>{child.label}</span>
+                        </NavLink>
                       ))}
-                    </ul>
+                    </div>
                   )}
                 </>
               ) : (
                 <NavLink
-                   to={item.path}
-                  className={`sidebar-item ${
-                    isActivePath(item.path)
-                      ? 'sidebar-item-active'
-                      : ''
-                  }`}
-                 >
-                  <item.icon className="w-5 h-5 flex-shrink-0" />
+                  to={item.path}
+                  style={isActivePath(item.path) ? itemActiveStyle : itemStyle}
+                >
+                  <item.icon style={{ width: '18px', height: '18px', flexShrink: 0 }} />
                   <span>{item.label}</span>
                 </NavLink>
               )}
@@ -151,24 +153,26 @@ export function Sidebar() {
         </div>
       </nav>
 
-      {/* User Info */}
-      <div className="sidebar-footer">
-          <div className="mb-2">
-            <p className="text-[#888888] text-xs">Conectado como</p>
-          </div>
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-[#00ff88] rounded-full flex items-center justify-center flex-shrink-0">
-              <span className="text-black text-sm font-bold">A</span>
+      {/* Footer */}
+      <div style={{ padding: '16px', borderTop: '1px solid #222222' }}>
+        <p style={{ color: '#888888', fontSize: '11px', marginBottom: '8px' }}>Conectado como</p>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <div style={{
+              width: '32px', height: '32px', backgroundColor: '#00ff88',
+              borderRadius: '50%', display: 'flex', alignItems: 'center',
+              justifyContent: 'center', flexShrink: 0,
+            }}>
+              <span style={{ color: '#000000', fontSize: '13px', fontWeight: 'bold' }}>A</span>
             </div>
-            <div>
-              <p className="text-white text-sm font-medium">Administrador</p>
-            </div>
+            <p style={{ color: '#ffffff', fontSize: '13px', fontWeight: '500' }}>Administrador</p>
           </div>
-          <button
-            className="flex items-center gap-1 text-[#888888] hover:text-red-400 transition-colors text-xs"
-          >
-            <LogOut />
+          <button style={{
+            display: 'flex', alignItems: 'center', gap: '4px',
+            color: '#888888', fontSize: '11px', background: 'none',
+            border: 'none', cursor: 'pointer',
+          }}>
+            <LogOut style={{ width: '14px', height: '14px' }} />
             <span>Sair</span>
           </button>
         </div>
