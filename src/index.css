@@ -126,7 +126,7 @@ body {
 
 .main-inner {
   flex: 1;
-  padding: 32px;
+  padding: 30px;
   background-color: #0a0a0a;
 }
 
@@ -301,11 +301,11 @@ body {
   margin-bottom: 4px;
 }
 
-.kpi-value {
-  font-size: 24px;
-  font-weight: bold;
-  color: #ffffff;
-}
+  .kpi-value {
+    font-size: 28px;
+    font-weight: bold;
+    color: #ffffff;
+  }
 
 /* === GRID DE CLIENTES === */
 
@@ -369,7 +369,7 @@ body {
   }
   
   .kpi-value-compact {
-    font-size: 20px;
+    font-size: 28px;
     font-weight: bold;
     color: #ffffff;
   }
@@ -389,9 +389,10 @@ body {
   }
   
   .content-card-title {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 600;
     color: #ffffff;
+    margin-top: 20px;
     margin-bottom: 16px;
   }
   
@@ -405,7 +406,7 @@ body {
     justify-content: space-between;
     align-items: flex-start;
     padding: 12px 0;
-    border-bottom: 1px solid #222222;
+    border-bottom: 1px solid #333333;
   }
   
   .content-list-item:last-child {
@@ -429,6 +430,7 @@ body {
     font-weight: 600;
     color: #00ff88;
     text-align: right;
+    font-weight: 600;
   }
   
   .event-list-item {
@@ -436,7 +438,7 @@ body {
     align-items: center;
     gap: 12px;
     padding: 12px 0;
-    border-bottom: 1px solid #222222;
+    border-bottom: 1px solid #333333;
   }
   
   .event-list-item:last-child {
@@ -454,7 +456,7 @@ body {
     padding: 4px 10px;
     border-radius: 9999px;
     font-size: 11px;
-    font-weight: 500;
+    font-weight: 600;
   }
   
   .status-badge.aprovado {
@@ -490,12 +492,14 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 8px;
-    padding: 16px;
+    padding: 20px 16px;
     background-color: #1a1a1a;
     border: 1px solid #222222;
     border-radius: 12px;
     text-decoration: none;
     transition: all 0.3s ease;
+    min-height: 80px;
+    justify-content: center;
   }
   
   .quick-access-card:hover {
@@ -505,7 +509,7 @@ body {
   
   .quick-access-label {
     font-size: 13px;
-    font-weight: 500;
+    font-weight: 600;
     color: #ffffff;
     text-align: center;
   }
