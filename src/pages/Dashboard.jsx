@@ -72,7 +72,7 @@ export function Dashboard() {
         </div>
 
         {/* BLOCK 1: KPIs - Horizontal line with 4 cards */}
-        <div className="grid grid-cols-4 gap-5 mb-5">
+        <div className="grid grid-cols-4 gap-4 mb-6">
           {stats.map((stat) => (
             <div
               key={stat.label}
@@ -140,7 +140,7 @@ export function Dashboard() {
         {/* BLOCK 3: Acesso Rápido - Horizontal line at the bottom */}
         <div className="bg-[#111111] border border-[#222222] rounded-xl p-5">
           <h3 className="text-sm font-semibold text-white mb-3">Acesso Rápido</h3>
-          <div className="grid grid-cols-4 gap-5">
+          <div className="grid grid-cols-4 gap-4 mb-6">
             {[
               { label: 'Novo Cliente', icon: Users, href: '/crm/clientes' },
               { label: 'Novo Orçamento', icon: FileText, href: '/crm/orcamentos' },
@@ -150,7 +150,7 @@ export function Dashboard() {
               <a
                 key={item.label}
                 href={item.href}
-                className="flex flex-col items-center gap-2 p-4 bg-[#1a1a1a] rounded-lg hover:bg-[#222222] hover:border-[#00ff88] border border-transparent transition-all"
+                className="flex flex-col items-center gap-2 p-5 bg-[#111111] border border-[#222222] rounded-xl hover:border-[#00ff88] transition-all cursor-pointer"
               >
                 <item.icon className="w-5 h-5 text-[#00ff88]" />
                 <span className="text-xs text-white text-center">{item.label}</span>
